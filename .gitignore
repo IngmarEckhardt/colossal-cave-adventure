@@ -1,0 +1,4 @@
+/cmake-*
+.private
+.tools
+.orig*

@@ -1,0 +1,6 @@
+[submodule "extern/dwarf-os"]
+	path = extern/dwarf-os
+	url = https://github.com/IngmarEckhardt/dwarfOS
+[submodule "extern/Unity"]
+	path = extern/Unity
+	url = https://github.com/ThrowTheSwitch/Unity
