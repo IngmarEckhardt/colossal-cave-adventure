@@ -12,6 +12,7 @@
 uint8_t lastTime;
 HeapManagementHelper * heapHelper;
 char * strings;
+char * timestamp;
 void printMemoryToSerialOutput(void);
 #endif
 
@@ -44,6 +45,8 @@ ISR(USART0_RX_vect) { putIntoQueue(UDR0); }
 void printMemoryToSerialOutput(void) {
     strings[0] = '\0';
     fgets(strings, STRING_BUFFER_SIZE, stdin);
-    printf("free Memory is: %d byte\n", heapHelper->getFreeMemory());
-    if (*strings) {printf("you entered: %s\n", strings);}
+    timestamp = ctime(NULL);
+    printf("%s: free Memory is: %d byte\n", timestamp, heapHelper->getFreeMemory());
+    if (*strings) {printf("%s: you entered: %s\n", timestamp, strings);}
+    free(timestamp);
 }
