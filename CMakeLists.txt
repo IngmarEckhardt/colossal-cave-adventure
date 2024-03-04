@@ -17,13 +17,15 @@ set(AVR_SIZE "${TOOLCHAIN_PATH}avr-size.exe")
 
 
 set(CSTANDARD "-std=gnu99")
-set(CDEBUG "-g -ggdb")
+
 if (TESTS)
+    set(CDEBUG "-g -ggdb --coverage")
 else ()
-set(CMCU "-mmcu=${MCU}")
-set(CTUNING "-funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -ffunction-sections -fdata-sections")
-set(COPT "-Os -lm -frename-registers")
-set(CWARN "-Wall -Wextra -Wstrict-prototypes -Wl,--gc-sections -Wl,--relax")
+    set(CDEBUG "-g -ggdb")
+    set(CMCU "-mmcu=${MCU}")
+    set(CTUNING "-funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -ffunction-sections -fdata-sections")
+    set(COPT "-Os -lm -frename-registers")
+    set(CWARN "-Wall -Wextra -Wstrict-prototypes -Wl,--gc-sections -Wl,--relax")
 endif ()
 set(CFLAGS "${CMCU} ${COPT} ${CWARN} ${CSTANDARD} ${CTUNING} ${CDEBUG}")
 set(CMAKE_C_FLAGS "${CFLAGS}")
@@ -33,35 +35,37 @@ set(SRC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(EXTERN_PATH "${CMAKE_CURRENT_SOURCE_DIR}/extern")
 
 set(SRC_FILES
-        "${SRC_PATH}/input_queue.c"
+        "${SRC_PATH}/setup_advent.c"
 )
 
 set(HEADER_FILES
 
 )
-include_directories(${INCL_PATH})
 
 if (TESTS)
 else ()
-set(BUILD_DWARFOS_AS_LIBRARY ON CACHE BOOL "Build DwarfOS as a library")
-add_definitions(-D_TIME_T_DEFINED)
-add_definitions(-DDWARF_TIME)
-add_subdirectory(${EXTERN_PATH}/dwarf-os extern_build)
+    include_directories(${INCL_PATH})
+
+    set(BUILD_DWARFOS_AS_LIBRARY ON CACHE BOOL "Build DwarfOS as a library")
+    add_definitions(-D_TIME_T_DEFINED)
+    add_definitions(-DDWARF_TIME)
+    add_subdirectory(${EXTERN_PATH}/dwarfOS extern_build)
 
 
-add_executable(${PROJECT_NAME} ${SRC_FILES} "${SRC_PATH}/mcu_advent.c")
-target_include_directories(${PROJECT_NAME} PUBLIC ${INCL_PATH})
-target_link_libraries(${PROJECT_NAME} DwarfOS)
-set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_NAME}.elf")
+    add_executable(${PROJECT_NAME} ${SRC_FILES} "${SRC_PATH}/mcu_advent.c")
+    target_include_directories(${PROJECT_NAME} PUBLIC ${INCL_PATH})
+    target_link_libraries(${PROJECT_NAME} DwarfOS)
+    set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_NAME}.elf")
 
 
-add_custom_target(hex "${AVR_OBJCOPY}" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures
-        "${PROJECT_NAME}.elf" "${PROJECT_NAME}.hex")
+    add_custom_target(hex "${AVR_OBJCOPY}" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures
+            "${PROJECT_NAME}.elf" "${PROJECT_NAME}.hex")
 
-add_custom_target(size "${AVR_SIZE}" "${PROJECT_NAME}.elf")
+    add_custom_target(size "${AVR_SIZE}" "${PROJECT_NAME}.elf")
 endif ()
 
 if (TESTS)
+#    include_directories(${INCL_PATH} "./tests/_include/input_queue")
     add_definitions(-DCCA_TEST)
     # adjust to your system
     set(CMAKE_SYSTEM_NAME Windows)
@@ -69,15 +73,7 @@ if (TESTS)
     # build Unity
     add_subdirectory(${EXTERN_PATH}/Unity extern_build_unity)
 
-    # some reduced libs for tests
-    add_library(${PROJECT_NAME}Lib STATIC "${SRC_PATH}/input_queue.c" "${INCL_PATH}/input_queue.h")
 
-    # time.c
-    add_executable(${PROJECT_NAME}_InputQueue "${TEST_PATH}/_input_queue.c")
-    target_link_libraries(${PROJECT_NAME}_InputQueue ${PROJECT_NAME}Lib unity)
-
-    include(CTest)
-    add_test(Time ${PROJECT_NAME}_InputQueue)
 endif ()
 set_directory_properties(PROPERTIES
         ADDITIONAL_MAKE_CLEAN_FILES "${PROJECT_NAME}.hex;${PROJECT_NAME}.eeprom;${PROJECT_NAME}.lst")
