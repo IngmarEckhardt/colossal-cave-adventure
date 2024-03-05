@@ -1,4 +1,6 @@
-const char *adventtxt4[201] = {
+#include <avr/pgmspace.h>
+
+const char * const adventtxt4[201] PROGMEM = {
 // 1
 	"Somewhere nearby is Colossal Cave, where others have found fortunes in \n"
 	"treasure and gold, though it is rumored that some who enter are never \n"

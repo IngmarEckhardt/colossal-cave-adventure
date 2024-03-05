@@ -1,4 +1,6 @@
-const char *adventtxt3[64] = {
+#include <avr/pgmspace.h>
+
+const char * const adventtxt3[64] PROGMEM = {
 // 1
 	"/Set of keys.\n"
 	"/There are some keys on the ground here.\n"

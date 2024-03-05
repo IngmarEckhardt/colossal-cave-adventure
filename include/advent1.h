@@ -1,4 +1,6 @@
-const char *adventtxt1[140] = {
+#include <avr/pgmspace.h>
+
+const char * const adventtxt1[140] PROGMEM = {
 // 1
 	"You are standing at the end of a road before a small brick\n"
 	"building.  Around you is a forest.  A small stream flows out\n"
