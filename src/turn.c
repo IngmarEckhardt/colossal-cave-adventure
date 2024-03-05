@@ -30,96 +30,96 @@ void turn(void) {
         }
         panic = 1;
     }
-    /*
-        see if a dwarf has seen him and has come
-        from where he wants to go.
-    */
-    if (newloc != loc && !forced(loc) && (cond[loc] & NOPIRAT) == 0) {
-        for (i = 1; i < (DWARFMAX - 1); ++i) {
-            if (odloc[i] == newloc && dseen[i]) {
-                newloc = loc;
-                rspeak(2);
-                break;
-            }
-        }
-    }
-
-    dwarves(); /* & special dwarf(pirate who steals)	*/
-
-    /* added by BDS C conversion */
-    if (loc != newloc) {
-        ++turns;
-        loc = newloc;
-/*	causes occasional "move" with two describe & descitem	*/
-/*	}	*/
-/*	if (loc != newloc)	*/
-
-        /* check for death */
-        if (loc == 0) {
-            death();
-            return;
-        }
-
-        /* check for forced move */
-        if (forced(loc)) {
-            describe();
-            domove();
-            return;
-        }
-
-        /* check for wandering in dark */
-        if (wzdark && dark() && pct(35)) {
-            rspeak(23);
-            oldloc2 = loc;
-            death();
-            return;
-        }
-
-        /* describe his situation */
-        describe();
-        if (!dark()) {
-            ++visited[loc];
-            descitem();
-        }
-/*	causes occasional "move" with no describe & descitem	*/
-    }
-
-    if (closed) {
-        if (prop[OYSTER] < 0 && toting(OYSTER)) {
-            pspeak(OYSTER, 1);
-        }
-        for (i = 1; i < MAXOBJ; ++i) {
-            if (toting(i) && prop[i] < 0) {
-                prop[i] = -1 - prop[i];
-            }
-        }
-    }
-
-    wzdark = dark();
-    if (knfloc > 0 && knfloc != loc) {
-        knfloc = 0;
-    }
-
-    if (stimer()) { /* as the grains of sand slip by	*/
-        return;
-    }
-
-    while (!english()) { /* retrieve player instructions	*/
-    }
-
-    if (dbugflg) {
-        printf("loc = %d, verb = %d, object = %d, \
-		motion = %d\n",
-               loc, verb, object, motion);
-    }
-
-    if (motion) { /* execute player instructions	*/
-        domove();
-    } else if (object) {
-        doobj();
-    } else {
-        itverb();
-    }
+//    /*
+//        see if a dwarf has seen him and has come
+//        from where he wants to go.
+//    */
+//    if (newloc != loc && !forced(loc) && (cond[loc] & NOPIRAT) == 0) {
+//        for (i = 1; i < (DWARFMAX - 1); ++i) {
+//            if (odloc[i] == newloc && dseen[i]) {
+//                newloc = loc;
+//                rspeak(2);
+//                break;
+//            }
+//        }
+//    }
+//
+//    dwarves(); /* & special dwarf(pirate who steals)	*/
+//
+//    /* added by BDS C conversion */
+//    if (loc != newloc) {
+//        ++turns;
+//        loc = newloc;
+///*	causes occasional "move" with two describe & descitem	*/
+///*	}	*/
+///*	if (loc != newloc)	*/
+//
+//        /* check for death */
+//        if (loc == 0) {
+//            death();
+//            return;
+//        }
+//
+//        /* check for forced move */
+//        if (forced(loc)) {
+//            describe();
+//            domove();
+//            return;
+//        }
+//
+//        /* check for wandering in dark */
+//        if (wzdark && dark() && pct(35)) {
+//            rspeak(23);
+//            oldloc2 = loc;
+//            death();
+//            return;
+//        }
+//
+//        /* describe his situation */
+//        describe();
+//        if (!dark()) {
+//            ++visited[loc];
+//            descitem();
+//        }
+///*	causes occasional "move" with no describe & descitem	*/
+//    }
+//
+//    if (closed) {
+//        if (prop[OYSTER] < 0 && toting(OYSTER)) {
+//            pspeak(OYSTER, 1);
+//        }
+//        for (i = 1; i < MAXOBJ; ++i) {
+//            if (toting(i) && prop[i] < 0) {
+//                prop[i] = -1 - prop[i];
+//            }
+//        }
+//    }
+//
+//    wzdark = dark();
+//    if (knfloc > 0 && knfloc != loc) {
+//        knfloc = 0;
+//    }
+//
+//    if (stimer()) { /* as the grains of sand slip by	*/
+//        return;
+//    }
+//
+//    while (!english()) { /* retrieve player instructions	*/
+//    }
+//
+//    if (dbugflg) {
+//        printf("loc = %d, verb = %d, object = %d, \
+//		motion = %d\n",
+//               loc, verb, object, motion);
+//    }
+//
+//    if (motion) { /* execute player instructions	*/
+//        domove();
+//    } else if (object) {
+//        doobj();
+//    } else {
+//        itverb();
+//    }
 }
 
 /*

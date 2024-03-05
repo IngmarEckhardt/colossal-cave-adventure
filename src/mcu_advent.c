@@ -11,8 +11,8 @@
 
 #include "advent.h"  /* #define preprocessor equates	*/
 
-//#include "advword.h" /* definition of "word" array	*/
-//#include "advcave.h" /* definition of "cave" array	*/
+#include "advword.h" /* definition of "word" array	*/
+#include "advcave.h" /* definition of "cave" array	*/
 #include "advdef.h"
 
 #define setmem(l, s, c) memset(l, c, s)
@@ -26,6 +26,7 @@ void printMemoryToSerialOutput(void);
 
 int main(void) {
     setupAdvent();
+    cca_setupStringRepos();
     initplay();
 
     strings = malloc(STRING_BUFFER_SIZE * sizeof(char));
@@ -33,15 +34,17 @@ int main(void) {
 
     sei();
     while (1) {
+        turn();
 
-        sleep_mode();
         adjustTo1Sec();
 
-        if ((uint8_t) time(NULL) != lastTime) {
-
-            lastTime = time(NULL);
-            printMemoryToSerialOutput();
-        }
+//        if ((uint8_t) time(NULL) != lastTime) {
+//
+//            lastTime = time(NULL);
+//            printMemoryToSerialOutput();
+//        }
+//
+//        sleep_mode();
     }
 }
 

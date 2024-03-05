@@ -6,7 +6,7 @@
 	Database variables
 */
 extern struct wac wc[]; /* see ADVWORD.H		*/
-extern char *cave[];    /* see ADVCAVE.H		*/
+extern const char * const cave[];    /* see ADVCAVE.H		*/
 extern size_t cavesz;
 
 extern struct trav travel[];

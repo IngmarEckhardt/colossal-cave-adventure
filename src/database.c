@@ -17,6 +17,27 @@
 #include "advent2.h"
 #include "advent3.h"
 #include "advent4.h"
+#include "string_repository.h"
+
+StringStorage * flashStorage;
+StringRepository * repository;
+LazyLoadingString ** caveStrings;
+LazyLoadingString ** adventtxt1Strings;
+LazyLoadingString ** adventtxt2Strings;
+LazyLoadingString ** adventtxt3Strings;
+LazyLoadingString ** adventtxt4Strings;
+
+
+void cca_setupStringRepos(void) {
+    repository = dOS_initStringRepository(0);
+    flashStorage = dOS_initStringStorage();
+
+    caveStrings = initManagedLazyLoadingStringArray(cave,cavesz);
+    adventtxt1Strings = initManagedLazyLoadingStringArray(adventtxt1,ADVENTTXT1_SIZE);
+    adventtxt2Strings = initManagedLazyLoadingStringArray(adventtxt2,ADVENTTXT2_SIZE);
+    adventtxt3Strings = initManagedLazyLoadingStringArray(adventtxt3,ADVENTTXT3_SIZE);
+    adventtxt4Strings = initManagedLazyLoadingStringArray(adventtxt4,ADVENTTXT4_SIZE);
+}
 
 
 /*
@@ -35,7 +56,9 @@ void gettrav(int loc) {
         bug(43);
     }
 
-    strcpy(atrav, cave[loc - 1]);
+//    strcpy(atrav, cave[loc - 1]);
+    strcpy(atrav, repository->getString(caveStrings[loc - 1], flashStorage));
+
     while ((aptr = strrchr(atrav, ','))) {
         *aptr = '\0';
     } /* terminate substring	*/
@@ -93,7 +116,8 @@ int yes(int msg1, int msg2, int msg3) {
 */
 void rspeak(int msg) {
 
-    fputs(adventtxt4[msg - 1], stdout);
+//    fputs(adventtxt4[msg - 1], stdout);
+    fputs(repository->getString(adventtxt4Strings[msg - 1], flashStorage), stdout);
 
     return;
 }

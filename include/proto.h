@@ -9,6 +9,8 @@ void initplay   (void);
 //char *savefile  (int save, char *path, size_t len);
 
 /* database.c */
+void cca_setupStringRepos(void);
+
 void gettrav (int loc);
 int  rdupto  (FILE *fdi, char uptoc, char print, char *string);
 void rdskip  (FILE *fdi, char skipc, int n, char rewind);

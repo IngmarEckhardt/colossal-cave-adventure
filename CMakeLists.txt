@@ -24,7 +24,7 @@ else ()
     set(CDEBUG "-g -ggdb")
     set(CMCU "-mmcu=${MCU}")
     set(CTUNING "-funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -ffunction-sections -fdata-sections")
-    set(COPT "-Os -lm -frename-registers")
+    set(COPT "-Os -lm")
     set(CWARN "-Wall -Wextra -Wstrict-prototypes -Wl,--gc-sections -Wl,--relax")
 endif ()
 set(CFLAGS "${CMCU} ${COPT} ${CWARN} ${CSTANDARD} ${CTUNING} ${CDEBUG}")
@@ -37,6 +37,7 @@ set(EXTERN_PATH "${CMAKE_CURRENT_SOURCE_DIR}/extern")
 set(SRC_FILES
         "${SRC_PATH}/setup_advent.c"
         "${SRC_PATH}/database.c"
+        "${SRC_PATH}/turn.c"
 )
 
 set(HEADER_FILES
