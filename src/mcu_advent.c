@@ -46,7 +46,12 @@ void printMemoryToSerialOutput(void) {
     strings[0] = '\0';
     fgets(strings, STRING_BUFFER_SIZE, stdin);
     timestamp = ctime(NULL);
-    printf("%s: free Memory is: %d byte\n", timestamp, heapHelper->getFreeMemory());
-    if (*strings) {printf("%s: you entered: %s\n", timestamp, strings);}
+
+    if (*strings) {
+        printf("%s: you entered: %s\n", timestamp, strings);
+    }
+    else {
+        printf("%s: free Memory is: %d byte\n", timestamp, heapHelper->getFreeMemory());
+    }
     free(timestamp);
 }
