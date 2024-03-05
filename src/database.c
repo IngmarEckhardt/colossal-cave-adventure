@@ -52,7 +52,8 @@ void gettrav(int loc) {
     if (loc <= 0 || loc >= (int) cavesz) {
         bug(42);
     }
-    if (strlen(cave[loc - 1]) > sizeof(atrav)) {
+//    if (strlen(cave[loc - 1]) > sizeof(atrav)) {
+    if (strlen_P(cave[loc - 1]) > sizeof(atrav)) {
         bug(43);
     }
 
@@ -119,7 +120,6 @@ void rspeak(int msg) {
 //    fputs(adventtxt4[msg - 1], stdout);
     fputs(repository->getString(adventtxt4Strings[msg - 1], flashStorage), stdout);
 
-    return;
 }
 
 /*
@@ -133,7 +133,8 @@ void pspeak(int item, int state) {
         return;
     }
 
-    p = adventtxt3[item - 1];
+//    p = adventtxt3[item - 1];
+    p = repository->getString(adventtxt3Strings[item - 1], flashStorage);
     if (p == NULL) {
         bug(31);
     } else {
@@ -156,16 +157,16 @@ void pspeak(int item, int state) {
 	Print a long location description from "advent1.txt"
 */
 void desclg(int loc) {
-    fputs(adventtxt1[loc - 1], stdout);
-
+//    fputs(adventtxt1[loc - 1], stdout);
+    fputs(repository->getString(adventtxt1Strings[loc - 1], flashStorage), stdout);
 }
 
 /*
 	Print a short location description from "advent2.txt"
 */
 void descsh(int loc) {
-    fputs(adventtxt2[loc - 1], stdout);
-
+//    fputs(adventtxt2[loc - 1], stdout);
+    fputs(repository->getString(adventtxt2Strings[loc - 1], flashStorage), stdout);
 }
 
 /*

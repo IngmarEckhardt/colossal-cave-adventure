@@ -170,4 +170,4 @@ const char * const adventtxt2[ADVENTTXT2_SIZE] PROGMEM = {adv2_string_1, adv2_st
                                    adv2_string_126, adv2_string_127, adv2_string_128, adv2_string_129, adv2_string_130,
                                    adv2_string_131, adv2_string_132, adv2_string_133, adv2_string_134, adv2_string_135,
                                    adv2_string_136, adv2_string_137, adv2_string_138, adv2_string_139,
-                                   adv2_string_140,};
+                                   adv2_string_140};
