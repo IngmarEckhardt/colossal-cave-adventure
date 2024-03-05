@@ -36,6 +36,7 @@ set(EXTERN_PATH "${CMAKE_CURRENT_SOURCE_DIR}/extern")
 
 set(SRC_FILES
         "${SRC_PATH}/setup_advent.c"
+        "${SRC_PATH}/database.c"
 )
 
 set(HEADER_FILES
