@@ -12,6 +12,7 @@
 #include <advent2.h>
 #include <advent1.h>
 #include <advent3.h>
+#include <advent4.h>
 
 void setup(void);
 
