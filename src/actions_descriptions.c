@@ -15,14 +15,6 @@
 #define DESCRIPTION_51_LENGTH 1309
 #define DESCRIPTION_142_LENGTH 1395
 
-//extern const char actionsDescriptionsSmall[AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL][ACTION_DESCRIPTIONS_SMALL_LENGTH];
-//extern const char actionDescriptionsMedium[AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM][ACTION_DESCRIPTIONS_MEDIUM_LENGTH];
-//extern const char actionDescriptionsLong[AMOUNT_OF_ACTION_DESCRIPTIONS_LONG][ACTION_DESCRIPTIONS_LONG_LENGTH];
-//// two very long descriptions
-//extern const char actionDescription_51[];
-//extern const char actionDescription_142[];
-
-
 const char actionsDescriptionsSmall[AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL][ACTION_DESCRIPTIONS_SMALL_LENGTH] PROGMEM = {
         // 2
         "A little dwarf with a big knife blocks your way.\n",
@@ -627,7 +619,7 @@ char * getDescription(uint8_t index) {
                           106, 107, 108, 109, 110, 111, 113, 122, 123, 127, 137, 138, 140, 141, 143, 144, 146, 147, 148,
                           150, 152, 153, 155, 160, 161, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178,
                           180, 181, 184, 190, 194, 195, 196, 200, 201};
-    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL; ++i) {
+    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL; i++) {
         if (shortMsg[i] == index) {
             stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_SMALL_LENGTH);
             strcpy_P(stringToReturn, actionsDescriptionsSmall[i]);
@@ -638,7 +630,7 @@ char * getDescription(uint8_t index) {
                            91, 92, 96, 100, 103, 112, 114, 115, 116, 117, 118, 119, 120, 121, 125, 126, 129, 130, 131,
                            135, 136, 139, 145, 149, 151, 154, 156, 157, 158, 159, 163, 164, 168, 179, 182, 185, 187,
                            188, 189, 191, 192, 193, 197, 198, 199};
-    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM; ++i) {
+    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM; i++) {
         if (mediumMsg[i] == index) {
             stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_MEDIUM_LENGTH);
             strcpy_P(stringToReturn, actionDescriptionsMedium[i]);
@@ -646,7 +638,7 @@ char * getDescription(uint8_t index) {
         }
     }
     uint8_t longMsg[AMOUNT_OF_ACTION_DESCRIPTIONS_LONG] = {1, 64, 65, 82, 124, 128, 132, 133, 134, 162, 183, 186};
-    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_LONG; ++i) {
+    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_LONG; i++) {
         if (longMsg[i] == index) {
             stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_LONG_LENGTH);
             strcpy_P(stringToReturn, actionDescriptionsLong[i]);
@@ -655,4 +647,3 @@ char * getDescription(uint8_t index) {
     }
     return stringToReturn;
 }
-

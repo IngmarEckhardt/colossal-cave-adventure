@@ -41,6 +41,9 @@ int main(void) {
             printToSerialOutput();
             strcpy_P(testBuffer, shortDescriptions[0]);
             printf("%s", testBuffer);
+            char * description_65 = getDescription(65);
+            printf("%s",description_65);
+            free(description_65);
         }
     }
 }
