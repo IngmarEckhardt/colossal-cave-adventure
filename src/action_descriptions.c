@@ -1,5 +1,5 @@
 // advent4.h
-#include <actions_descriptions.h>
+#include <action_descriptions.h>
 #include <avr/pgmspace.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -601,14 +601,14 @@ const char actionDescription_142[DESCRIPTION_142_LENGTH] PROGMEM =
         "you explicitly ask me to.\n";
 
 
-char * getDescription(uint8_t index) {
+char * getActionDescription(uint8_t msgNumber) {
     char * stringToReturn = NULL;
 
-    if (index == 51) {
+    if (msgNumber == 51) {
         stringToReturn = (char *) malloc(DESCRIPTION_51_LENGTH);
         strcpy_P(stringToReturn, actionDescription_51);
         return stringToReturn;
-    } else if (index == 142) {
+    } else if (msgNumber == 142) {
         stringToReturn = (char *) malloc(DESCRIPTION_142_LENGTH);
         strcpy_P(stringToReturn, actionDescription_142);
         return stringToReturn;
@@ -620,7 +620,7 @@ char * getDescription(uint8_t index) {
                           150, 152, 153, 155, 160, 161, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178,
                           180, 181, 184, 190, 194, 195, 196, 200, 201};
     for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL; i++) {
-        if (shortMsg[i] == index) {
+        if (shortMsg[i] == msgNumber) {
             stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_SMALL_LENGTH);
             strcpy_P(stringToReturn, actionsDescriptionsSmall[i]);
             return stringToReturn;
@@ -631,7 +631,7 @@ char * getDescription(uint8_t index) {
                            135, 136, 139, 145, 149, 151, 154, 156, 157, 158, 159, 163, 164, 168, 179, 182, 185, 187,
                            188, 189, 191, 192, 193, 197, 198, 199};
     for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM; i++) {
-        if (mediumMsg[i] == index) {
+        if (mediumMsg[i] == msgNumber) {
             stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_MEDIUM_LENGTH);
             strcpy_P(stringToReturn, actionDescriptionsMedium[i]);
             return stringToReturn;
@@ -639,7 +639,7 @@ char * getDescription(uint8_t index) {
     }
     uint8_t longMsg[AMOUNT_OF_ACTION_DESCRIPTIONS_LONG] = {1, 64, 65, 82, 124, 128, 132, 133, 134, 162, 183, 186};
     for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_LONG; i++) {
-        if (longMsg[i] == index) {
+        if (longMsg[i] == msgNumber) {
             stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_LONG_LENGTH);
             strcpy_P(stringToReturn, actionDescriptionsLong[i]);
             return stringToReturn;

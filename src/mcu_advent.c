@@ -12,7 +12,7 @@
 #include <short_location_descriptions.h>
 #include <long_location_descriptions.h>
 #include <object_descriptions.h>
-#include <actions_descriptions.h>
+#include <action_descriptions.h>
 
 void setup(void);
 
@@ -41,7 +41,7 @@ int main(void) {
             printToSerialOutput();
             strcpy_P(testBuffer, shortDescriptions[0]);
             printf("%s", testBuffer);
-            char * description_65 = getDescription(65);
+            char * description_65 = getActionDescription(142);
             printf("%s",description_65);
             free(description_65);
         }
