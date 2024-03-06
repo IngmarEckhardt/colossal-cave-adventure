@@ -9,10 +9,10 @@
 #include <heap_management_helper.h>
 #include <time.h>
 #include <setup_advent.h>
-#include <advent2.h>
-#include <advent1.h>
-#include <advent3.h>
-#include <advent4.h>
+#include <short_location_descriptions.h>
+#include <long_location_descriptions.h>
+#include <object_descriptions.h>
+#include <actions_descriptions.h>
 
 void setup(void);
 
@@ -39,7 +39,7 @@ int main(void) {
 
             lastTime = time(NULL);
             printToSerialOutput();
-            strcpy_P(testBuffer,adventtxt2[0]);
+            strcpy_P(testBuffer, shortDescriptions[0]);
             printf("%s", testBuffer);
         }
     }

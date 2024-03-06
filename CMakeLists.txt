@@ -35,7 +35,7 @@ set(SRC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(EXTERN_PATH "${CMAKE_CURRENT_SOURCE_DIR}/extern")
 
 set(SRC_FILES
-
+        "${SRC_PATH}/actions_descriptions.c"
 #        "${SRC_PATH}/database.c"
 #        "${SRC_PATH}/english.c"
 #        "${SRC_PATH}/itverb.c"

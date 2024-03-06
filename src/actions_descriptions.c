@@ -1,4 +1,29 @@
-const char adventtxt4_a[117][62] PROGMEM = {
+// advent4.h
+#include <actions_descriptions.h>
+#include <avr/pgmspace.h>
+#include <stddef.h>
+#include <stdlib.h>
+
+#define ACTION_DESCRIPTIONS_SMALL_LENGTH 62
+#define ACTION_DESCRIPTIONS_MEDIUM_LENGTH 186
+#define ACTION_DESCRIPTIONS_LONG_LENGTH 520
+
+#define AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL 117
+#define AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM 68
+#define AMOUNT_OF_ACTION_DESCRIPTIONS_LONG 12
+
+#define DESCRIPTION_51_LENGTH 1309
+#define DESCRIPTION_142_LENGTH 1395
+
+//extern const char actionsDescriptionsSmall[AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL][ACTION_DESCRIPTIONS_SMALL_LENGTH];
+//extern const char actionDescriptionsMedium[AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM][ACTION_DESCRIPTIONS_MEDIUM_LENGTH];
+//extern const char actionDescriptionsLong[AMOUNT_OF_ACTION_DESCRIPTIONS_LONG][ACTION_DESCRIPTIONS_LONG_LENGTH];
+//// two very long descriptions
+//extern const char actionDescription_51[];
+//extern const char actionDescription_142[];
+
+
+const char actionsDescriptionsSmall[AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL][ACTION_DESCRIPTIONS_SMALL_LENGTH] PROGMEM = {
         // 2
         "A little dwarf with a big knife blocks your way.\n",
         // 4
@@ -235,7 +260,7 @@ const char adventtxt4_a[117][62] PROGMEM = {
         // 201
         "There's no point in suspending a demonstration game.\n"
 };
-const char adventtxt4_b[68][186] PROGMEM = {
+const char actionDescriptionsMedium[AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM][ACTION_DESCRIPTIONS_MEDIUM_LENGTH] PROGMEM = {
         // 3
         "A little dwarf just walked around a corner, saw you,\n"
         "threw a little axe at you which missed, cursed, and ran away.\n",
@@ -450,7 +475,7 @@ const char adventtxt4_b[68][186] PROGMEM = {
         "You prod the nearest Dwarf, who wakes up grumpily, takes\n"
         "one look at you, curses, and grabs for his axe.\n",
 };
-const char adventtxt4_c[12][520] PROGMEM = {
+const char actionDescriptionsLong[AMOUNT_OF_ACTION_DESCRIPTIONS_LONG][ACTION_DESCRIPTIONS_LONG_LENGTH] PROGMEM = {
         // 1
         "Somewhere nearby is Colossal Cave, where others have found fortunes in \n"
         "treasure and gold, though it is rumored that some who enter are never \n"
@@ -532,8 +557,10 @@ const char adventtxt4_c[12][520] PROGMEM = {
         "meself off to the maze and hide me chest!\".  With that,\n"
         "he vanished into the gloom.\n",
 };
+
+
 // 51
-const char adventtxt4_51[] PROGMEM =
+const char actionDescription_51[DESCRIPTION_51_LENGTH] PROGMEM =
         "I know of places, actions, and things.  Most of my vocabulary \n"
         "describes places and is used to move you there.  To move, try words \n"
         "like forest, building, downstream, enter, east, west, north, south, up \n"
@@ -555,8 +582,9 @@ const char adventtxt4_51[] PROGMEM =
         "from anywhere above ground except when lost in the forest.  Also, note \n"
         "that cave passages turn a lot, and that leaving a room to the north \n"
         "does not guarantee entering the next from the south. Good luck!\n";
+
 // 142
-const char adventtxt4_142[] PROGMEM =
+const char actionDescription_142[DESCRIPTION_142_LENGTH] PROGMEM =
         "If you want to end your adventure early, say \"quit\".  To suspend your \n"
         "adventure such that you can continue later say \"suspend\" (or \"pause\" \n"
         "or \"save\").  To load a previously saved game, say 'load' or 'restore'.  \n"
@@ -579,3 +607,52 @@ const char adventtxt4_142[] PROGMEM =
         "accept the hints.  Finally, to save paper, you may specify \"brief\", \n"
         "which tells me never to repeat the full description of a place unless \n"
         "you explicitly ask me to.\n";
+
+
+char * getDescription(uint8_t index) {
+    char * stringToReturn = NULL;
+
+    if (index == 51) {
+        stringToReturn = (char *) malloc(DESCRIPTION_51_LENGTH);
+        strcpy_P(stringToReturn, actionDescription_51);
+        return stringToReturn;
+    } else if (index == 142) {
+        stringToReturn = (char *) malloc(DESCRIPTION_142_LENGTH);
+        strcpy_P(stringToReturn, actionDescription_142);
+        return stringToReturn;
+    }
+    uint8_t shortMsg[AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL] = {2, 4, 5, 6, 7, 8, 9, 12, 13, 14, 17, 18, 20, 22, 23, 24, 25, 27, 28, 29, 31, 32, 33, 34, 35,
+                          36, 37, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 53, 54, 55, 58, 60, 61, 62, 67,
+                          68, 70, 71, 72, 74, 76, 77, 78, 79, 80, 86, 87, 93, 94, 95, 97, 98, 99, 101, 102, 104, 105,
+                          106, 107, 108, 109, 110, 111, 113, 122, 123, 127, 137, 138, 140, 141, 143, 144, 146, 147, 148,
+                          150, 152, 153, 155, 160, 161, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178,
+                          180, 181, 184, 190, 194, 195, 196, 200, 201};
+    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL; ++i) {
+        if (shortMsg[i] == index) {
+            stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_SMALL_LENGTH);
+            strcpy_P(stringToReturn, actionsDescriptionsSmall[i]);
+            return stringToReturn;
+        }
+    }
+    uint8_t mediumMsg[AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM] = {3, 10, 11, 15, 16, 19, 21, 26, 30, 41, 56, 57, 58, 59, 63, 66, 69, 73, 75, 81, 83, 84, 85,
+                           91, 92, 96, 100, 103, 112, 114, 115, 116, 117, 118, 119, 120, 121, 125, 126, 129, 130, 131,
+                           135, 136, 139, 145, 149, 151, 154, 156, 157, 158, 159, 163, 164, 168, 179, 182, 185, 187,
+                           188, 189, 191, 192, 193, 197, 198, 199};
+    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM; ++i) {
+        if (mediumMsg[i] == index) {
+            stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_MEDIUM_LENGTH);
+            strcpy_P(stringToReturn, actionDescriptionsMedium[i]);
+            return stringToReturn;
+        }
+    }
+    uint8_t longMsg[AMOUNT_OF_ACTION_DESCRIPTIONS_LONG] = {1, 64, 65, 82, 124, 128, 132, 133, 134, 162, 183, 186};
+    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_LONG; ++i) {
+        if (longMsg[i] == index) {
+            stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_LONG_LENGTH);
+            strcpy_P(stringToReturn, actionDescriptionsLong[i]);
+            return stringToReturn;
+        }
+    }
+    return stringToReturn;
+}
+

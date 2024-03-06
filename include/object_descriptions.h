@@ -1,6 +1,7 @@
+// advent3.h
 #include <avr/pgmspace.h>
 
-const char adventtxt3[64][438] PROGMEM = {
+const char objectDescriptions[64][438] PROGMEM = {
 // 1
 	"/Set of keys.\n"
 	"/There are some keys on the ground here.\n"

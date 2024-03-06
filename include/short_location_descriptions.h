@@ -1,6 +1,7 @@
+// advent2.h
 #include <avr/pgmspace.h>
 
-const char adventtxt2[140][124] PROGMEM = {
+const char shortDescriptions[140][124] PROGMEM = {
 // 1
 	"You're at end of road again.\n",
 // 2

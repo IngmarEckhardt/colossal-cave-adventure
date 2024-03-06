@@ -1,6 +1,8 @@
+//advent1.h
+
 #include <avr/pgmspace.h>
 
-const char adventtxt1_a[29][62] PROGMEM = {
+const char locationDescriptionsSmall[29][62] PROGMEM = {
         // 3
         "You are inside a building, a well house for a large spring.\n",
         // 5
@@ -61,7 +63,7 @@ const char adventtxt1_a[29][62] PROGMEM = {
         "You are in a secret canyon which exits to the north and east.\n"
 };
 
-const char adventtxt1_b[52][186] PROGMEM = {
+const char locationDescriptionsMedium[52][186] PROGMEM = {
         // 1
         "You are standing at the end of a road before a small brick\n"
         "building.  Around you is a forest.  A small stream flows out\n"
@@ -250,7 +252,7 @@ const char adventtxt1_b[52][186] PROGMEM = {
         "       \"Caution!  Bear in room!\"\n",
 };
 
-const char adventtxt1_c[20][520] PROGMEM = {
+const char locationDescriptionsLong[20][520] PROGMEM = {
         // 15
         "You are at one end of a vast hall stretching forward out of\n"
         "sight to the west.  There are openings to either side.\n"
@@ -388,7 +390,8 @@ const char adventtxt1_c[20][520] PROGMEM = {
         "the dust lead away toward the far end of the room.\n"
         "The only exit is the way you came in.\n",
 };
-const char adventtxt1_115[] PROGMEM = "You are at the northeast end of an immense room, even\n"
+//115
+const char locationDescription_115[] PROGMEM = "You are at the northeast end of an immense room, even\n"
                                       "larger than the giant room.  It appears to be a repository\n"
                                       "for the \"adventure\" program.  Massive torches far overhead\n"
                                       "bathe the room with smoky yellow light.  Scattered about\n"
@@ -402,8 +405,8 @@ const char adventtxt1_115[] PROGMEM = "You are at the northeast end of an immens
                                       "An immense mirror is hanging against one wall, and\n"
                                       "stretches to the other end of the room, where various\n"
                                       "other sundry objects can be glimpsed dimly in the distance.\n";
-
-const char adventtxt1_126[] PROGMEM = "You are on the edge of a breath-taking view.  Far below you is an \n"
+//126
+const char locationDescription_126[] PROGMEM = "You are on the edge of a breath-taking view.  Far below you is an \n"
                                       "active volcano, from which great gouts of molten lava come surging \n"
                                       "out, cascading back down into the depths. The glowing rock fills the \n"
                                       "farthest reaches of the cavern with a blood-red glare, giving \n"
