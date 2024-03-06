@@ -599,8 +599,17 @@ const char actionDescription_142[DESCRIPTION_142_LENGTH] PROGMEM =
         "accept the hints.  Finally, to save paper, you may specify \"brief\", \n"
         "which tells me never to repeat the full description of a place unless \n"
         "you explicitly ask me to.\n";
-
-
+const uint8_t shortMsg[] PROGMEM  = {2, 4, 5, 6, 7, 8, 9, 12, 13, 14, 17, 18, 20, 22, 23, 24, 25, 27, 28, 29, 31, 32, 33, 34, 35,
+                                                                  36, 37, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 53, 54, 55, 58, 60, 61, 62, 67,
+                                                                  68, 70, 71, 72, 74, 76, 77, 78, 79, 80, 86, 87, 93, 94, 95, 97, 98, 99, 101, 102, 104, 105,
+                                                                  106, 107, 108, 109, 110, 111, 113, 122, 123, 127, 137, 138, 140, 141, 143, 144, 146, 147, 148,
+                                                                  150, 152, 153, 155, 160, 161, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178,
+                                                                  180, 181, 184, 190, 194, 195, 196, 200, 201};
+const uint8_t mediumMsg[] PROGMEM = {3, 10, 11, 15, 16, 19, 21, 26, 30, 41, 56, 57, 58, 59, 63, 66, 69, 73, 75, 81, 83, 84, 85,
+                                                                     91, 92, 96, 100, 103, 112, 114, 115, 116, 117, 118, 119, 120, 121, 125, 126, 129, 130, 131,
+                                                                     135, 136, 139, 145, 149, 151, 154, 156, 157, 158, 159, 163, 164, 168, 179, 182, 185, 187,
+                                                                     188, 189, 191, 192, 193, 197, 198, 199};
+const uint8_t longMsg[] PROGMEM = {1, 64, 65, 82, 124, 128, 132, 133, 134, 162, 183, 186};
 char * getActionDescription(uint8_t msgNumber) {
     char * stringToReturn = NULL;
 
@@ -613,33 +622,26 @@ char * getActionDescription(uint8_t msgNumber) {
         strcpy_P(stringToReturn, actionDescription_142);
         return stringToReturn;
     }
-    uint8_t shortMsg[AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL] = {2, 4, 5, 6, 7, 8, 9, 12, 13, 14, 17, 18, 20, 22, 23, 24, 25, 27, 28, 29, 31, 32, 33, 34, 35,
-                          36, 37, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 53, 54, 55, 58, 60, 61, 62, 67,
-                          68, 70, 71, 72, 74, 76, 77, 78, 79, 80, 86, 87, 93, 94, 95, 97, 98, 99, 101, 102, 104, 105,
-                          106, 107, 108, 109, 110, 111, 113, 122, 123, 127, 137, 138, 140, 141, 143, 144, 146, 147, 148,
-                          150, 152, 153, 155, 160, 161, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178,
-                          180, 181, 184, 190, 194, 195, 196, 200, 201};
+
+
     for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL; i++) {
-        if (shortMsg[i] == msgNumber) {
+        if (pgm_read_byte(&shortMsg[i]) == msgNumber) {
             stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_SMALL_LENGTH);
             strcpy_P(stringToReturn, actionsDescriptionsSmall[i]);
             return stringToReturn;
         }
     }
-    uint8_t mediumMsg[AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM] = {3, 10, 11, 15, 16, 19, 21, 26, 30, 41, 56, 57, 58, 59, 63, 66, 69, 73, 75, 81, 83, 84, 85,
-                           91, 92, 96, 100, 103, 112, 114, 115, 116, 117, 118, 119, 120, 121, 125, 126, 129, 130, 131,
-                           135, 136, 139, 145, 149, 151, 154, 156, 157, 158, 159, 163, 164, 168, 179, 182, 185, 187,
-                           188, 189, 191, 192, 193, 197, 198, 199};
+
     for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM; i++) {
-        if (mediumMsg[i] == msgNumber) {
+        if (pgm_read_byte(&mediumMsg[i]) == msgNumber) {
             stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_MEDIUM_LENGTH);
             strcpy_P(stringToReturn, actionDescriptionsMedium[i]);
             return stringToReturn;
         }
     }
-    uint8_t longMsg[AMOUNT_OF_ACTION_DESCRIPTIONS_LONG] = {1, 64, 65, 82, 124, 128, 132, 133, 134, 162, 183, 186};
+
     for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_LONG; i++) {
-        if (longMsg[i] == msgNumber) {
+        if (pgm_read_byte(&longMsg[i]) == msgNumber) {
             stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_LONG_LENGTH);
             strcpy_P(stringToReturn, actionDescriptionsLong[i]);
             return stringToReturn;

@@ -30,7 +30,7 @@ int main(void) {
 
     setup();
     sei();
-    char * testBuffer = malloc(30*sizeof(char));
+
     while (1) {
 
         sleep_mode();
@@ -39,9 +39,10 @@ int main(void) {
 
             lastTime = time(NULL);
             printToSerialOutput();
-            strcpy_P(testBuffer, shortDescriptions[0]);
-            printf("%s", testBuffer);
-            char * description_65 = getActionDescription(142);
+            char * description_65 = getActionDescription(1);
+            printf("%s",description_65);
+            free(description_65);
+            description_65= getLongLocationDescription(65);
             printf("%s",description_65);
             free(description_65);
         }

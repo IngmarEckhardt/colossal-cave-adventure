@@ -446,6 +446,49 @@ const char locationDescription_126[LOC_DESCRIPTION_126_LENGTH] PROGMEM =
         "to the already hellish scene.  \n"
         "A dark, foreboding passage exits to the south.\n";
 
+const uint8_t shortLocMsg[AMOUNT_OF_LOC_DESCRIPTIONS_SMALL][MAX_AMOUNT_SMALL_LOC_SANE_DESCRIPTION] PROGMEM = {
+        {3},
+        {5},
+        {6},
+        {12},
+        {16},
+        {20},
+        {21},
+        {22},
+        {29},
+        {31},
+        {32},
+        {34},
+        {42,  43,  44,  45,  49,  50,  51,  52,  53,  55,  80, 83,  84, 87},
+        {46,  47,  48,  54,  56,  58,  63,  81,  82,  85,  86, 114, 140},
+        {69},
+        {70},
+        {72},
+        {73},
+        {75},
+        {76},
+        {78},
+        {90},
+        {93},
+        {94},
+        {104},
+        {105},
+        {107, 112, 131, 132, 133, 134, 135, 136, 137, 138, 139},
+        {108},
+        {119, 120, 121},
+};
+
+const uint8_t mediumLocMsg[AMOUNT_OF_LOC_DESCRIPTIONS_MEDIUM] PROGMEM = {1, 2, 4, 7, 8, 9, 10, 13, 14, 17, 18, 19, 23, 24,
+                                                                      25, 26,
+                                                                      28, 30, 33, 36, 37, 38, 39, 40, 41, 57, 59, 60,
+                                                                      61, 62, 65,
+                                                                      66, 65, 66, 71, 74, 77, 79, 88, 89, 91, 96, 100,
+                                                                      101, 102,
+                                                                      117, 118, 122, 123, 125, 128, 129};
+const uint8_t longLocMsg[AMOUNT_OF_LOC_DESCRIPTIONS_LONG] PROGMEM = {15, 35, 64, 67, 68, 92, 95, 97, 98, 99, 103, 106, 109,
+                                                                  110, 111,
+                                                                  113, 116, 124, 127, 130};
+
 char * getLongLocationDescription(uint8_t locNumber) {
     char * stringToReturn = NULL;
     if (locNumber == 115) {
@@ -458,41 +501,10 @@ char * getLongLocationDescription(uint8_t locNumber) {
         return stringToReturn;
     }
 
-    uint8_t shortMsg[AMOUNT_OF_LOC_DESCRIPTIONS_SMALL][MAX_AMOUNT_SMALL_LOC_SANE_DESCRIPTION] = {
-            {3},
-            {5},
-            {6},
-            {12},
-            {16},
-            {20},
-            {21},
-            {22},
-            {29},
-            {31},
-            {32},
-            {34},
-            {42,  43,  44,  45,  49,  50,  51,  52,  53,  55,  80, 83,  84, 87},
-            {46,  47,  48,  54,  56,  58,  63,  81,  82,  85,  86, 114, 140},
-            {69},
-            {70},
-            {72},
-            {73},
-            {75},
-            {76},
-            {78},
-            {90},
-            {93},
-            {94},
-            {104},
-            {105},
-            {107, 112, 131, 132, 133, 134, 135, 136, 137, 138, 139},
-            {108},
-            {119, 120, 121},
-    };
 
     for (uint8_t i = 0; i < AMOUNT_OF_LOC_DESCRIPTIONS_SMALL; i++) {
         for (int j = 0; j < MAX_AMOUNT_SMALL_LOC_SANE_DESCRIPTION; ++j) {
-            if (shortMsg[i][j] == locNumber) {
+            if (pgm_read_byte(&shortLocMsg[i][j]) == locNumber) {
                 stringToReturn = (char *) malloc(LOC_DESCRIPTIONS_SMALL_LENGTH);
                 strcpy_P(stringToReturn, locationDescriptionsSmall[i]);
                 return stringToReturn;
@@ -500,22 +512,16 @@ char * getLongLocationDescription(uint8_t locNumber) {
         }
     }
 
-    uint8_t mediumMsg[AMOUNT_OF_LOC_DESCRIPTIONS_MEDIUM] = {1, 2, 4, 7, 8, 9, 10, 13, 14, 17, 18, 19, 23, 24, 25, 26,
-                                                            28, 30, 33, 36, 37, 38, 39, 40, 41, 57, 59, 60, 61, 62, 65,
-                                                            66, 65, 66, 71, 74, 77, 79, 88, 89, 91, 96, 100, 101, 102,
-                                                            117, 118, 122, 123, 125, 128, 129,
-    };
     for (uint8_t i = 0; i < AMOUNT_OF_LOC_DESCRIPTIONS_MEDIUM; i++) {
-        if (mediumMsg[i] == locNumber) {
+        if (pgm_read_byte(&mediumLocMsg[i]) == locNumber) {
             stringToReturn = (char *) malloc(LOC_DESCRIPTIONS_MEDIUM_LENGTH);
             strcpy_P(stringToReturn, locationDescriptionsMedium[i]);
             return stringToReturn;
         }
     }
-    uint8_t longMsg[AMOUNT_OF_LOC_DESCRIPTIONS_LONG] = {15, 35, 64, 67, 68, 92, 95, 97, 98, 99, 103, 106, 109, 110, 111,
-                                                        113, 116, 124, 127, 130};
+
     for (uint8_t i = 0; i < AMOUNT_OF_LOC_DESCRIPTIONS_LONG; i++) {
-        if (longMsg[i] == locNumber) {
+        if (pgm_read_byte(&longLocMsg[i]) == locNumber) {
             stringToReturn = (char *) malloc(LOC_DESCRIPTIONS_LONG_LENGTH);
             strcpy_P(stringToReturn, locationDescriptionsLong[i]);
             return stringToReturn;
