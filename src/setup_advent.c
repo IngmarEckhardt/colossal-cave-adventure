@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <avr/io.h>
+
 #include <setup_advent.h>
 #include <setup.h>
 #include <uart_helper.h>
@@ -37,14 +38,11 @@ static FILE myStdIn = FDEV_SETUP_STREAM(NULL, get_char, _FDEV_SETUP_READ);
 
 void setupAdvent(void) {
     setupMcu(&mcuClock);
+
     uartHelper = dOS_initUartHelper();
     inputQueue = cca_initInputQueue(&adjustCounter);
     stdin = &myStdIn;
     stdout = &myStdOut;
-
-#ifndef NDEBUG
-
-#endif
     // Enable receiver and transmitter and Interrupt additionally
     UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0);
 }

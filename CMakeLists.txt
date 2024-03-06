@@ -36,12 +36,12 @@ set(EXTERN_PATH "${CMAKE_CURRENT_SOURCE_DIR}/extern")
 
 set(SRC_FILES
 
-        "${SRC_PATH}/database.c"
-        "${SRC_PATH}/english.c"
-        "${SRC_PATH}/itverb.c"
+#        "${SRC_PATH}/database.c"
+#        "${SRC_PATH}/english.c"
+#        "${SRC_PATH}/itverb.c"
         "${SRC_PATH}/setup_advent.c"
-        "${SRC_PATH}/turn.c"
-        "${SRC_PATH}/verb.c"
+#        "${SRC_PATH}/turn.c"
+#        "${SRC_PATH}/verb.c"
 )
 
 set(HEADER_FILES
