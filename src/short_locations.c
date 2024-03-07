@@ -148,7 +148,7 @@ char * getShortLocation(uint8_t locNumber) {
     char * stringToReturn = NULL;
 
     for (uint8_t i = 0; i < AMOUNT_OF_SHORT_LOC_DESCRIPTIONS_SMALL; i++) {
-        for (int j = 0; j < MAX_AMOUNT_SHORTEST_LOC_SANE_DESCRIPTION; ++j) {
+        for (int j = 0; j < MAX_AMOUNT_SHORTEST_LOC_SANE_DESCRIPTION; j++) {
             if (pgm_read_byte(&shortShortLocations[i].numbers[j]) == locNumber) {
                 stringToReturn = (char *) malloc(SHORT_LOC_DESCRIPTIONS_SMALL_LENGTH);
                 strcpy_P(stringToReturn, shortShortLocations[i].description);

@@ -375,7 +375,7 @@ char * getLongLocation(uint8_t locNumber) {
     }
 
     for (uint8_t i = 0; i < AMOUNT_OF_LOC_DESCRIPTIONS_SMALL; i++) {
-        for (int j = 0; j < MAX_AMOUNT_SMALL_LOC_SANE_DESCRIPTION; ++j) {
+        for (int j = 0; j < MAX_AMOUNT_SMALL_LOC_SANE_DESCRIPTION; j++) {
             if (pgm_read_byte(&shortLongLocations[i].numbers[j]) == locNumber) {
                 stringToReturn = (char *) malloc(LOC_DESCRIPTIONS_SMALL_LENGTH);
                 strcpy_P(stringToReturn, shortLongLocations[i].description);
