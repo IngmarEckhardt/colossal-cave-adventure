@@ -1,7 +1,6 @@
 // advent2.h
 #include <short_locations.h>
 #include <avr/pgmspace.h>
-#include <stddef.h>
 #include <stdlib.h>
 
 #define SHORT_LOC_DESCRIPTIONS_SMALL_LENGTH 62

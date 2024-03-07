@@ -1,7 +1,6 @@
 #include <long_locations.h>
 //advent1.h
 #include <avr/pgmspace.h>
-#include <stddef.h>
 #include <stdlib.h>
 
 #define LOC_DESCRIPTIONS_SMALL_LENGTH 62

@@ -1,7 +1,6 @@
 // advent4.h
 #include <actions.h>
 #include <avr/pgmspace.h>
-#include <stddef.h>
 #include <stdlib.h>
 
 #define ACTION_DESCRIPTIONS_SMALL_LENGTH 62

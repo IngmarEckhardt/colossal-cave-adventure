@@ -36,15 +36,16 @@ set(EXTERN_PATH "${CMAKE_CURRENT_SOURCE_DIR}/extern")
 
 set(SRC_FILES
         "${SRC_PATH}/actions.c"
+        "${SRC_PATH}/cave_travel_array.c"
         "${SRC_PATH}/long_locations.c"
         "${SRC_PATH}/objects.c"
-#        "${SRC_PATH}/database.c"
-#        "${SRC_PATH}/english.c"
-#        "${SRC_PATH}/itverb.c"
+        "${SRC_PATH}/database.c"
+        "${SRC_PATH}/english.c"
+        "${SRC_PATH}/itverb.c"
         "${SRC_PATH}/setup_adventure.c"
         "${SRC_PATH}/short_locations.c"
-#        "${SRC_PATH}/turn.c"
-#        "${SRC_PATH}/verb.c"
+        "${SRC_PATH}/turn.c"
+        "${SRC_PATH}/verb.c"
 )
 
 set(HEADER_FILES

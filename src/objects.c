@@ -1,7 +1,6 @@
 // advent3.h
 #include <objects.h>
 #include <avr/pgmspace.h>
-#include <stddef.h>
 #include <stdlib.h>
 
 #define OBJ_DESCRIPTIONS_SMALL_LENGTH 62
