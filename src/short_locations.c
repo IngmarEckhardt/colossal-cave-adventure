@@ -13,7 +13,7 @@
 
 typedef struct {
     uint8_t numbers[MAX_AMOUNT_SHORTEST_LOC_SANE_DESCRIPTION]; // Array of numbers
-    char shortDescription[SHORT_LOC_DESCRIPTIONS_SMALL_LENGTH]; // Short length description
+    char description[SHORT_LOC_DESCRIPTIONS_SMALL_LENGTH]; // Short length description
 } ShortShortLocation;
 const ShortShortLocation shortShortLocations[AMOUNT_OF_SHORT_LOC_DESCRIPTIONS_SMALL] PROGMEM = {
         {{1},             "You're at end of road again.\n"},
@@ -113,7 +113,7 @@ const ShortShortLocation shortShortLocations[AMOUNT_OF_SHORT_LOC_DESCRIPTIONS_SM
 
 typedef struct {
     uint8_t number;
-    char mediumDescription[SHORT_LOC_DESCRIPTIONS_MEDIUM_LENGTH];
+    char description[SHORT_LOC_DESCRIPTIONS_MEDIUM_LENGTH];
 } MediumShortLocation;
 
 const MediumShortLocation mediumShortLocations[AMOUNT_OF_SHORT_LOC_DESCRIPTIONS_MEDIUM] PROGMEM = {
@@ -151,7 +151,7 @@ char * getShortLocation(uint8_t locNumber) {
         for (int j = 0; j < MAX_AMOUNT_SHORTEST_LOC_SANE_DESCRIPTION; ++j) {
             if (pgm_read_byte(&shortShortLocations[i].numbers[j]) == locNumber) {
                 stringToReturn = (char *) malloc(SHORT_LOC_DESCRIPTIONS_SMALL_LENGTH);
-                strcpy_P(stringToReturn, shortShortLocations[i].shortDescription);
+                strcpy_P(stringToReturn, shortShortLocations[i].description);
                 return stringToReturn;
             }
         }
@@ -160,7 +160,7 @@ char * getShortLocation(uint8_t locNumber) {
     for (uint8_t i = 0; i < AMOUNT_OF_SHORT_LOC_DESCRIPTIONS_MEDIUM; i++) {
         if (pgm_read_byte(&mediumShortLocations[i].number) == locNumber) {
             stringToReturn = (char *) malloc(SHORT_LOC_DESCRIPTIONS_MEDIUM_LENGTH);
-            strcpy_P(stringToReturn, mediumShortLocations[i].mediumDescription);
+            strcpy_P(stringToReturn, mediumShortLocations[i].description);
             return stringToReturn;
         }
     }

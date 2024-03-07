@@ -188,7 +188,7 @@ const MediumObject mediumObjects[AMOUNT_OF_OBJ_DESCRIPTIONS_MEDIUM]PROGMEM = {
 };
 typedef struct {
     uint8_t number;
-    char longDescription[OBJ_DESCRIPTIONS_LONG_LENGTH];
+    char description[OBJ_DESCRIPTIONS_LONG_LENGTH];
 } LongObject;
 const LongObject longObjects[AMOUNT_OF_OBJ_DESCRIPTIONS_LONG] PROGMEM = {
         {24, "/*Plant\n"
@@ -257,7 +257,7 @@ char * getObject(uint8_t objNumber) {
     for (uint8_t i = 0; i < AMOUNT_OF_OBJ_DESCRIPTIONS_LONG; ++i) {
         if (pgm_read_byte(&longObjects[i].number) == objNumber) {
             stringToReturn = malloc(OBJ_DESCRIPTIONS_LONG_LENGTH);
-            strcpy_P(stringToReturn, (char *) pgm_read_word(&(longObjects[i].longDescription)));
+            strcpy_P(stringToReturn, (char *) pgm_read_word(&(longObjects[i].description)));
             return stringToReturn;
         }
     }
