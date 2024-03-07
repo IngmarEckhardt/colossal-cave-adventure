@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <avr/io.h>
 
-#include <setup_advent.h>
+#include <setup_adventure.h>
 #include <setup.h>
 #include <uart_helper.h>
 

@@ -35,12 +35,14 @@ set(SRC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(EXTERN_PATH "${CMAKE_CURRENT_SOURCE_DIR}/extern")
 
 set(SRC_FILES
-        "${SRC_PATH}/action_descriptions.c"
-        "${SRC_PATH}/long_location_descriptions.c"
+        "${SRC_PATH}/actions.c"
+        "${SRC_PATH}/long_locations.c"
+        "${SRC_PATH}/objects.c"
 #        "${SRC_PATH}/database.c"
 #        "${SRC_PATH}/english.c"
 #        "${SRC_PATH}/itverb.c"
-        "${SRC_PATH}/setup_advent.c"
+        "${SRC_PATH}/setup_adventure.c"
+        "${SRC_PATH}/short_locations.c"
 #        "${SRC_PATH}/turn.c"
 #        "${SRC_PATH}/verb.c"
 )
@@ -59,7 +61,7 @@ else ()
     add_subdirectory(${EXTERN_PATH}/dwarfOS extern_build)
 
 
-    add_executable(${PROJECT_NAME} ${SRC_FILES} "${SRC_PATH}/mcu_advent.c")
+    add_executable(${PROJECT_NAME} ${SRC_FILES} "${SRC_PATH}/colossal_cave_adventure.c")
     target_include_directories(${PROJECT_NAME} PUBLIC ${INCL_PATH})
     target_link_libraries(${PROJECT_NAME} DwarfOS)
     set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_NAME}.elf")
