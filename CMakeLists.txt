@@ -53,6 +53,7 @@ set(HEADER_FILES
 )
 
 if (TESTS)
+    include_directories(${INCL_PATH} "extern/dwarfOS/include")
 else ()
     include_directories(${INCL_PATH})
 
@@ -80,14 +81,15 @@ if (TESTS)
     # adjust to your system
     set(CMAKE_SYSTEM_NAME Windows)
     set(TEST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+
     # build Unity
     add_subdirectory(${EXTERN_PATH}/Unity extern_build_unity)
     # string_repository.c
-    add_executable(${PROJECT_NAME}_StringRepo "${TEST_PATH}/_string_repository.c" "${TEST_PATH}/_src/_string_storage.c")
-    target_link_libraries(${PROJECT_NAME}_StringRepo ${PROJECT_NAME}LibReduced unity)
+    add_executable(${PROJECT_NAME}_longLocations "${TEST_PATH}/_long_locations.c" "extern/dwarfOS/src/string_repository.c")
+    target_link_libraries(${PROJECT_NAME}_longLocations unity)
 
     include(CTest)
-    add_test(AsciiHelper ${PROJECT_NAME}_AsciiHelper)
+    add_test(LongLocations ${PROJECT_NAME}_longLocations)
 
 endif ()
 set_directory_properties(PROPERTIES

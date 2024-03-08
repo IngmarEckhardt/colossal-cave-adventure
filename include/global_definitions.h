@@ -2,6 +2,11 @@
 /*	header ADVDEF.H						*\
 \*	WARNING: GLOBAL variable allocations for adventure	*/
 
+#include "string_repository.h"
+#include "mcu_clock.h"
+#include "input_queue.h"
+#include "uart_helper.h"
+
 /*
 	Database variables
 */

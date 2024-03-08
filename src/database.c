@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 #include <advent.h>
-#include <advdec.h>
+#include <global_declarations.h>
 #include <actions.h>
 #include <objects.h>
 #include <long_locations.h>
@@ -115,39 +115,39 @@ void pspeak(int item, int state) {
         return;
     }
 
-    char * objectStatusMsg = getObject(item);
-    if (objectStatusMsg == NULL) {
-        printf("ask for Object %d, but was NULL", item);
-
-        bug(31);
-        return;
-    } else {
-        int c;
-        int n = state + 2;
-
-        while (n--) {
-            while ((c = *objectStatusMsg++) != '/') {
-                if (c == '\0') {
-                    bug(32);
-                }
-
-            }
-        }
-
-        for (n = 0; objectStatusMsg[n] != '\0' && objectStatusMsg[n] != '/'; n++)
-            putchar(objectStatusMsg[n]);
-
-    }
-    free(objectStatusMsg);
+//    char * objectStatusMsg = getObject(item);
+//    if (objectStatusMsg == NULL) {
+//        printf("ask for Object %d, but was NULL", item);
+//
+//        bug(31);
+//        return;
+//    } else {
+//        int c;
+//        int n = state + 2;
+//
+//        while (n--) {
+//            while ((c = *objectStatusMsg++) != '/') {
+//                if (c == '\0') {
+//                    bug(32);
+//                }
+//
+//            }
+//        }
+//
+//        for (n = 0; objectStatusMsg[n] != '\0' && objectStatusMsg[n] != '/'; n++)
+//            putchar(objectStatusMsg[n]);
+//
+//    }
+//    free(objectStatusMsg);
 }
 
 /*
 	Print a long location description from "advent1.txt"
 */
 void desclg(int loc) {
-    char * description = getLongLocation(loc);
-    fputs(description, stdout);
-    free(description);
+//    char * description = getLongLocation(loc);
+//    fputs(description, stdout);
+//    free(description);
 
 }
 

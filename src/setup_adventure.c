@@ -1,27 +1,28 @@
+#include <setup_adventure.h>
+
 #include <stdio.h>
 #include <avr/io.h>
 #include <string.h>
 
-#include <setup_adventure.h>
-#include <setup.h>
-#include <uart_helper.h>
-#include <advent.h>
-#include <advdef.h>
 
+#include <setup.h>
+#include <advent.h>
+#include <global_definitions.h>
+
+#include <cca_helper.h>
 
 #define setmem(l, s, c) memset(l, c, s)
 
 const uint8_t adjustToSecondValue = ADJUST_TO_SECOND_VALUE;
-volatile uint8_t adjustCounter = 0;
+volatile uint8_t cca_adjustCounter = 0;
 
-McuClock * mcuClock;
-InputQueue * inputQueue;
-UartHelper * uartHelper;
+
+
 
 void adjustTo1Sec(void) {
-    if (adjustCounter == adjustToSecondValue) {
+    if (cca_adjustCounter == adjustToSecondValue) {
         mcuClock->incrementClockOneSec();
-        adjustCounter = 0;
+        cca_adjustCounter = 0;
     }
 }
 void putIntoQueue(uint8_t item) {
@@ -133,8 +134,12 @@ void initplay(void)
 void setupAdvent(void) {
     setupMcu(&mcuClock);
 
+    stringRepository = dOS_initStringRepository(0);
     uartHelper = dOS_initUartHelper();
     inputQueue = cca_initInputQueue();
+    heapHelper = dOS_initHeapManagementHelper();
+    stringStorage = dOS_initStringStorage();
+
     stdin = &myStdIn;
     stdout = &myStdOut;
     // Enable receiver and transmitter and Interrupt additionally

@@ -7,7 +7,7 @@
 #include <stdio.h> /* drv = 1.1st file 2.def 3.A	*/
 
 #include "advent.h"
-#include "advdec.h"
+#include "global_declarations.h"
 
 
 /*

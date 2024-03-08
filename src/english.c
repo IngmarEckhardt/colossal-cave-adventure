@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #include "advent.h"
-#include "advdec.h"
+#include "global_declarations.h"
 
 
 /*
