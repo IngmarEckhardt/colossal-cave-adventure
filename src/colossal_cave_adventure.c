@@ -7,6 +7,11 @@
 #include "advent.h"
 #include "advword.h" /* definition of "word" array	*/
 #include "advdef.h"
+#include "objects.h"
+#include "long_locations.h"
+#include "short_locations.h"
+#include "actions.h"
+#include "cave_travel_array.h"
 
 #include <mcu_clock.h>
 #include <heap_management_helper.h>
@@ -21,7 +26,6 @@ void printToSerialOutput(void);
 McuClock * mcuClock;
 HeapManagementHelper * heapHelper;
 
-uint8_t lastTime;
 char * timestamp;
 uint8_t lastTime;
 
@@ -29,7 +33,20 @@ uint8_t lastTime;
 int main(void) {
 
     setup();
-
+    char * object3 = getObject(61);
+    printf("Object 61 is: %s\n", object3);
+    free(object3);
+    object3 = getLongLocation(61);
+    printf("LongLocation 61 is: %s\n", object3);
+    free(object3);
+    object3 = getShortLocation(61);
+    printf("ShortLocation 61 is: %s\n", object3);
+    free(object3);
+    object3 = getAction(61);
+    printf("Action 61 is: %s\n", object3);
+    object3 = getTravel(61);
+    printf("Travel 61 is: %s\n", object3);
+    free(object3);
     sei();
     if (yes(65, 1, 0))
         limit = 1000;
@@ -39,26 +56,8 @@ int main(void) {
 
     while (1) {
         turn();
-        printToSerialOutput();
-//        sleep_mode();
+        sleep_mode();
         adjustTo1Sec();
-//        if ((uint8_t) time(NULL) != lastTime) {
-//
-//            lastTime = time(NULL);
-//            printToSerialOutput();
-//            char * description_65 = getAction(1);
-//            printf("%s",description_65);
-//            free(description_65);
-//            description_65= getLongLocation(65);
-//            printf("%s",description_65);
-//            free(description_65);
-//            description_65= getShortLocation(65);
-//            printf("%s",description_65);
-//            free(description_65);
-//            description_65= getObject(25);
-//            printf("%s",description_65);
-//            free(description_65);
-//        }
     }
 }
 
@@ -68,8 +67,6 @@ ISR(TIMER2_OVF_vect) { adjustCounter++; }
 ISR(USART0_RX_vect) { putIntoQueue(UDR0); }
 
 void printToSerialOutput(void) {
-
-
     timestamp = ctime(NULL);
     printf("%s: free Memory is: %d byte\n", timestamp, heapHelper->getFreeMemory());
     free(timestamp);

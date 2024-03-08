@@ -71,14 +71,14 @@ void gettrav(int loc) {
 */
 int yes(int msg1, int msg2, int msg3) {
     char answer[80];
-    HeapManagementHelper * heapManagementHelper = dOS_initHeapManagementHelper();
-    printf("Memory is %d", heapManagementHelper->getFreeMemory());
-    free(heapManagementHelper);
+//    HeapManagementHelper * heapManagementHelper = dOS_initHeapManagementHelper();
+//    printf("Memory is %d", heapManagementHelper->getFreeMemory());
+//    free(heapManagementHelper);
     if (msg1) {
         rspeak(msg1);
     }
     fputs("> ", stdout);
-//    fflush(stdout);
+    fflush(stdout);
     if (NULL == fgets(answer, 80, stdin)) {
         printf("No Msg detected");
 
@@ -117,6 +117,8 @@ void pspeak(int item, int state) {
 
     char * objectStatusMsg = getObject(item);
     if (objectStatusMsg == NULL) {
+        printf("ask for Object %d, but was NULL", item);
+
         bug(31);
         return;
     } else {

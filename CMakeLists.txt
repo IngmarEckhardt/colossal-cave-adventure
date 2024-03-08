@@ -82,7 +82,12 @@ if (TESTS)
     set(TEST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tests")
     # build Unity
     add_subdirectory(${EXTERN_PATH}/Unity extern_build_unity)
+    # string_repository.c
+    add_executable(${PROJECT_NAME}_StringRepo "${TEST_PATH}/_string_repository.c" "${TEST_PATH}/_src/_string_storage.c")
+    target_link_libraries(${PROJECT_NAME}_StringRepo ${PROJECT_NAME}LibReduced unity)
 
+    include(CTest)
+    add_test(AsciiHelper ${PROJECT_NAME}_AsciiHelper)
 
 endif ()
 set_directory_properties(PROPERTIES

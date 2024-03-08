@@ -134,7 +134,7 @@ void setupAdvent(void) {
     setupMcu(&mcuClock);
 
     uartHelper = dOS_initUartHelper();
-    inputQueue = cca_initInputQueue(&adjustCounter);
+    inputQueue = cca_initInputQueue();
     stdin = &myStdIn;
     stdout = &myStdOut;
     // Enable receiver and transmitter and Interrupt additionally

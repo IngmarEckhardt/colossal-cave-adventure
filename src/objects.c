@@ -15,7 +15,7 @@ typedef struct {
     char description[OBJ_DESCRIPTIONS_SMALL_LENGTH];
 } SmallObject;
 
-const SmallObject smallObjects[AMOUNT_OF_OBJ_DESCRIPTIONS_SMALL] PROGMEM = {
+const SmallObject smallObjects[AMOUNT_OF_OBJ_DESCRIPTIONS_SMALL]PROGMEM = {
         {1,  "/Set of keys.\n"
              "/There are some keys on the ground here.\n"
              "/\n"},
@@ -239,24 +239,24 @@ const LongObject longObjects[AMOUNT_OF_OBJ_DESCRIPTIONS_LONG] PROGMEM = {
 char * getObject(uint8_t objNumber) {
     char * stringToReturn = NULL;
 
-    for (uint8_t i = 0; i < AMOUNT_OF_OBJ_DESCRIPTIONS_SMALL; ++i) {
+    for (uint8_t i = 0; i < AMOUNT_OF_OBJ_DESCRIPTIONS_SMALL; i++) {
         if (pgm_read_byte(&smallObjects[i].number) == objNumber) {
             stringToReturn = malloc(OBJ_DESCRIPTIONS_SMALL_LENGTH);
-            strcpy_P(stringToReturn, (char *) pgm_read_word(&(smallObjects[i].description)));
+            strcpy_P(stringToReturn, smallObjects[i].description);
             return stringToReturn;
         }
     }
-    for (uint8_t i = 0; i < AMOUNT_OF_OBJ_DESCRIPTIONS_MEDIUM; ++i) {
+    for (uint8_t i = 0; i < AMOUNT_OF_OBJ_DESCRIPTIONS_MEDIUM; i++) {
         if (pgm_read_byte(&mediumObjects[i].number) == objNumber) {
             stringToReturn = malloc(OBJ_DESCRIPTIONS_MEDIUM_LENGTH);
-            strcpy_P(stringToReturn, (char *) pgm_read_word(&(mediumObjects[i].description)));
+            strcpy_P(stringToReturn, mediumObjects[i].description);
             return stringToReturn;
         }
     }
-    for (uint8_t i = 0; i < AMOUNT_OF_OBJ_DESCRIPTIONS_LONG; ++i) {
+    for (uint8_t i = 0; i < AMOUNT_OF_OBJ_DESCRIPTIONS_LONG; i++) {
         if (pgm_read_byte(&longObjects[i].number) == objNumber) {
             stringToReturn = malloc(OBJ_DESCRIPTIONS_LONG_LENGTH);
-            strcpy_P(stringToReturn, (char *) pgm_read_word(&(longObjects[i].description)));
+            strcpy_P(stringToReturn, longObjects[i].description);
             return stringToReturn;
         }
     }
