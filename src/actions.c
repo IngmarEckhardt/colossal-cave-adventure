@@ -2,6 +2,7 @@
 #include <actions.h>
 #include <avr/pgmspace.h>
 #include <stdlib.h>
+#include <cca_helper.h>
 
 #define ACTION_DESCRIPTIONS_SMALL_LENGTH 62
 #define ACTION_DESCRIPTIONS_MEDIUM_LENGTH 186
@@ -19,122 +20,122 @@ typedef struct {
     char description[ACTION_DESCRIPTIONS_SMALL_LENGTH];
 } SmallAction;
 const SmallAction smallActions[AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL] PROGMEM = {
-        {{2,},              "A little dwarf with a big knife blocks your way.\n"},
-        {{4,},              "There is a threatening little dwarf in the room with you!\n"},
-        {{5,},              "One sharp, nasty knife is thrown at you!\n"},
-        {{6,},              "None of them hit you!\n"},
-        {{7,},              "One of them gets you!\n"},
-        {{8,},              "A hollow voice says \"Plugh\".\n"},
-        {{9,},              "There is no way to go that direction.\n"},
-        {{12,},             "I don't know how to apply that word here.\n"},
-        {{13,},             "I don't understand that!\n"},
-        {{14,},             "I'm game.  Would you care to explain how?\n"},
-        {{17,},             "If you prefer, simply type W rather than West.\n"},
-        {{18,},             "Are you trying to catch the bird?\n"},
-        {{20,},             "Are you trying to somehow deal with the snake?\n"},
-        {{22,},             "Do you really want to quit now?\n"},
-        {{23,},             "You fell into a pit and broke every bone in your body!\n"},
-        {{24,},             "You are already carrying it!\n"},
-        {{25,},             "You can't be serious!\n"},
-        {{27,},             "You can catch the bird, but you cannot carry it.\n"},
-        {{28,},             "There is nothing here with a lock!\n"},
-        {{29,},             "You aren't carrying it!\n"},
-        {{31,},             "You have no keys!\n"},
-        {{32,},             "It has no lock.\n"},
-        {{33,},             "I don't know how to lock or unlock such a thing.\n"},
-        {{34,},             "It was already locked.\n"},
-        {{35,},             "The grate is now locked.\n"},
-        {{36,},             "The grate is now unlocked.\n"},
-        {{37,},             "It was already unlocked.\n"},
-        {{38,},             "You have no source of light.\n"},
-        {{39,},             "Your lamp is now on.\n"},
-        {{40,},             "Your lamp is now off.\n"},
-        {{42,},             "Nothing happens.\n"},
-        {{43,},             "Where?\n"},
-        {{44,},             "There is nothing here to attack.\n"},
-        {{45,},             "The little bird is now dead.  Its body disappears.\n"},
-        {{46,},             "Attacking the snake both doesn't work and is very dangerous.\n"},
-        {{47,},             "You killed a little dwarf.\n"},
-        {{48,},             "You attack a little dwarf, but he dodges out of the way.\n"},
-        {{49,},             "With what? Your bare hands?\n"},
-        {{50,},             "Good try, but that is an old worn-out magic word.\n"},
-        {{52,},             "It misses!\n"},
-        {{53,},             "It gets you!\n"},
-        {{54,},             "OK\n"},
-        {{55,},             "You can't unlock the keys.\n"},
-        {{58,},             "I need more detailed instructions to do that.\n"},
-        {{60,},             "I don't know that word.\n"},
-        {{61,},             "What?\n"},
-        {{62,},             "Are you trying to get into the cave?\n"},
-        {{67,},             "Blasting requires dynamite.\n"},
-        {{68,},             "I'm as confused as you are.\n"},
-        {{70,},             "Your feet are now wet.\n"},
-        {{71,},             "I think I just lost my appetite.\n"},
-        {{72,},             "Thank you.  It was delicious!\n"},
-        {{74,},             "The bottle of water is now empty.\n"},
-        {{76,},             "Peculiar.  Nothing unexpected happens.\n"},
-        {{77,},             "Your bottle is empty and the ground is wet.\n"},
-        {{78,},             "You can't pour that.\n"},
-        {{79,},             "Watch it!\n"},
-        {{80,},             "Which way?\n"},
-        {{86,},             "Okay, If you're so smart, do it yourself!  I'm leaving!\n"},
-        {{87, 88, 89, 90,}, "Reserved\n"},
-        {{93,},             "You can't go through a locked steel grate!\n"},
-        {{94,},             "I believe what you want is right here with you.\n"},
-        {{95,},             "You don't fit through a two-inch slit!\n"},
-        {{97,},             "There is no way across the fissure.\n"},
-        {{98,},             "You're not carrying anything.\n"},
-        {{99,},             "You are currently holding the following:\n"},
-        {{101,},            "The snake has now devoured your bird.\n"},
-        {{102,},            "There's nothing here it wants to eat (Except perhaps you).\n"},
-        {{104,},            "You have nothing in which to carry it.\n"},
-        {{105,},            "Your bottle is already full.\n"},
-        {{106,},            "There is nothing here with which to fill the bottle.\n"},
-        {{107,},            "Your bottle is now full of water.\n"},
-        {{108,},            "Your bottle is now full of oil.\n"},
-        {{109,},            "You can't fill that.\n"},
-        {{110,},            "Don't be ridiculous!\n"},
-        {{111,},            "The door is extremely rusty and refuses to open.\n"},
-        {{113,},            "The hinges are quite thoroughly rusted now and won't budge.\n"},
-        {{122,},            "You don't have anything strong enough to open the clam.\n"},
-        {{123,},            "You don't have anything strong enough to open the oyster.\n"},
-        {{137,},            "Oh, leave the poor unhappy bird alone.\n"},
-        {{138,},            "I daresay whatever you want is around here somewhere.\n"},
-        {{140,},            "You can't get there from here.\n"},
-        {{141,},            "You are being followed by a very large, tame bear.\n"},
-        {{143,},            "Do you indeed wish to quit now?\n"},
-        {{144,},            "There is nothing here with which to fill the vase.\n"},
-        {{146,},            "It is beyond your power to do that.\n"},
-        {{147,},            "I don't know how.\n"},
-        {{148,},            "It is too far up for you to reach.\n"},
-        {{150,},            "The shell is very strong and impervious to attack.\n"},
-        {{152,},            "The axe bounces harmlessly off the dragon's thick scales.\n"},
-        {{153,},            "The dragon looks rather nasty.  You'd best not try to get by.\n"},
-        {{155,},            "On what?\n"},
-        {{160,},            "The troll refuses to let you cross.\n"},
-        {{161,},            "There is no longer any way across the chasm.\n"},
-        {{165,},            "With what?  Your bare hands?  Against HIS bear hands??\n"},
-        {{166,},            "The bear is confused;  he only wants to be your friend.\n"},
-        {{167,},            "For crying out loud, the poor thing is already dead!\n"},
-        {{169,},            "The bear is still chained to the wall.\n"},
-        {{170,},            "The chain is still locked.\n"},
-        {{171,},            "The chain is now unlocked.\n"},
-        {{172,},            "The chain is now locked.\n"},
-        {{173,},            "There is nothing here to which the chain can be locked.\n"},
-        {{174,},            "There is nothing here to eat.\n"},
-        {{175,},            "Do you want the hint?\n"},
-        {{176,},            "Do you need help getting out of the maze?\n"},
-        {{177,},            "You can make the passages look less alike by dropping things.\n"},
-        {{178,},            "Are you trying to explore beyond the plover room?\n"},
-        {{180,},            "Do you need help getting out of here?\n"},
-        {{181,},            "Don't go west.\n"},
-        {{184,},            "Your lamp has run out of power.\n"},
-        {{190,},            "I'm afraid the magazine is written in Dwarvish.\n"},
-        {{194,},            "It says the same thing it did before.\n"},
-        {{195,},            "I'm afraid I don't understand.\n"},
-        {{196,},            "\"Congratulations on bringing light into the dark-room!\"\n"},
-        {{200,},            "Is this acceptable?\n"},
-        {{201,},            "There's no point in suspending a demonstration game.\n"},
+        {{2,},   "A little dwarf with a big knife blocks your way.\n"},
+        {{4,},   "There is a threatening little dwarf in the room with you!\n"},
+        {{5,},   "One sharp, nasty knife is thrown at you!\n"},
+        {{6,},   "None of them hit you!\n"},
+        {{7,},   "One of them gets you!\n"},
+        {{8,},   "A hollow voice says \"Plugh\".\n"},
+        {{9,},   "There is no way to go that direction.\n"},
+        {{12,},  "I don't know how to apply that word here.\n"},
+        {{13,},  "I don't understand that!\n"},
+        {{14,},  "I'm game.  Would you care to explain how?\n"},
+        {{17,},  "If you prefer, simply type W rather than West.\n"},
+        {{18,},  "Are you trying to catch the bird?\n"},
+        {{20,},  "Are you trying to somehow deal with the snake?\n"},
+        {{22,},  "Do you really want to quit now?\n"},
+        {{23,},  "You fell into a pit and broke every bone in your body!\n"},
+        {{24,},  "You are already carrying it!\n"},
+        {{25,},  "You can't be serious!\n"},
+        {{27,},  "You can catch the bird, but you cannot carry it.\n"},
+        {{28,},  "There is nothing here with a lock!\n"},
+        {{29,},  "You aren't carrying it!\n"},
+        {{31,},  "You have no keys!\n"},
+        {{32,},  "It has no lock.\n"},
+        {{33,},  "I don't know how to lock or unlock such a thing.\n"},
+        {{34,},  "It was already locked.\n"},
+        {{35,},  "The grate is now locked.\n"},
+        {{36,},  "The grate is now unlocked.\n"},
+        {{37,},  "It was already unlocked.\n"},
+        {{38,},  "You have no source of light.\n"},
+        {{39,},  "Your lamp is now on.\n"},
+        {{40,},  "Your lamp is now off.\n"},
+        {{42,},  "Nothing happens.\n"},
+        {{43,},  "Where?\n"},
+        {{44,},  "There is nothing here to attack.\n"},
+        {{45,},  "The little bird is now dead.  Its body disappears.\n"},
+        {{46,},  "Attacking the snake both doesn't work and is very dangerous.\n"},
+        {{47,},  "You killed a little dwarf.\n"},
+        {{48,},  "You attack a little dwarf, but he dodges out of the way.\n"},
+        {{49,},  "With what? Your bare hands?\n"},
+        {{50,},  "Good try, but that is an old worn-out magic word.\n"},
+        {{52,},  "It misses!\n"},
+        {{53,},  "It gets you!\n"},
+        {{54,},  "OK\n"},
+        {{55,},  "You can't unlock the keys.\n"},
+        {{58,},  "I need more detailed instructions to do that.\n"},
+        {{60,},  "I don't know that word.\n"},
+        {{61,},  "What?\n"},
+        {{62,},  "Are you trying to get into the cave?\n"},
+        {{67,},  "Blasting requires dynamite.\n"},
+        {{68,},  "I'm as confused as you are.\n"},
+        {{70,},  "Your feet are now wet.\n"},
+        {{71,},  "I think I just lost my appetite.\n"},
+        {{72,},  "Thank you.  It was delicious!\n"},
+        {{74,},  "The bottle of water is now empty.\n"},
+        {{76,},  "Peculiar.  Nothing unexpected happens.\n"},
+        {{77,},  "Your bottle is empty and the ground is wet.\n"},
+        {{78,},  "You can't pour that.\n"},
+        {{79,},  "Watch it!\n"},
+        {{80,},  "Which way?\n"},
+        {{86,},  "Okay, If you're so smart, do it yourself!  I'm leaving!\n"},
+        {{87,},  "Reserved\n"}, //  88, 89, 90,
+        {{93,},  "You can't go through a locked steel grate!\n"},
+        {{94,},  "I believe what you want is right here with you.\n"},
+        {{95,},  "You don't fit through a two-inch slit!\n"},
+        {{97,},  "There is no way across the fissure.\n"},
+        {{98,},  "You're not carrying anything.\n"},
+        {{99,},  "You are currently holding the following:\n"},
+        {{101,}, "The snake has now devoured your bird.\n"},
+        {{102,}, "There's nothing here it wants to eat (Except perhaps you).\n"},
+        {{104,}, "You have nothing in which to carry it.\n"},
+        {{105,}, "Your bottle is already full.\n"},
+        {{106,}, "There is nothing here with which to fill the bottle.\n"},
+        {{107,}, "Your bottle is now full of water.\n"},
+        {{108,}, "Your bottle is now full of oil.\n"},
+        {{109,}, "You can't fill that.\n"},
+        {{110,}, "Don't be ridiculous!\n"},
+        {{111,}, "The door is extremely rusty and refuses to open.\n"},
+        {{113,}, "The hinges are quite thoroughly rusted now and won't budge.\n"},
+        {{122,}, "You don't have anything strong enough to open the clam.\n"},
+        {{123,}, "You don't have anything strong enough to open the oyster.\n"},
+        {{137,}, "Oh, leave the poor unhappy bird alone.\n"},
+        {{138,}, "I daresay whatever you want is around here somewhere.\n"},
+        {{140,}, "You can't get there from here.\n"},
+        {{141,}, "You are being followed by a very large, tame bear.\n"},
+        {{143,}, "Do you indeed wish to quit now?\n"},
+        {{144,}, "There is nothing here with which to fill the vase.\n"},
+        {{146,}, "It is beyond your power to do that.\n"},
+        {{147,}, "I don't know how.\n"},
+        {{148,}, "It is too far up for you to reach.\n"},
+        {{150,}, "The shell is very strong and impervious to attack.\n"},
+        {{152,}, "The axe bounces harmlessly off the dragon's thick scales.\n"},
+        {{153,}, "The dragon looks rather nasty.  You'd best not try to get by.\n"},
+        {{155,}, "On what?\n"},
+        {{160,}, "The troll refuses to let you cross.\n"},
+        {{161,}, "There is no longer any way across the chasm.\n"},
+        {{165,}, "With what?  Your bare hands?  Against HIS bear hands??\n"},
+        {{166,}, "The bear is confused;  he only wants to be your friend.\n"},
+        {{167,}, "For crying out loud, the poor thing is already dead!\n"},
+        {{169,}, "The bear is still chained to the wall.\n"},
+        {{170,}, "The chain is still locked.\n"},
+        {{171,}, "The chain is now unlocked.\n"},
+        {{172,}, "The chain is now locked.\n"},
+        {{173,}, "There is nothing here to which the chain can be locked.\n"},
+        {{174,}, "There is nothing here to eat.\n"},
+        {{175,}, "Do you want the hint?\n"},
+        {{176,}, "Do you need help getting out of the maze?\n"},
+        {{177,}, "You can make the passages look less alike by dropping things.\n"},
+        {{178,}, "Are you trying to explore beyond the plover room?\n"},
+        {{180,}, "Do you need help getting out of here?\n"},
+        {{181,}, "Don't go west.\n"},
+        {{184,}, "Your lamp has run out of power.\n"},
+        {{190,}, "I'm afraid the magazine is written in Dwarvish.\n"},
+        {{194,}, "It says the same thing it did before.\n"},
+        {{195,}, "I'm afraid I don't understand.\n"},
+        {{196,}, "\"Congratulations on bringing light into the dark-room!\"\n"},
+        {{200,}, "Is this acceptable?\n"},
+        {{201,}, "There's no point in suspending a demonstration game.\n"},
 };
 typedef struct {
     uint8_t number[1];
@@ -276,6 +277,7 @@ const char actionDescription_142[DESCRIPTION_142_LENGTH] PROGMEM =
         "which tells me never to repeat the full description of a place unless \n"
         "you explicitly ask me to.\n";
 
+
 char * getAction(uint8_t actionNumber) {
     char * stringToReturn = NULL;
 
@@ -289,29 +291,29 @@ char * getAction(uint8_t actionNumber) {
         return stringToReturn;
     }
 
+    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
+            .entries = (void *) smallActions,
+            .maxLengthOfStrings = ACTION_DESCRIPTIONS_SMALL_LENGTH,
+            .sizeOfIndexArray = 1,
+            .amountOfEntries = AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL,
+    }, stringStorage, actionNumber);
 
-    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_SMALL; i++) {
-        if (pgm_read_byte(&smallActions[i].number) == actionNumber) {
-            stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_SMALL_LENGTH);
-            strcpy_P(stringToReturn, smallActions[i].description);
-            return stringToReturn;
-        }
+    if (stringToReturn == NULL) {
+        stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
+                .entries = (void *) mediumActions,
+                .maxLengthOfStrings = ACTION_DESCRIPTIONS_MEDIUM_LENGTH,
+                .sizeOfIndexArray = 1,
+                .amountOfEntries = AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM,
+        }, stringStorage, actionNumber);
+    }
+    if (stringToReturn == NULL) {
+        stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
+                .entries = (void *) longActions,
+                .maxLengthOfStrings = ACTION_DESCRIPTIONS_LONG_LENGTH,
+                .sizeOfIndexArray = 1,
+                .amountOfEntries = AMOUNT_OF_ACTION_DESCRIPTIONS_LONG,
+        }, stringStorage, actionNumber);
     }
 
-    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_MEDIUM; i++) {
-        if (pgm_read_byte(&mediumActions[i].number) == actionNumber) {
-            stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_MEDIUM_LENGTH);
-            strcpy_P(stringToReturn, mediumActions[i].description);
-            return stringToReturn;
-        }
-    }
-
-    for (uint8_t i = 0; i < AMOUNT_OF_ACTION_DESCRIPTIONS_LONG; i++) {
-        if (pgm_read_byte(&longActions[i].number) == actionNumber) {
-            stringToReturn = (char *) malloc(ACTION_DESCRIPTIONS_LONG_LENGTH);
-            strcpy_P(stringToReturn, longActions[i].description);
-            return stringToReturn;
-        }
-    }
     return stringToReturn;
 }

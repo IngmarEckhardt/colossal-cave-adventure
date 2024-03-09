@@ -184,3 +184,43 @@ const char longLocationDescription_126[LOC_DESCRIPTION_126_LENGTH] PROGMEM =
         "incandescence of its own, which lends an additional infernal splendor \n"
         "to the already hellish scene.  \n"
         "A dark, foreboding passage exits to the south.\n";
+
+char * getLongLocation(uint8_t locationNumber) {
+    char * stringToReturn = NULL;
+
+    if (locationNumber == 115) {
+        stringToReturn = (char *) malloc(LOC_DESCRIPTION_115_LENGTH);
+        strcpy_P(stringToReturn, longLocationDescription_115);
+        return stringToReturn;
+    } else if (locationNumber == 126) {
+        stringToReturn = (char *) malloc(LOC_DESCRIPTION_126_LENGTH);
+        strcpy_P(stringToReturn, longLocationDescription_126);
+        return stringToReturn;
+    }
+
+    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
+            .entries = (void *) shortLongLocations,
+            .maxLengthOfStrings = LOC_DESCRIPTIONS_SMALL_LENGTH,
+            .sizeOfIndexArray = MAX_AMOUNT_SMALL_LOC_SANE_DESCRIPTION,
+            .amountOfEntries = AMOUNT_OF_LOC_DESCRIPTIONS_SMALL,
+    }, stringStorage, locationNumber);
+
+    if (stringToReturn == NULL) {
+        stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
+                .entries = (void *) mediumLongLocations,
+                .maxLengthOfStrings = LOC_DESCRIPTIONS_MEDIUM_LENGTH,
+                .sizeOfIndexArray = 1,
+                .amountOfEntries = AMOUNT_OF_LOC_DESCRIPTIONS_MEDIUM,
+        }, stringStorage, locationNumber);
+    }
+    if (stringToReturn == NULL) {
+        stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
+                .entries = (void *) longLongLocations,
+                .maxLengthOfStrings = LOC_DESCRIPTIONS_LONG_LENGTH,
+                .sizeOfIndexArray = 1,
+                .amountOfEntries = AMOUNT_OF_LOC_DESCRIPTIONS_LONG,
+        }, stringStorage, locationNumber);
+    }
+
+    return stringToReturn;
+}

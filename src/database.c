@@ -155,9 +155,9 @@ void desclg(int loc) {
 	Print a short location description from "advent2.txt"
 */
 void descsh(int loc) {
-    char * description = getShortLocation(loc);
-    fputs(description, stdout);
-    free(description);
+//    char * description = getShortLocation(loc);
+//    fputs(description, stdout);
+//    free(description);
 
 }
 

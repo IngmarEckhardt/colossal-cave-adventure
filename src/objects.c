@@ -2,7 +2,7 @@
 #include <objects.h>
 #include <avr/pgmspace.h>
 #include <stdlib.h>
-#include "string_repository.h"
+#include <cca_helper.h>
 
 #define OBJ_DESCRIPTIONS_SMALL_LENGTH 59
 #define OBJ_DESCRIPTIONS_MEDIUM_LENGTH 173
@@ -86,4 +86,40 @@ const LongObject longObjects[AMOUNT_OF_OBJ_DESCRIPTIONS_LONG] PROGMEM = {
         {{36,},"/*Message in second maze\n/There is a message scrawled in the dust in a flowery script,\nreading:\n           \"This is not the maze where the\"\n           \"pirate leaves his treasure chest\"\n/\n"},
         {{58,},"/Ming vase\n/There is a delicate, precious, ming vase here!\n/The vase is now resting, delicately, on a velvet pillow.\n/The floor is littered with worthless shards of pottery.\n/The ming vase drops with a delicate crash.\n/\n"},
 };
-const char longObject24[]PROGMEM = "/*Plant\n/There is a tiny little plant in the pit, murmuring\n\"Water, Water, ...\"\n/The plant spurts into furious growth for a few seconds.\n/There is a 12-foot-tall beanstalk stretching up out of\nthe pit, bellowing \"Water!! Water!!\"\n/The plant grows explosively, almost filling the bottom\nof the pit. \n/There is a gigantic beanstalk stretching all the way\nup to the hole.\n/You've over-watered the plant!  It's shriveling up!\nIt's, It's...\n/\n"},
+const char longObject24[438]PROGMEM = "/*Plant\n/There is a tiny little plant in the pit, murmuring\n\"Water, Water, ...\"\n/The plant spurts into furious growth for a few seconds.\n/There is a 12-foot-tall beanstalk stretching up out of\nthe pit, bellowing \"Water!! Water!!\"\n/The plant grows explosively, almost filling the bottom\nof the pit. \n/There is a gigantic beanstalk stretching all the way\nup to the hole.\n/You've over-watered the plant!  It's shriveling up!\nIt's, It's...\n/\n";
+
+char * getObject(uint8_t objectNumber)  {
+    char * stringToReturn = NULL;
+
+    if (objectNumber == 24) {
+        stringToReturn = (char *) malloc(438);
+        strcpy_P(stringToReturn, longObject24);
+        return stringToReturn;
+    }
+
+    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
+            .entries = (void *) smallObjects,
+            .maxLengthOfStrings = OBJ_DESCRIPTIONS_SMALL_LENGTH,
+            .sizeOfIndexArray = 1,
+            .amountOfEntries = AMOUNT_OF_OBJ_DESCRIPTIONS_SMALL,
+    }, stringStorage, objectNumber);
+
+    if (stringToReturn == NULL) {
+        stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
+                .entries = (void *) mediumObjects,
+                .maxLengthOfStrings = OBJ_DESCRIPTIONS_MEDIUM_LENGTH,
+                .sizeOfIndexArray = 1,
+                .amountOfEntries = AMOUNT_OF_OBJ_DESCRIPTIONS_MEDIUM,
+        }, stringStorage, objectNumber);
+    }
+    if (stringToReturn == NULL) {
+        stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
+                .entries = (void *) longObjects,
+                .maxLengthOfStrings = OBJ_DESCRIPTIONS_LONG_LENGTH,
+                .sizeOfIndexArray = 1,
+                .amountOfEntries = AMOUNT_OF_OBJ_DESCRIPTIONS_LONG,
+        }, stringStorage, objectNumber);
+    }
+
+    return stringToReturn;
+}

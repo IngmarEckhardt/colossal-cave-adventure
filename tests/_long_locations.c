@@ -379,7 +379,7 @@ void computeAdventtxt2() {
         printf("Error opening file!\n");
         return;
     }
-    uint16_t threshold = 63;
+
     for (int i = 0; i < entry_count; ++i) {
         if (strlen(entries[i].text) <= 187) { continue;}
         if (strlen(entries[i].text)> 521) { continue;}
