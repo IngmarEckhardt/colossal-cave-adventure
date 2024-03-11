@@ -16,7 +16,7 @@
 #include <long_locations.h>
 #include <short_locations.h>
 #include <cave_travel_array.h>
-#include "heap_management_helper.h"
+#include <cca_helper.h>
 
 
 /*
@@ -71,9 +71,6 @@ void gettrav(int loc) {
 */
 int yes(int msg1, int msg2, int msg3) {
     char answer[80];
-//    HeapManagementHelper * heapManagementHelper = dOS_initHeapManagementHelper();
-//    printf("Memory is %d", heapManagementHelper->getFreeMemory());
-//    free(heapManagementHelper);
     if (msg1) {
         rspeak(msg1);
     }
@@ -100,7 +97,7 @@ int yes(int msg1, int msg2, int msg3) {
 	Print a location description from "advent4.txt"
 */
 void rspeak(int msg) {
-    char * message = getAction(msg);
+    char * message = getAction(stringRepository, flashHelper,msg);
     fputs(message, stdout);
     free(message);
 }
@@ -115,39 +112,39 @@ void pspeak(int item, int state) {
         return;
     }
 
-//    char * objectStatusMsg = getObject(item);
-//    if (objectStatusMsg == NULL) {
-//        printf("ask for Object %d, but was NULL", item);
-//
-//        bug(31);
-//        return;
-//    } else {
-//        int c;
-//        int n = state + 2;
-//
-//        while (n--) {
-//            while ((c = *objectStatusMsg++) != '/') {
-//                if (c == '\0') {
-//                    bug(32);
-//                }
-//
-//            }
-//        }
-//
-//        for (n = 0; objectStatusMsg[n] != '\0' && objectStatusMsg[n] != '/'; n++)
-//            putchar(objectStatusMsg[n]);
-//
-//    }
-//    free(objectStatusMsg);
+    char * objectStatusMsg = getObject(stringRepository, flashHelper,item);
+    if (objectStatusMsg == NULL) {
+        printf("ask for Object %d, but was NULL", item);
+
+        bug(31);
+        return;
+    } else {
+        int c;
+        int n = state + 2;
+
+        while (n--) {
+            while ((c = *objectStatusMsg++) != '/') {
+                if (c == '\0') {
+                    bug(32);
+                }
+
+            }
+        }
+
+        for (n = 0; objectStatusMsg[n] != '\0' && objectStatusMsg[n] != '/'; n++)
+            putchar(objectStatusMsg[n]);
+
+    }
+    free(objectStatusMsg);
 }
 
 /*
 	Print a long location description from "advent1.txt"
 */
 void desclg(int loc) {
-//    char * description = getLongLocation(loc);
-//    fputs(description, stdout);
-//    free(description);
+    char * description = getLongLocation(stringRepository, flashHelper,loc);
+    fputs(description, stdout);
+    free(description);
 
 }
 
@@ -155,9 +152,9 @@ void desclg(int loc) {
 	Print a short location description from "advent2.txt"
 */
 void descsh(int loc) {
-//    char * description = getShortLocation(loc);
-//    fputs(description, stdout);
-//    free(description);
+    char * description = getShortLocation(stringRepository, flashHelper,loc);
+    fputs(description, stdout);
+    free(description);
 
 }
 

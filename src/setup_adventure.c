@@ -3,13 +3,13 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include <string.h>
-
+#include <cca_helper.h>
 
 #include <setup.h>
 #include <advent.h>
 #include <global_definitions.h>
 
-#include <cca_helper.h>
+
 
 #define setmem(l, s, c) memset(l, c, s)
 
@@ -138,7 +138,7 @@ void setupAdvent(void) {
     uartHelper = dOS_initUartHelper();
     inputQueue = cca_initInputQueue();
     heapHelper = dOS_initHeapManagementHelper();
-    stringStorage = dOS_initStringStorage();
+    flashHelper = dOS_initFlashHelper();
 
     stdin = &myStdIn;
     stdout = &myStdOut;

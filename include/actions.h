@@ -1,4 +1,8 @@
-//advent4.h
+#ifndef ACTIONS_H
+#define ACTIONS_H
 #include <stdint.h>
+#include <string_repository.h>
 
-char * getAction(uint8_t actionNumber);
+char * getAction(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t actionNumber);
+
+#endif //ACTIONS_H

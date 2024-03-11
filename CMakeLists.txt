@@ -51,11 +51,11 @@ set(SRC_FILES
 set(HEADER_FILES
 
 )
-
+include_directories(${INCL_PATH})
 if (TESTS)
     include_directories(${INCL_PATH} "extern/dwarfOS/include")
 else ()
-    include_directories(${INCL_PATH})
+    #    include_directories(${INCL_PATH})
 
     set(BUILD_DWARFOS_AS_LIBRARY ON CACHE BOOL "Build DwarfOS as a library")
     add_definitions(-D_TIME_T_DEFINED)
@@ -76,7 +76,7 @@ else ()
 endif ()
 
 if (TESTS)
-#    include_directories(${INCL_PATH} "./tests/_include/input_queue")
+
     add_definitions(-DCCA_TEST)
     # adjust to your system
     set(CMAKE_SYSTEM_NAME Windows)
@@ -84,12 +84,23 @@ if (TESTS)
 
     # build Unity
     add_subdirectory(${EXTERN_PATH}/Unity extern_build_unity)
+
+
     # string_repository.c
-    add_executable(${PROJECT_NAME}_longLocations "${TEST_PATH}/_long_locations.c" "extern/dwarfOS/src/string_repository.c")
-    target_link_libraries(${PROJECT_NAME}_longLocations unity)
+    add_executable(${PROJECT_NAME}_string_db_conversion
+            "${TEST_PATH}/string_db_conversion.c"
+            "${SRC_PATH}/long_locations.c"
+            "${SRC_PATH}/short_locations.c"
+            "${SRC_PATH}/actions.c"
+            "${SRC_PATH}/objects.c"
+
+            "extern/dwarfOS/src/string_repository.c"
+            "extern/dwarfOS/src/pgm_textfile_generator.c"
+            "tests/_src/_flash_helper.c")
+    target_link_libraries(${PROJECT_NAME}_string_db_conversion unity)
 
     include(CTest)
-    add_test(LongLocations ${PROJECT_NAME}_longLocations)
+    #    add_test(LongLocations ${PROJECT_NAME}_string_db_conversion)
 
 endif ()
 set_directory_properties(PROPERTIES

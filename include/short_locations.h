@@ -1,5 +1,8 @@
-// advent2.h
-#include <avr/pgmspace.h>
+#ifndef SHORT_LOCATIONS_H
+#define SHORT_LOCATIONS_H
+#include <stdint.h>
+#include <string_repository.h>
 
+char * getShortLocation(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t shortLocationNumber);
 
-char * getShortLocation(uint8_t locNumber);
+#endif //SHORT_LOCATIONS_H
