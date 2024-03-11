@@ -36,7 +36,7 @@ set(EXTERN_PATH "${CMAKE_CURRENT_SOURCE_DIR}/extern")
 
 set(SRC_FILES
         "${SRC_PATH}/actions.c"
-        "${SRC_PATH}/cave_travel_array.c"
+        "${SRC_PATH}/caves.c"
         "${SRC_PATH}/long_locations.c"
         "${SRC_PATH}/objects.c"
         "${SRC_PATH}/database.c"
@@ -93,6 +93,7 @@ if (TESTS)
             "${SRC_PATH}/short_locations.c"
             "${SRC_PATH}/actions.c"
             "${SRC_PATH}/objects.c"
+            "${SRC_PATH}/caves.c"
 
             "extern/dwarfOS/src/string_repository.c"
             "extern/dwarfOS/src/pgm_textfile_generator.c"

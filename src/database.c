@@ -15,8 +15,8 @@
 #include <objects.h>
 #include <long_locations.h>
 #include <short_locations.h>
-#include <cave_travel_array.h>
 #include <cca_helper.h>
+#include "caves.h"
 
 
 /*
@@ -28,11 +28,12 @@ void gettrav(int loc) {
     long t;
     int i;
 
-    if (loc <= 0 || loc >= (int) cavesz) {
+    if (loc <= 0 || loc >= (int) 140) {
+//    if (loc <= 0 || loc >= (int) cavesz) {
         bug(42);
     }
 
-    char * travelString = getTravel(loc-1);
+    char * travelString = getCave(stringRepository, flashHelper,loc);
 
     if (strlen(travelString) > sizeof(atrav)) {
         bug(43);
