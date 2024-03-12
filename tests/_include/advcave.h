@@ -151,4 +151,3 @@ const char *cave[140] = {
 	"112045000,112011000,"
 };
 
-size_t cavesz = sizeof(cave) / sizeof(cave[0]);

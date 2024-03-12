@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 #include "advent.h"
-#include "global_declarations.h"
+#include "advdec.h"
 
 
 /*

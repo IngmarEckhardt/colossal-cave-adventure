@@ -1,8 +1,13 @@
-#include <../include/caves.h>
+#include <stdlib.h>
+#include <stdint.h>
 #ifndef CCA_TEST
 #include <avr/pgmspace.h>
+#include <advent.h>
+#include <advdec.h>
+#else
+#include <string_repository.h>
 #endif
-#include <stdlib.h>
+
 #define CAVE_DESCRIPTION_1_LENGTH 16
 #define CAVE_DESCRIPTION_2_LENGTH 31
 #define CAVE_DESCRIPTION_3_LENGTH 56
@@ -220,7 +225,7 @@ const CAVE_5 caves_5[AMOUNT_OF_CAVE_DESCRIPTIONS_5] = {
 
 
 
-char * getCave(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t caveNumber) {
+char * loadCave(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t caveNumber) {
     char * stringToReturn = NULL;
 
     if (stringToReturn != NULL) { return stringToReturn; }
@@ -265,4 +270,17 @@ char * getCave(StringRepository * stringRepository, FlashHelper * flashHelper, u
     }, flashHelper, caveNumber);
 
 	return stringToReturn;
+}
+
+char * getCave(int caveNumber) {
+#ifndef CCA_TEST
+    return loadCave(stringRepository, flashHelper, caveNumber);
+#else
+    StringRepository * stringRepository = dOS_initStringRepository(0);
+    FlashHelper * flashHelper = dOS_initFlashHelper();
+    char * result = loadCave(stringRepository, flashHelper, caveNumber);
+    free(stringRepository);
+    free(flashHelper);
+    return result;
+#endif
 }

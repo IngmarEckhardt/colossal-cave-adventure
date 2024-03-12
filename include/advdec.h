@@ -1,13 +1,25 @@
+#include <input_queue.h>
+#include <uart_helper.h>
+#include <string_repository.h>
 
 /*	header ADVDEC.H						*\
 \*	WARNING: GLOBAL EXTERNAL declarations for adventure	*/
 
+
+StringRepository * stringRepository;
+FlashHelper * flashHelper;
+InputQueue * inputQueue;
+UartHelper * uartHelper;
+
+volatile uint8_t cca_adjustCounter;
 /*
 	Database variables
 */
 extern struct wac wc[]; /* see ADVWORD.H		*/
-extern char *cave[];    /* see ADVCAVE.H		*/
+//extern char *cave[];    /* see ADVCAVE.H		*/
 extern size_t cavesz;
+
+
 
 extern struct trav travel[];
 extern int actmsg[]; /* action messages	*/

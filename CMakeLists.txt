@@ -42,7 +42,6 @@ set(SRC_FILES
         "${SRC_PATH}/database.c"
         "${SRC_PATH}/english.c"
         "${SRC_PATH}/itverb.c"
-        "${SRC_PATH}/setup_adventure.c"
         "${SRC_PATH}/short_locations.c"
         "${SRC_PATH}/turn.c"
         "${SRC_PATH}/verb.c"
@@ -51,12 +50,11 @@ set(SRC_FILES
 set(HEADER_FILES
 
 )
-include_directories(${INCL_PATH})
-if (TESTS)
-    include_directories(${INCL_PATH} "extern/dwarfOS/include")
-else ()
-    #    include_directories(${INCL_PATH})
 
+if (TESTS)
+
+else ()
+    include_directories(${INCL_PATH})
     set(BUILD_DWARFOS_AS_LIBRARY ON CACHE BOOL "Build DwarfOS as a library")
     add_definitions(-D_TIME_T_DEFINED)
     add_definitions(-DDWARF_TIME)
@@ -76,11 +74,12 @@ else ()
 endif ()
 
 if (TESTS)
-
+    set(TEST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+    include_directories("${TEST_PATH}/_include" ${INCL_PATH} "${EXTERN_PATH}/dwarfOS/include")
     add_definitions(-DCCA_TEST)
     # adjust to your system
     set(CMAKE_SYSTEM_NAME Windows)
-    set(TEST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+
 
     # build Unity
     add_subdirectory(${EXTERN_PATH}/Unity extern_build_unity)

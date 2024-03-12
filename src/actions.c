@@ -1,8 +1,13 @@
-#include <../include/actions.h>
+#include <stdlib.h>
+#include <stdint.h>
 #ifndef CCA_TEST
 #include <avr/pgmspace.h>
+#include <advent.h>
+#include <advdec.h>
+#else
+#include <string_repository.h>
 #endif
-#include <stdlib.h>
+
 #define ACTION_DESCRIPTION_1_LENGTH 14
 #define ACTION_DESCRIPTION_2_LENGTH 32
 #define ACTION_DESCRIPTION_3_LENGTH 63
@@ -319,7 +324,7 @@ const char action_142[ACTION_DESCRIPTION_142_LENGTH] PROGMEM = "If you want to e
 const char action_142[ACTION_DESCRIPTION_142_LENGTH] = "If you want to end your adventure early, say \"quit\".  To suspend your \nadventure such that you can continue later say \"suspend\" (or \"pause\" \nor \"save\").  To load a previously saved game, say 'load' or 'restore'.  \nTo see how well you're doing, say \"score\".  To get full credit for a \ntreasure, you must have left it safely in the building, though you get \npartial credit just for locating it. You lose points for getting \nkilled, or for quitting, though the former costs you more. \nThere are also points based on how much (If any) of the cave you've \nmanaged to explore;  in particular, there is a large bonus just for \ngetting in (to distinguish the beginners from the rest of the pack), \nand there are other ways to determine whether you've been through some \nof the more harrowing sections. \nIf you think you've found all the treasures, just keep exploring for a \nwhile.  If nothing interesting happens, you haven't found them all \nyet.  If something interesting DOES happen, it means you're getting a \nbonus and have an opportunity to garner many more points in the \nmaster's section.\nI may occasionally offer hints in you seem to be having trouble.  If I \ndo, I'll warn you in advance how much it will affect your score to \naccept the hints.  Finally, to save paper, you may specify \"brief\", \nwhich tells me never to repeat the full description of a place unless \nyou explicitly ask me to.\n";
 #endif
 
-char * getAction(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t actionNumber) {
+char * loadAction(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t actionNumber) {
     char * stringToReturn = NULL;
 
     if (actionNumber == 51) {
@@ -388,4 +393,17 @@ char * getAction(StringRepository * stringRepository, FlashHelper * flashHelper,
     }, flashHelper, actionNumber);
 
 	return stringToReturn;
+}
+
+char * getAction(int actionNumber) {
+#ifndef CCA_TEST
+    return loadAction(stringRepository, flashHelper, actionNumber);
+#else
+    StringRepository * stringRepository = dOS_initStringRepository(0);
+    FlashHelper * flashHelper = dOS_initFlashHelper();
+    char * result = loadAction(stringRepository, flashHelper, actionNumber);
+    free(stringRepository);
+    free(flashHelper);
+    return result;
+#endif
 }

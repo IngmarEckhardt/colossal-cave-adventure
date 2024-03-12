@@ -1,8 +1,13 @@
-#include <../include/long_locations.h>
+#include <stdlib.h>
+#include <stdint.h>
 #ifndef CCA_TEST
 #include <avr/pgmspace.h>
+#include <advent.h>
+#include <advdec.h>
+#else
+#include <string_repository.h>
 #endif
-#include <stdlib.h>
+
 #define LONG_LOCATION_DESCRIPTION_1_LENGTH 73
 #define LONG_LOCATION_DESCRIPTION_2_LENGTH 141
 #define LONG_LOCATION_DESCRIPTION_3_LENGTH 196
@@ -195,7 +200,7 @@ const char longLocation_126[LONG_LOCATION_DESCRIPTION_126_LENGTH] PROGMEM = "You
 const char longLocation_126[LONG_LOCATION_DESCRIPTION_126_LENGTH] = "You are on the edge of a breath-taking view.  Far below you is an \nactive volcano, from which great gouts of molten lava come surging \nout, cascading back down into the depths. The glowing rock fills the \nfarthest reaches of the cavern with a blood-red glare, giving \neverything an eerie, macabre appearance.\nThe air is filled with flickering sparks of ash and a heavy smell of \nbrimstone.  The walls are hot to the touch, and the thundering of the \nvolcano drowns out all other sounds.  Embedded in the jagged roof far \noverhead are myriad formations composed of pure white alabaster, which \nscatter their murky light into sinister apparitions upon the walls.\nTo one side is a deep gorge, filled with a bizarre chaos of tortured \nrock which seems to have been crafted by the Devil Himself.  An \nimmense river of fire crashes out from the depths of the volcano, \nburns its way through the gorge, and plummets into a bottomless pit \nfar off to your left.  \nTo the right, an immense geyser of blistering steam erupts \ncontinuously from a barren island in the center of a sulfurous lake, \nwhich bubbles ominously. The far right wall is aflame with an \nincandescence of its own, which lends an additional infernal splendor \nto the already hellish scene.  \nA dark, foreboding passage exits to the south.\n";
 #endif
 
-char * getLongLocation(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t longLocationNumber) {
+char * loadLongLocation(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t longLocationNumber) {
     char * stringToReturn = NULL;
 
     if (longLocationNumber == 115) {
@@ -248,4 +253,17 @@ char * getLongLocation(StringRepository * stringRepository, FlashHelper * flashH
     }, flashHelper, longLocationNumber);
 
 	return stringToReturn;
+}
+
+char * getLongLocation(int longLocationNumber) {
+#ifndef CCA_TEST
+    return loadLongLocation(stringRepository, flashHelper, longLocationNumber);
+#else
+    StringRepository * stringRepository = dOS_initStringRepository(0);
+    FlashHelper * flashHelper = dOS_initFlashHelper();
+    char * result = loadLongLocation(stringRepository, flashHelper, longLocationNumber);
+    free(stringRepository);
+    free(flashHelper);
+    return result;
+#endif
 }

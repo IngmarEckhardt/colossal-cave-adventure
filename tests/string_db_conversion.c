@@ -1,18 +1,15 @@
 #include <unity.h>
 #include <stdlib.h>
 
-#include "_include/advent1.h"
-#include "_include/advent2.h"
-#include "_include/advent3.h"
-#include "_include/advent4.h"
-#include "_include/advcave.h"
-#include <pgm_textfile_generator.h>
-#include <objects.h>
-#include <actions.h>
-#include <long_locations.h>
-#include <short_locations.h>
-#include <caves.h>
+#include <advent1.h>
+#include <advent2.h>
+#include <advent3.h>
+#include <advent4.h>
+#include <advcave.h>
 
+#include <pgm_textfile_generator.h>
+
+#include <_proto.h>
 
 
 
@@ -28,36 +25,36 @@ void convertAdvent(void) {
 
 void test_convertAdvent(void) {
     char * result;
-    StringRepository * stringRepository = dOS_initStringRepository(0);
-    FlashHelper * flashHelper = dOS_initFlashHelper();
+
     for (int i = 0; i < 140; i++) {
-        result = getLongLocation(stringRepository, flashHelper,i+1);
+        result = getLongLocation(i+1);
         TEST_ASSERT_EQUAL_STRING(adventtxt1[i], result);
         free(result);
     }
     for (int i = 0; i < 140; i++) {
-        result = getShortLocation(stringRepository, flashHelper,i+1);
+        result = getShortLocation(i+1);
         TEST_ASSERT_EQUAL_STRING(adventtxt2[i], result);
         free(result);
     }
     for (int i = 0; i < 64; i++) {
-        result = getObject(stringRepository, flashHelper,i+1);
+        result = getObject(i+1);
         TEST_ASSERT_EQUAL_STRING(adventtxt3[i], result);
         free(result);
     }
     for (int i = 0; i < 201; i++) {
-        result = getAction(stringRepository, flashHelper,i+1);
+        result = getAction(i+1);
         TEST_ASSERT_EQUAL_STRING(adventtxt4[i], result);
         free(result);
     }
     for (int i = 0; i < 140; i++) {
-        result = getCave(stringRepository, flashHelper,i+1);
+        result = getCave(i+1);
         TEST_ASSERT_EQUAL_STRING(cave[i], result);
         free(result);
     }
 }
 
 int main(void) {
+
     UNITY_BEGIN();
     RUN_TEST(convertAdvent);
     RUN_TEST(test_convertAdvent);

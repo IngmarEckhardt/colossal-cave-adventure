@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+// Version of flash_helper without avr libs
 char * createStringFromFlash(const char * flashString) {
 
     char * result = (char *) malloc((strlen(flashString) + 1) * sizeof(char));

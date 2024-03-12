@@ -1,8 +1,13 @@
-#include <../include/short_locations.h>
+#include <stdlib.h>
+#include <stdint.h>
 #ifndef CCA_TEST
 #include <avr/pgmspace.h>
+#include <advent.h>
+#include <advdec.h>
+#else
+#include <string_repository.h>
 #endif
-#include <stdlib.h>
+
 #define SHORT_LOCATION_DESCRIPTION_1_LENGTH 16
 #define SHORT_LOCATION_DESCRIPTION_2_LENGTH 31
 #define SHORT_LOCATION_DESCRIPTION_3_LENGTH 56
@@ -182,7 +187,7 @@ const SHORT_LOCATION_5 shortLocations_5[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5]
 
 
 
-char * getShortLocation(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t shortLocationNumber) {
+char * loadShortLocation(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t shortLocationNumber) {
     char * stringToReturn = NULL;
 
     if (stringToReturn != NULL) { return stringToReturn; }
@@ -227,4 +232,17 @@ char * getShortLocation(StringRepository * stringRepository, FlashHelper * flash
     }, flashHelper, shortLocationNumber);
 
 	return stringToReturn;
+}
+
+char * getShortLocation(int shortLocationNumber) {
+#ifndef CCA_TEST
+    return loadShortLocation(stringRepository, flashHelper, shortLocationNumber);
+#else
+    StringRepository * stringRepository = dOS_initStringRepository(0);
+    FlashHelper * flashHelper = dOS_initFlashHelper();
+    char * result = loadShortLocation(stringRepository, flashHelper, shortLocationNumber);
+    free(stringRepository);
+    free(flashHelper);
+    return result;
+#endif
 }

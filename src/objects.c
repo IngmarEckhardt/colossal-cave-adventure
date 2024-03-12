@@ -1,8 +1,13 @@
-#include <../include/objects.h>
+#include <stdlib.h>
+#include <stdint.h>
 #ifndef CCA_TEST
 #include <avr/pgmspace.h>
+#include <advent.h>
+#include <advdec.h>
+#else
+#include <string_repository.h>
 #endif
-#include <stdlib.h>
+
 #define OBJECT_DESCRIPTION_1_LENGTH 73
 #define OBJECT_DESCRIPTION_2_LENGTH 113
 #define OBJECT_DESCRIPTION_3_LENGTH 197
@@ -125,7 +130,7 @@ const char object_24[OBJECT_DESCRIPTION_24_LENGTH] PROGMEM = "/*Plant\n/There is
 const char object_24[OBJECT_DESCRIPTION_24_LENGTH] = "/*Plant\n/There is a tiny little plant in the pit, murmuring\n\"Water, Water, ...\"\n/The plant spurts into furious growth for a few seconds.\n/There is a 12-foot-tall beanstalk stretching up out of\nthe pit, bellowing \"Water!! Water!!\"\n/The plant grows explosively, almost filling the bottom\nof the pit. \n/There is a gigantic beanstalk stretching all the way\nup to the hole.\n/You've over-watered the plant!  It's shriveling up!\nIt's, It's...\n/\n";
 #endif
 
-char * getObject(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t objectNumber) {
+char * loadObject(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t objectNumber) {
     char * stringToReturn = NULL;
 
     if (objectNumber == 24) {
@@ -166,4 +171,17 @@ char * getObject(StringRepository * stringRepository, FlashHelper * flashHelper,
     }, flashHelper, objectNumber);
 
 	return stringToReturn;
+}
+
+char * getObject(int objectNumber) {
+#ifndef CCA_TEST
+    return loadObject(stringRepository, flashHelper, objectNumber);
+#else
+    StringRepository * stringRepository = dOS_initStringRepository(0);
+    FlashHelper * flashHelper = dOS_initFlashHelper();
+    char * result = loadObject(stringRepository, flashHelper, objectNumber);
+    free(stringRepository);
+    free(flashHelper);
+    return result;
+#endif
 }
