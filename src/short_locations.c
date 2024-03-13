@@ -1,39 +1,20 @@
+#include <short_locations.h>
 #include <stdlib.h>
-#include <stdint.h>
 #ifndef CCA_TEST
-#include <avr/pgmspace.h>
 #include <advent.h>
 #include <advdec.h>
+#include <avr/pgmspace.h>
 #else
 #include <string_repository.h>
+#include <stdint.h>
 #endif
 
-#define SHORT_LOCATION_DESCRIPTION_1_LENGTH 16
-#define SHORT_LOCATION_DESCRIPTION_2_LENGTH 31
-#define SHORT_LOCATION_DESCRIPTION_3_LENGTH 56
-#define SHORT_LOCATION_DESCRIPTION_4_LENGTH 76
-#define SHORT_LOCATION_DESCRIPTION_5_LENGTH 187
-#define AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_1 2
-#define AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_2 51
-#define AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_3 29
-#define AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_4 11
-#define AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5 8
-#define MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_1_WITH_SAME_LENGTH 13
-#define MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_2_WITH_SAME_LENGTH 2
-#define MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_3_WITH_SAME_LENGTH 1
-#define MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH 14
-#define MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH 1
 
 typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_1_WITH_SAME_LENGTH];
     char stringInProgramMem[SHORT_LOCATION_DESCRIPTION_1_LENGTH];
 } SHORT_LOCATION_1;
-
-#ifndef CCA_TEST
-const SHORT_LOCATION_1 shortLocations_1[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_1] PROGMEM = {
-#else
-const SHORT_LOCATION_1 shortLocations_1[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_1] = {
-#endif
+const __attribute__((section(".progmemx.data"))) SHORT_LOCATION_1 shortLocations_1[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_1] = {
 		{{31,},">$<\n"},
 		{{46,47,48,54,56,58,63,81,82,85,86,114,140,},"Dead end.\n"},
 };
@@ -42,12 +23,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_2_WITH_SAME_LENGTH];
     char stringInProgramMem[SHORT_LOCATION_DESCRIPTION_2_LENGTH];
 } SHORT_LOCATION_2;
-
-#ifndef CCA_TEST
-const SHORT_LOCATION_2 shortLocations_2[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_2] PROGMEM = {
-#else
-const SHORT_LOCATION_2 shortLocations_2[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_2] = {
-#endif
+const __attribute__((section(".progmemx.data"))) SHORT_LOCATION_2 shortLocations_2[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_2] = {
 		{{1,},"You're at end of road again.\n"},
 		{{2,},"You're at hill in road.\n"},
 		{{3,},"You're inside building.\n"},
@@ -105,12 +81,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_3_WITH_SAME_LENGTH];
     char stringInProgramMem[SHORT_LOCATION_DESCRIPTION_3_LENGTH];
 } SHORT_LOCATION_3;
-
-#ifndef CCA_TEST
-const SHORT_LOCATION_3 shortLocations_3[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_3] PROGMEM = {
-#else
-const SHORT_LOCATION_3 shortLocations_3[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_3] = {
-#endif
+const __attribute__((section(".progmemx.data"))) SHORT_LOCATION_3 shortLocations_3[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_3] = {
 		{{12,},"You are in an awkward sloping east/west canyon.\n"},
 		{{16,},"The crack is far too small for you to follow.\n"},
 		{{17,},"You're on east bank of fissure.\n"},
@@ -146,12 +117,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH];
     char stringInProgramMem[SHORT_LOCATION_DESCRIPTION_4_LENGTH];
 } SHORT_LOCATION_4;
-
-#ifndef CCA_TEST
-const SHORT_LOCATION_4 shortLocations_4[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_4] PROGMEM = {
-#else
-const SHORT_LOCATION_4 shortLocations_4[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_4] = {
-#endif
+const __attribute__((section(".progmemx.data"))) SHORT_LOCATION_4 shortLocations_4[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_4] = {
 		{{26,},"You clamber up the plant and scurry through the hole at the\ntop.\n"},
 		{{27,},"You are on the west side of the fissure in the hall of mists.\n"},
 		{{37,},"You are on the brink of a small clean climbable pit.  A\ncrawl leads west.\n"},
@@ -169,12 +135,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH];
     char stringInProgramMem[SHORT_LOCATION_DESCRIPTION_5_LENGTH];
 } SHORT_LOCATION_5;
-
-#ifndef CCA_TEST
-const SHORT_LOCATION_5 shortLocations_5[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5] PROGMEM = {
-#else
-const SHORT_LOCATION_5 shortLocations_5[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5] = {
-#endif
+const __attribute__((section(".progmemx.data"))) SHORT_LOCATION_5 shortLocations_5[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5] = {
 		{{28,},"You are in a low N/S passage at a hole in the floor.  The\nhole goes down to an E/W passage.\n"},
 		{{30,},"You are in the west side chamber of the hall of the\nmountain king.  A passage continues west and up here.\n"},
 		{{38,},"You are in the bottom of a small pit with a little stream,\nwhich enters and exits through tiny slits.\n"},
@@ -189,48 +150,11 @@ const SHORT_LOCATION_5 shortLocations_5[AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5]
 
 char * loadShortLocation(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t shortLocationNumber) {
     char * stringToReturn = NULL;
-
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) shortLocations_1,
-            .maxLengthOfStrings = SHORT_LOCATION_DESCRIPTION_1_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_1_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_1,
-    }, flashHelper, shortLocationNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) shortLocations_2,
-            .maxLengthOfStrings = SHORT_LOCATION_DESCRIPTION_2_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_2_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_2,
-    }, flashHelper, shortLocationNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) shortLocations_3,
-            .maxLengthOfStrings = SHORT_LOCATION_DESCRIPTION_3_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_3_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_3,
-    }, flashHelper, shortLocationNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) shortLocations_4,
-            .maxLengthOfStrings = SHORT_LOCATION_DESCRIPTION_4_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_4,
-    }, flashHelper, shortLocationNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) shortLocations_5,
-            .maxLengthOfStrings = SHORT_LOCATION_DESCRIPTION_5_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5,
-    }, flashHelper, shortLocationNumber);
-
+    LOAD_FROM(1)
+    LOAD_FROM(2)
+    LOAD_FROM(3)
+    LOAD_FROM(4)
+    LOAD_FROM(5)
 	return stringToReturn;
 }
 

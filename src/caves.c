@@ -1,40 +1,21 @@
+#include <caves.h>
 #include <stdlib.h>
-#include <stdint.h>
 #ifndef CCA_TEST
-#include <avr/pgmspace.h>
 #include <advent.h>
 #include <advdec.h>
+#include <avr/pgmspace.h>
 #else
 #include <string_repository.h>
+#include <stdint.h>
 #endif
 
-#define CAVE_DESCRIPTION_1_LENGTH 16
-#define CAVE_DESCRIPTION_2_LENGTH 31
-#define CAVE_DESCRIPTION_3_LENGTH 56
-#define CAVE_DESCRIPTION_4_LENGTH 76
-#define CAVE_DESCRIPTION_5_LENGTH 187
-#define AMOUNT_OF_CAVE_DESCRIPTIONS_1 14
-#define AMOUNT_OF_CAVE_DESCRIPTIONS_2 44
-#define AMOUNT_OF_CAVE_DESCRIPTIONS_3 31
-#define AMOUNT_OF_CAVE_DESCRIPTIONS_4 18
-#define AMOUNT_OF_CAVE_DESCRIPTIONS_5 32
-#define MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_1_WITH_SAME_LENGTH 2
-#define MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_2_WITH_SAME_LENGTH 1
-#define MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_3_WITH_SAME_LENGTH 1
-#define MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_4_WITH_SAME_LENGTH 1
-#define MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_5_WITH_SAME_LENGTH 1
 
 typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_1_WITH_SAME_LENGTH];
     char stringInProgramMem[CAVE_DESCRIPTION_1_LENGTH];
 } CAVE_1;
-
-#ifndef CCA_TEST
-const CAVE_1 caves_1[AMOUNT_OF_CAVE_DESCRIPTIONS_1] PROGMEM = {
-#else
-const CAVE_1 caves_1[AMOUNT_OF_CAVE_DESCRIPTIONS_1] = {
-#endif
-		{{16,},"14001000,"},
+const __attribute__((section(".progmemx.data"))) CAVE_1 caves_1[AMOUNT_OF_CAVE_DESCRIPTIONS_1]= {
+        {{16,},"14001000,"},
 		{{20,21,},"001000,"},
 		{{22,},"15001000,"},
 		{{26,},"88001000,"},
@@ -54,12 +35,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_2_WITH_SAME_LENGTH];
     char stringInProgramMem[CAVE_DESCRIPTION_2_LENGTH];
 } CAVE_2;
-
-#ifndef CCA_TEST
-const CAVE_2 caves_2[AMOUNT_OF_CAVE_DESCRIPTIONS_2] PROGMEM = {
-#else
-const CAVE_2 caves_2[AMOUNT_OF_CAVE_DESCRIPTIONS_2] = {
-#endif
+const __attribute__((section(".progmemx.data"))) CAVE_2 caves_2[AMOUNT_OF_CAVE_DESCRIPTIONS_2] = {
 		{{18,},"15038000,15011000,15045000,"},
 		{{24,},"67029000,67011000,"},
 		{{29,},"19038000,19011000,19045000,"},
@@ -110,12 +86,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_3_WITH_SAME_LENGTH];
     char stringInProgramMem[CAVE_DESCRIPTION_3_LENGTH];
 } CAVE_3;
-
-#ifndef CCA_TEST
-const CAVE_3 caves_3[AMOUNT_OF_CAVE_DESCRIPTIONS_3] PROGMEM = {
-#else
-const CAVE_3 caves_3[AMOUNT_OF_CAVE_DESCRIPTIONS_3] = {
-#endif
+const __attribute__((section(".progmemx.data"))) CAVE_3 caves_3[AMOUNT_OF_CAVE_DESCRIPTIONS_3] = {
 		{{25,},"23029000,23011000,31056724,26056000,"},
 		{{30,},"19038000,19011000,19043000,62044000,62029000,"},
 		{{36,},"37043000,37017000,28029000,28052000,39044000,65070000,"},
@@ -153,12 +124,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_4_WITH_SAME_LENGTH];
     char stringInProgramMem[CAVE_DESCRIPTION_4_LENGTH];
 } CAVE_4;
-
-#ifndef CCA_TEST
-const CAVE_4 caves_4[AMOUNT_OF_CAVE_DESCRIPTIONS_4] PROGMEM = {
-#else
-const CAVE_4 caves_4[AMOUNT_OF_CAVE_DESCRIPTIONS_4] = {
-#endif
+const __attribute__((section(".progmemx.data"))) CAVE_4 caves_4[AMOUNT_OF_CAVE_DESCRIPTIONS_4] = {
 		{{2,},"1002000,1012000,1007000,1043000,1045000,1030000,5006000,5045000,5046000,"},
 		{{3,},"1003000,1011000,1032000,1044000,11062000,33065000,79005000,79014000,"},
 		{{5,},"4009000,4043000,4030000,5006050,5007050,5045050,6006000,5044000,5046000,"},
@@ -183,12 +149,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_5_WITH_SAME_LENGTH];
     char stringInProgramMem[CAVE_DESCRIPTION_5_LENGTH];
 } CAVE_5;
-
-#ifndef CCA_TEST
-const CAVE_5 caves_5[AMOUNT_OF_CAVE_DESCRIPTIONS_5] PROGMEM = {
-#else
-const CAVE_5 caves_5[AMOUNT_OF_CAVE_DESCRIPTIONS_5] = {
-#endif
+const __attribute__((section(".progmemx.data"))) CAVE_5 caves_5[AMOUNT_OF_CAVE_DESCRIPTIONS_5] = {
 		{{1,},"2002000,2044000,2029000,3003000,3012000,3019000,3043000,4005000,4013000,4014000,4046000,4030000,5006000,5045000,5043000,8063000,"},
 		{{4,},"1004000,1012000,1045000,5006000,5043000,5044000,5029000,7005000,7046000,7030000,8063000,"},
 		{{7,},"1012000,4004000,4045000,5006000,5043000,5044000,8005000,8015000,8016000,8046000,595060000,595014000,595030000,"},
@@ -228,46 +189,11 @@ const CAVE_5 caves_5[AMOUNT_OF_CAVE_DESCRIPTIONS_5] = {
 char * loadCave(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t caveNumber) {
     char * stringToReturn = NULL;
 
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) caves_1,
-            .maxLengthOfStrings = CAVE_DESCRIPTION_1_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_1_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_CAVE_DESCRIPTIONS_1,
-    }, flashHelper, caveNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) caves_2,
-            .maxLengthOfStrings = CAVE_DESCRIPTION_2_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_2_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_CAVE_DESCRIPTIONS_2,
-    }, flashHelper, caveNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) caves_3,
-            .maxLengthOfStrings = CAVE_DESCRIPTION_3_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_3_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_CAVE_DESCRIPTIONS_3,
-    }, flashHelper, caveNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) caves_4,
-            .maxLengthOfStrings = CAVE_DESCRIPTION_4_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_4_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_CAVE_DESCRIPTIONS_4,
-    }, flashHelper, caveNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) caves_5,
-            .maxLengthOfStrings = CAVE_DESCRIPTION_5_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_5_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_CAVE_DESCRIPTIONS_5,
-    }, flashHelper, caveNumber);
+    LOAD_FROM(1)
+    LOAD_FROM(2)
+    LOAD_FROM(3)
+    LOAD_FROM(4)
+    LOAD_FROM(5)
 
 	return stringToReturn;
 }

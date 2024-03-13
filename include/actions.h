@@ -1,0 +1,46 @@
+#ifndef COLOSSAL_CAVE_ADVENTURE_ACTIONS_H
+#define COLOSSAL_CAVE_ADVENTURE_ACTIONS_H
+
+#define ACTION_DESCRIPTION_1_LENGTH 14
+#define ACTION_DESCRIPTION_2_LENGTH 32
+#define ACTION_DESCRIPTION_3_LENGTH 63
+#define ACTION_DESCRIPTION_4_LENGTH 101
+#define ACTION_DESCRIPTION_5_LENGTH 157
+#define ACTION_DESCRIPTION_6_LENGTH 321
+#define ACTION_DESCRIPTION_7_LENGTH 521
+#define AMOUNT_OF_ACTION_DESCRIPTIONS_1 9
+#define AMOUNT_OF_ACTION_DESCRIPTIONS_2 40
+#define AMOUNT_OF_ACTION_DESCRIPTIONS_3 68
+#define AMOUNT_OF_ACTION_DESCRIPTIONS_4 35
+#define AMOUNT_OF_ACTION_DESCRIPTIONS_5 26
+#define AMOUNT_OF_ACTION_DESCRIPTIONS_6 14
+#define AMOUNT_OF_ACTION_DESCRIPTIONS_7 4
+#define MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_1_WITH_SAME_LENGTH 4
+#define MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_2_WITH_SAME_LENGTH 1
+#define MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_3_WITH_SAME_LENGTH 1
+#define MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_4_WITH_SAME_LENGTH 1
+#define MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_5_WITH_SAME_LENGTH 1
+#define MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_6_WITH_SAME_LENGTH 1
+#define MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_7_WITH_SAME_LENGTH 1
+
+#ifndef CCA_TEST
+#define LOAD_FROM(NUM) \
+    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
+        .farPointer = pgm_get_far_address(actions_##NUM), \
+        .maxLengthOfStrings = ACTION_DESCRIPTION_##NUM##_LENGTH, \
+        .sizeOfIndexArray = MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
+        .amountOfEntries = AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM, \
+    }, flashHelper, actionNumber); \
+    if (stringToReturn != NULL) { return stringToReturn; }
+
+#else
+#define LOAD_FROM(NUM) \
+    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
+        .farPointer = (uint32_t) (actions_##NUM), \
+        .maxLengthOfStrings = ACTION_DESCRIPTION_##NUM##_LENGTH, \
+        .sizeOfIndexArray = MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
+        .amountOfEntries = AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM, \
+    }, flashHelper, actionNumber); \
+    if (stringToReturn != NULL) { return stringToReturn; }
+#endif
+#endif //COLOSSAL_CAVE_ADVENTURE_ACTIONS_H

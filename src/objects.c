@@ -1,36 +1,20 @@
+#include <objects.h>
 #include <stdlib.h>
-#include <stdint.h>
 #ifndef CCA_TEST
-#include <avr/pgmspace.h>
 #include <advent.h>
 #include <advdec.h>
+#include <avr/pgmspace.h>
 #else
 #include <string_repository.h>
+#include <stdint.h>
 #endif
 
-#define OBJECT_DESCRIPTION_1_LENGTH 73
-#define OBJECT_DESCRIPTION_2_LENGTH 113
-#define OBJECT_DESCRIPTION_3_LENGTH 197
-#define OBJECT_DESCRIPTION_4_LENGTH 247
-#define AMOUNT_OF_OBJECT_DESCRIPTIONS_1 25
-#define AMOUNT_OF_OBJECT_DESCRIPTIONS_2 15
-#define AMOUNT_OF_OBJECT_DESCRIPTIONS_3 9
-#define AMOUNT_OF_OBJECT_DESCRIPTIONS_4 4
-#define MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_1_WITH_SAME_LENGTH 1
-#define MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_2_WITH_SAME_LENGTH 1
-#define MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_3_WITH_SAME_LENGTH 1
-#define MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_4_WITH_SAME_LENGTH 1
 
 typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_1_WITH_SAME_LENGTH];
     char stringInProgramMem[OBJECT_DESCRIPTION_1_LENGTH];
 } OBJECT_1;
-
-#ifndef CCA_TEST
-const OBJECT_1 objects_1[AMOUNT_OF_OBJECT_DESCRIPTIONS_1] PROGMEM = {
-#else
-const OBJECT_1 objects_1[AMOUNT_OF_OBJECT_DESCRIPTIONS_1] = {
-#endif
+const __attribute__((section(".progmemx.data"))) OBJECT_1 objects_1[AMOUNT_OF_OBJECT_DESCRIPTIONS_1] = {
 		{{1,},"/Set of keys.\n/There are some keys on the ground here.\n/\n"},
 		{{3,},"/*Grate\n/The grate is locked.\n/The grate is open.\n/\n"},
 		{{4,},"/Wicker cage\n/There is a small wicker cage discarded nearby.\n/\n"},
@@ -62,12 +46,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_2_WITH_SAME_LENGTH];
     char stringInProgramMem[OBJECT_DESCRIPTION_2_LENGTH];
 } OBJECT_2;
-
-#ifndef CCA_TEST
-const OBJECT_2 objects_2[AMOUNT_OF_OBJECT_DESCRIPTIONS_2] PROGMEM = {
-#else
-const OBJECT_2 objects_2[AMOUNT_OF_OBJECT_DESCRIPTIONS_2] = {
-#endif
+const __attribute__((section(".progmemx.data"))) OBJECT_2 objects_2[AMOUNT_OF_OBJECT_DESCRIPTIONS_2]= {
 		{{2,},"/Brass lantern\n/There is a shiny brass lamp nearby.\n/There is a lamp shining nearby.\n/\n"},
 		{{5,},"/Black rod\n/A three foot black rod with a rusty star on an end lies nearby.\n/\n"},
 		{{6,},"/Black rod\n/A three foot black rod with a rusty mark on an end lies nearby.\n/\n"},
@@ -89,12 +68,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_3_WITH_SAME_LENGTH];
     char stringInProgramMem[OBJECT_DESCRIPTION_3_LENGTH];
 } OBJECT_3;
-
-#ifndef CCA_TEST
-const OBJECT_3 objects_3[AMOUNT_OF_OBJECT_DESCRIPTIONS_3] PROGMEM = {
-#else
-const OBJECT_3 objects_3[AMOUNT_OF_OBJECT_DESCRIPTIONS_3] = {
-#endif
+const __attribute__((section(".progmemx.data"))) OBJECT_3 objects_3[AMOUNT_OF_OBJECT_DESCRIPTIONS_3] = {
 		{{9,},"/*Rusty door\n/The way north is barred by a massive, rusty, iron door.\n/The way north leads through a massive, rusty, iron door.\n/\n"},
 		{{13,},"/*Stone tablet\n/A massive stone tablet imbedded in the wall reads:\n\"Congratulations on bringing light into the dark-room!\"\n/\n"},
 		{{15,},"/Giant oyster >Groan!<\n/There is an enormous oyster here with its shell tightly closed.\n/Interesting.  There seems to be something written on the\nunderside of the oyster.\n/\n"},
@@ -110,12 +84,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_4_WITH_SAME_LENGTH];
     char stringInProgramMem[OBJECT_DESCRIPTION_4_LENGTH];
 } OBJECT_4;
-
-#ifndef CCA_TEST
-const OBJECT_4 objects_4[AMOUNT_OF_OBJECT_DESCRIPTIONS_4] PROGMEM = {
-#else
-const OBJECT_4 objects_4[AMOUNT_OF_OBJECT_DESCRIPTIONS_4] = {
-#endif
+const __attribute__((section(".progmemx.data"))) OBJECT_4 objects_4[AMOUNT_OF_OBJECT_DESCRIPTIONS_4] = {
 		{{31,},"/*Dragon\n/A huge green fierce dragon bars the way!\n/Congratulations!  You have just vanquished a dragon with\nyour bare hands!  (Unbelievable, Isn't it?)\n/The body of a huge green dead dragon is lying off to one\nside.\n/\n"},
 		{{32,},"/*Chasm\n/A rickety wooden bridge extends across the chasm, vanishing\ninto the mist.  A sign posted on the bridge reads:\n          \"Stop!  Pay Troll!\"\n/The wreckage of a bridge (and a dead bear) can be seen\nat the bottom of the chasm.\n/\n"},
 		{{35,},"//There is a ferocious cave bear eyeing you from the far\nend of the room!\n/There is a gentle cave bear sitting placidly in one corner.\n/There is a contented-looking bear wandering about nearby.\n//\n"},
@@ -123,52 +92,29 @@ const OBJECT_4 objects_4[AMOUNT_OF_OBJECT_DESCRIPTIONS_4] = {
 };
 
 #define OBJECT_DESCRIPTION_24_LENGTH 455
+const __attribute__((section(".progmemx.data"))) char object_24[OBJECT_DESCRIPTION_24_LENGTH] = "/*Plant\n/There is a tiny little plant in the pit, murmuring\n\"Water, Water, ...\"\n/The plant spurts into furious growth for a few seconds.\n/There is a 12-foot-tall beanstalk stretching up out of\nthe pit, bellowing \"Water!! Water!!\"\n/The plant grows explosively, almost filling the bottom\nof the pit. \n/There is a gigantic beanstalk stretching all the way\nup to the hole.\n/You've over-watered the plant!  It's shriveling up!\nIt's, It's...\n/\n";
 
-#ifndef CCA_TEST
-const char object_24[OBJECT_DESCRIPTION_24_LENGTH] PROGMEM = "/*Plant\n/There is a tiny little plant in the pit, murmuring\n\"Water, Water, ...\"\n/The plant spurts into furious growth for a few seconds.\n/There is a 12-foot-tall beanstalk stretching up out of\nthe pit, bellowing \"Water!! Water!!\"\n/The plant grows explosively, almost filling the bottom\nof the pit. \n/There is a gigantic beanstalk stretching all the way\nup to the hole.\n/You've over-watered the plant!  It's shriveling up!\nIt's, It's...\n/\n";
-#else
-const char object_24[OBJECT_DESCRIPTION_24_LENGTH] = "/*Plant\n/There is a tiny little plant in the pit, murmuring\n\"Water, Water, ...\"\n/The plant spurts into furious growth for a few seconds.\n/There is a 12-foot-tall beanstalk stretching up out of\nthe pit, bellowing \"Water!! Water!!\"\n/The plant grows explosively, almost filling the bottom\nof the pit. \n/There is a gigantic beanstalk stretching all the way\nup to the hole.\n/You've over-watered the plant!  It's shriveling up!\nIt's, It's...\n/\n";
-#endif
+
+
 
 char * loadObject(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t objectNumber) {
     char * stringToReturn = NULL;
 
     if (objectNumber == 24) {
         stringToReturn = (char *) malloc(OBJECT_DESCRIPTION_24_LENGTH);
-        flashHelper->loadFromFlash(stringToReturn, object_24);
+#ifndef CCA_TEST
+        flashHelper->loadFarStringFromFlash(stringToReturn, pgm_get_far_address(object_24));
+#else
+        flashHelper->loadFarStringFromFlash(stringToReturn, (uint32_t) (object_24));
+#endif
+
     }
     if (stringToReturn != NULL) { return stringToReturn; }
 
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) objects_1,
-            .maxLengthOfStrings = OBJECT_DESCRIPTION_1_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_1_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_OBJECT_DESCRIPTIONS_1,
-    }, flashHelper, objectNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) objects_2,
-            .maxLengthOfStrings = OBJECT_DESCRIPTION_2_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_2_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_OBJECT_DESCRIPTIONS_2,
-    }, flashHelper, objectNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) objects_3,
-            .maxLengthOfStrings = OBJECT_DESCRIPTION_3_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_3_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_OBJECT_DESCRIPTIONS_3,
-    }, flashHelper, objectNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) objects_4,
-            .maxLengthOfStrings = OBJECT_DESCRIPTION_4_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_4_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_OBJECT_DESCRIPTIONS_4,
-    }, flashHelper, objectNumber);
+    LOAD_FROM(1)
+    LOAD_FROM(2)
+    LOAD_FROM(3)
+    LOAD_FROM(4)
 
 	return stringToReturn;
 }

@@ -1,39 +1,20 @@
+#include <long_locations.h>
 #include <stdlib.h>
-#include <stdint.h>
 #ifndef CCA_TEST
-#include <avr/pgmspace.h>
 #include <advent.h>
 #include <advdec.h>
+#include <avr/pgmspace.h>
 #else
 #include <string_repository.h>
+#include <stdint.h>
 #endif
 
-#define LONG_LOCATION_DESCRIPTION_1_LENGTH 73
-#define LONG_LOCATION_DESCRIPTION_2_LENGTH 141
-#define LONG_LOCATION_DESCRIPTION_3_LENGTH 196
-#define LONG_LOCATION_DESCRIPTION_4_LENGTH 321
-#define LONG_LOCATION_DESCRIPTION_5_LENGTH 521
-#define AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1 35
-#define AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2 30
-#define AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3 18
-#define AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4 12
-#define AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5 7
-#define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1_WITH_SAME_LENGTH 14
-#define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2_WITH_SAME_LENGTH 1
-#define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3_WITH_SAME_LENGTH 1
-#define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH 1
-#define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH 1
 
 typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1_WITH_SAME_LENGTH];
-    char stringInProgramMem[LONG_LOCATION_DESCRIPTION_1_LENGTH];
+    const char stringInProgramMem[LONG_LOCATION_DESCRIPTION_1_LENGTH];
 } LONG_LOCATION_1;
-
-#ifndef CCA_TEST
-const LONG_LOCATION_1 longLocations_1[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1] PROGMEM = {
-#else
-const LONG_LOCATION_1 longLocations_1[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1] = {
-#endif
+const __attribute__((section(".progmemx.data"))) LONG_LOCATION_1  longLocations_1[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1]  = {
 		{{3,},"You are inside a building, a well house for a large spring.\n"},
 		{{5,},"You are in open forest, with a deep valley to one side.\n"},
 		{{6,},"You are in open forest near both a valley and a road.\n"},
@@ -75,12 +56,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2_WITH_SAME_LENGTH];
     char stringInProgramMem[LONG_LOCATION_DESCRIPTION_2_LENGTH];
 } LONG_LOCATION_2;
-
-#ifndef CCA_TEST
-const LONG_LOCATION_2 longLocations_2[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2] PROGMEM = {
-#else
-const LONG_LOCATION_2 longLocations_2[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2] = {
-#endif
+const __attribute__((section(".progmemx.data"))) LONG_LOCATION_2 longLocations_2[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2] = {
 		{{4,},"You are in a valley in the forest beside a stream tumbling\nalong a rocky bed.\n"},
 		{{7,},"At your feet all the water of the stream splashes into a\n2-inch slit in the rock.  Downstream the streambed is bare rock.\n"},
 		{{9,},"You are in a small chamber beneath a 3x3 steel grate to the\nsurface.  A low crawl over cobbles leads inward to the West.\n"},
@@ -117,12 +93,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3_WITH_SAME_LENGTH];
     char stringInProgramMem[LONG_LOCATION_DESCRIPTION_3_LENGTH];
 } LONG_LOCATION_3;
-
-#ifndef CCA_TEST
-const LONG_LOCATION_3 longLocations_3[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3] PROGMEM = {
-#else
-const LONG_LOCATION_3 longLocations_3[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3] = {
-#endif
+const __attribute__((section(".progmemx.data"))) LONG_LOCATION_3 longLocations_3[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3] = {
 		{{1,},"You are standing at the end of a road before a small brick\nbuilding.  Around you is a forest.  A small stream flows out\nof the building and down a gully.\n"},
 		{{2,},"You have walked up a hill, still in the forest.  The road\nslopes back down the other side of the hill.  There is a\nbuilding in the distance.\n"},
 		{{8,},"You are in a 20-foot depression floored with bare dirt.  Set\ninto the dirt is a strong steel grate mounted in concrete.\nA dry streambed leads into the depression.\n"},
@@ -147,12 +118,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH];
     char stringInProgramMem[LONG_LOCATION_DESCRIPTION_4_LENGTH];
 } LONG_LOCATION_4;
-
-#ifndef CCA_TEST
-const LONG_LOCATION_4 longLocations_4[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4] PROGMEM = {
-#else
-const LONG_LOCATION_4 longLocations_4[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4] = {
-#endif
+const __attribute__((section(".progmemx.data"))) LONG_LOCATION_4 longLocations_4[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4]  = {
 		{{11,},"You are in a debris room filled with stuff washed in from the\nsurface.  A low wide passage with cobbles becomes plugged\nwith mud and debris here, but an awkward canyon leads\nupward and west.  A note on the wall says:\n       Magic Word \"XYZZY\"\n"},
 		{{64,},"You are at a complex junction.  A low hands and knees passage\nfrom the north joins a higher crawl from the east to make\na walking passage going west.  There is also a large room\nabove.  The air is damp here.\n"},
 		{{68,},"You are in a large low circular chamber whose floor is\nan immense slab fallen from the ceiling (slab room).\nEast and west there once were large passages, but they\nare now filled with boulders.  Low small passages go\nnorth and south, and the south one quickly bends west\naround the boulders.\n"},
@@ -171,12 +137,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH];
     char stringInProgramMem[LONG_LOCATION_DESCRIPTION_5_LENGTH];
 } LONG_LOCATION_5;
-
-#ifndef CCA_TEST
-const LONG_LOCATION_5 longLocations_5[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5] PROGMEM = {
-#else
-const LONG_LOCATION_5 longLocations_5[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5] = {
-#endif
+const __attribute__((section(".progmemx.data"))) LONG_LOCATION_5 longLocations_5[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5] = {
 		{{15,},"You are at one end of a vast hall stretching forward out of\nsight to the west.  There are openings to either side.\nNearby, a wide stone staircase leads downward.  The hall\nis filled with wisps of white mist swaying to and fro\nalmost as if alive.  A cold wind blows up the staircase.\nThere is a passage at the top of a dome behind you.\n"},
 		{{35,},"You're at a low window overlooking a huge pit, which\nextends up out of sight.  A floor is indistinctly visible\nover 50 feet below.  Traces of white mist cover the floor\nof the pit, becoming thicker to the right.  Marks in the\ndust around the window would seem to indicate that\nsomeone has been here recently.  Directly across the pit\nfrom you and 25 feet away there is a similar window\nlooking into a lighted room.  A shadowy figure can\nbe seen there peering back at you.\n"},
 		{{67,},"You are at the east end of the twopit room.  The floor\nhere is littered with thin rock slabs, which make it easy\nto descend the pits.  There is a path here bypassing\nthe pits to connect passages from east and west.\nThere are holes all over, but the only bit one is on\nthe wall directly over the west pit where you can't\nget at it.\n"},
@@ -187,70 +148,38 @@ const LONG_LOCATION_5 longLocations_5[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5] = 
 };
 
 #define LONG_LOCATION_DESCRIPTION_115_LENGTH 766
+const __attribute__((section(".progmemx.data"))) char longLocation_115[LONG_LOCATION_DESCRIPTION_115_LENGTH] = "You are at the northeast end of an immense room, even\nlarger than the giant room.  It appears to be a repository\nfor the \"adventure\" program.  Massive torches far overhead\nbathe the room with smoky yellow light.  Scattered about\nyou can be seen a pile of bottles (all of them empty), a\nnursery of young beanstalks murmuring quietly, a bed of\noysters, a bundle of black rods with rusty stars on their\nends, and a collection of brass lanterns.  Off to one side\na great many Dwarves are sleeping on the floor, snoring\nloudly.  A sign nearby reads:\n        \"Do NOT disturb the Dwarves!\"\nAn immense mirror is hanging against one wall, and\nstretches to the other end of the room, where various\nother sundry objects can be glimpsed dimly in the distance.\n";
 #define LONG_LOCATION_DESCRIPTION_126_LENGTH 1320
+const __attribute__((section(".progmemx.data"))) char longLocation_126[LONG_LOCATION_DESCRIPTION_126_LENGTH]  = "You are on the edge of a breath-taking view.  Far below you is an \nactive volcano, from which great gouts of molten lava come surging \nout, cascading back down into the depths. The glowing rock fills the \nfarthest reaches of the cavern with a blood-red glare, giving \neverything an eerie, macabre appearance.\nThe air is filled with flickering sparks of ash and a heavy smell of \nbrimstone.  The walls are hot to the touch, and the thundering of the \nvolcano drowns out all other sounds.  Embedded in the jagged roof far \noverhead are myriad formations composed of pure white alabaster, which \nscatter their murky light into sinister apparitions upon the walls.\nTo one side is a deep gorge, filled with a bizarre chaos of tortured \nrock which seems to have been crafted by the Devil Himself.  An \nimmense river of fire crashes out from the depths of the volcano, \nburns its way through the gorge, and plummets into a bottomless pit \nfar off to your left.  \nTo the right, an immense geyser of blistering steam erupts \ncontinuously from a barren island in the center of a sulfurous lake, \nwhich bubbles ominously. The far right wall is aflame with an \nincandescence of its own, which lends an additional infernal splendor \nto the already hellish scene.  \nA dark, foreboding passage exits to the south.\n";
 
-#ifndef CCA_TEST
-const char longLocation_115[LONG_LOCATION_DESCRIPTION_115_LENGTH] PROGMEM = "You are at the northeast end of an immense room, even\nlarger than the giant room.  It appears to be a repository\nfor the \"adventure\" program.  Massive torches far overhead\nbathe the room with smoky yellow light.  Scattered about\nyou can be seen a pile of bottles (all of them empty), a\nnursery of young beanstalks murmuring quietly, a bed of\noysters, a bundle of black rods with rusty stars on their\nends, and a collection of brass lanterns.  Off to one side\na great many Dwarves are sleeping on the floor, snoring\nloudly.  A sign nearby reads:\n        \"Do NOT disturb the Dwarves!\"\nAn immense mirror is hanging against one wall, and\nstretches to the other end of the room, where various\nother sundry objects can be glimpsed dimly in the distance.\n";
-#else
-const char longLocation_115[LONG_LOCATION_DESCRIPTION_115_LENGTH] = "You are at the northeast end of an immense room, even\nlarger than the giant room.  It appears to be a repository\nfor the \"adventure\" program.  Massive torches far overhead\nbathe the room with smoky yellow light.  Scattered about\nyou can be seen a pile of bottles (all of them empty), a\nnursery of young beanstalks murmuring quietly, a bed of\noysters, a bundle of black rods with rusty stars on their\nends, and a collection of brass lanterns.  Off to one side\na great many Dwarves are sleeping on the floor, snoring\nloudly.  A sign nearby reads:\n        \"Do NOT disturb the Dwarves!\"\nAn immense mirror is hanging against one wall, and\nstretches to the other end of the room, where various\nother sundry objects can be glimpsed dimly in the distance.\n";
-#endif
-#ifndef CCA_TEST
-const char longLocation_126[LONG_LOCATION_DESCRIPTION_126_LENGTH] PROGMEM = "You are on the edge of a breath-taking view.  Far below you is an \nactive volcano, from which great gouts of molten lava come surging \nout, cascading back down into the depths. The glowing rock fills the \nfarthest reaches of the cavern with a blood-red glare, giving \neverything an eerie, macabre appearance.\nThe air is filled with flickering sparks of ash and a heavy smell of \nbrimstone.  The walls are hot to the touch, and the thundering of the \nvolcano drowns out all other sounds.  Embedded in the jagged roof far \noverhead are myriad formations composed of pure white alabaster, which \nscatter their murky light into sinister apparitions upon the walls.\nTo one side is a deep gorge, filled with a bizarre chaos of tortured \nrock which seems to have been crafted by the Devil Himself.  An \nimmense river of fire crashes out from the depths of the volcano, \nburns its way through the gorge, and plummets into a bottomless pit \nfar off to your left.  \nTo the right, an immense geyser of blistering steam erupts \ncontinuously from a barren island in the center of a sulfurous lake, \nwhich bubbles ominously. The far right wall is aflame with an \nincandescence of its own, which lends an additional infernal splendor \nto the already hellish scene.  \nA dark, foreboding passage exits to the south.\n";
-#else
-const char longLocation_126[LONG_LOCATION_DESCRIPTION_126_LENGTH] = "You are on the edge of a breath-taking view.  Far below you is an \nactive volcano, from which great gouts of molten lava come surging \nout, cascading back down into the depths. The glowing rock fills the \nfarthest reaches of the cavern with a blood-red glare, giving \neverything an eerie, macabre appearance.\nThe air is filled with flickering sparks of ash and a heavy smell of \nbrimstone.  The walls are hot to the touch, and the thundering of the \nvolcano drowns out all other sounds.  Embedded in the jagged roof far \noverhead are myriad formations composed of pure white alabaster, which \nscatter their murky light into sinister apparitions upon the walls.\nTo one side is a deep gorge, filled with a bizarre chaos of tortured \nrock which seems to have been crafted by the Devil Himself.  An \nimmense river of fire crashes out from the depths of the volcano, \nburns its way through the gorge, and plummets into a bottomless pit \nfar off to your left.  \nTo the right, an immense geyser of blistering steam erupts \ncontinuously from a barren island in the center of a sulfurous lake, \nwhich bubbles ominously. The far right wall is aflame with an \nincandescence of its own, which lends an additional infernal splendor \nto the already hellish scene.  \nA dark, foreboding passage exits to the south.\n";
-#endif
 
 char * loadLongLocation(StringRepository * stringRepository, FlashHelper * flashHelper, uint8_t longLocationNumber) {
     char * stringToReturn = NULL;
 
     if (longLocationNumber == 115) {
         stringToReturn = (char *) malloc(LONG_LOCATION_DESCRIPTION_115_LENGTH);
-        flashHelper->loadFromFlash(stringToReturn, longLocation_115);
+
+#ifndef CCA_TEST
+        flashHelper->loadFarStringFromFlash(stringToReturn, pgm_get_far_address(longLocation_115));
+#else
+        flashHelper->loadFarStringFromFlash(stringToReturn, (uint32_t)(longLocation_115));
+#endif
     }
     if (longLocationNumber == 126) {
         stringToReturn = (char *) malloc(LONG_LOCATION_DESCRIPTION_126_LENGTH);
-        flashHelper->loadFromFlash(stringToReturn, longLocation_126);
+#ifndef CCA_TEST
+        flashHelper->loadFarStringFromFlash(stringToReturn, pgm_get_far_address(longLocation_126));
+#else
+        flashHelper->loadFarStringFromFlash(stringToReturn, (uint32_t)(longLocation_126));
+#endif
     }
     if (stringToReturn != NULL) { return stringToReturn; }
 
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) longLocations_1,
-            .maxLengthOfStrings = LONG_LOCATION_DESCRIPTION_1_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1,
-    }, flashHelper, longLocationNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) longLocations_2,
-            .maxLengthOfStrings = LONG_LOCATION_DESCRIPTION_2_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2,
-    }, flashHelper, longLocationNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) longLocations_3,
-            .maxLengthOfStrings = LONG_LOCATION_DESCRIPTION_3_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3,
-    }, flashHelper, longLocationNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) longLocations_4,
-            .maxLengthOfStrings = LONG_LOCATION_DESCRIPTION_4_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4,
-    }, flashHelper, longLocationNumber);
-    if (stringToReturn != NULL) { return stringToReturn; }
-
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) {
-            .entries = (void *) longLocations_5,
-            .maxLengthOfStrings = LONG_LOCATION_DESCRIPTION_5_LENGTH,
-            .sizeOfIndexArray = MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH,
-            .amountOfEntries = AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5,
-    }, flashHelper, longLocationNumber);
+    LOAD_FROM(1)
+    LOAD_FROM(2)
+    LOAD_FROM(3)
+    LOAD_FROM(4)
+    LOAD_FROM(5)
 
 	return stringToReturn;
 }

@@ -1,0 +1,42 @@
+#ifndef COLOSSAL_CAVE_ADVENTURE_LONG_LOCATIONS_H
+#define COLOSSAL_CAVE_ADVENTURE_LONG_LOCATIONS_H
+
+
+#define LONG_LOCATION_DESCRIPTION_1_LENGTH 73
+#define LONG_LOCATION_DESCRIPTION_2_LENGTH 141
+#define LONG_LOCATION_DESCRIPTION_3_LENGTH 196
+#define LONG_LOCATION_DESCRIPTION_4_LENGTH 321
+#define LONG_LOCATION_DESCRIPTION_5_LENGTH 521
+#define AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1 35
+#define AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2 30
+#define AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3 18
+#define AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4 12
+#define AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5 7
+#define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1_WITH_SAME_LENGTH 14
+#define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2_WITH_SAME_LENGTH 1
+#define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3_WITH_SAME_LENGTH 1
+#define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH 1
+#define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH 1
+
+#ifndef CCA_TEST
+#define LOAD_FROM(NUM) \
+    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
+        .farPointer = pgm_get_far_address(longLocations_##NUM), \
+        .maxLengthOfStrings = LONG_LOCATION_DESCRIPTION_##NUM##_LENGTH, \
+        .sizeOfIndexArray = MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
+        .amountOfEntries = AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_##NUM, \
+    }, flashHelper, longLocationNumber); \
+    if (stringToReturn != NULL) { return stringToReturn; }
+
+#else
+#define LOAD_FROM(NUM) \
+    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
+        .farPointer = (uint32_t) (longLocations_##NUM), \
+        .maxLengthOfStrings = LONG_LOCATION_DESCRIPTION_##NUM##_LENGTH, \
+        .sizeOfIndexArray = MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
+        .amountOfEntries = AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_##NUM, \
+    }, flashHelper, longLocationNumber); \
+    if (stringToReturn != NULL) { return stringToReturn; }
+#endif
+
+#endif //COLOSSAL_CAVE_ADVENTURE_LONG_LOCATIONS_H
