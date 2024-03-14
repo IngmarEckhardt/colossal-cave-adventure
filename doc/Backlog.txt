@@ -1,4 +1,0 @@
-1. outputstream to uart_out
-2. inputstream to uart_in
-3. string arrays into prog mem
-4. reuse of advents main, argv-parsing with a wrapper
