@@ -2,11 +2,11 @@
 #ifndef ADVENT_PROTO_H_
 #define ADVENT_PROTO_H_
 
-/* collossal_cave_adventure.c */
-void printToSerialOutput(void);
-void scanint    (int *pi, char *str);
+/* init_adventure.c */
 void initplay   (void);
-/* setup_adventure.c */
+
+/* colossal_cave_adventure.c */
+void printToSerialOutput(void);
 void adjustTo1Sec(void);
 void setupAdvent(void);
 
@@ -100,8 +100,6 @@ void vbreak (void);
 void vwake  (void);
 void actspk (int verb);
 void needobj(void);
-
-
 
 /* program memory getters */
 char * getCave(int caveNumber);

@@ -86,7 +86,7 @@ const __attribute__((__progmem__)) OBJECT_4 objects_4[AMOUNT_OF_OBJECT_DESCRIPTI
         {{58,}, "/Ming vase\n/There is a delicate, precious, ming vase here!\n/The vase is now resting, delicately, on a velvet pillow.\n/The floor is littered with worthless shards of pottery.\n/The ming vase drops with a delicate crash.\n/\n"},
 };
 
-#define OBJECT_DESCRIPTION_24_LENGTH 455
+#define OBJECT_DESCRIPTION_24_LENGTH 439
 const __attribute__((__progmem__)) char object_24[OBJECT_DESCRIPTION_24_LENGTH] = "/*Plant\n/There is a tiny little plant in the pit, murmuring\n\"Water, Water, ...\"\n/The plant spurts into furious growth for a few seconds.\n/There is a 12-foot-tall beanstalk stretching up out of\nthe pit, bellowing \"Water!! Water!!\"\n/The plant grows explosively, almost filling the bottom\nof the pit. \n/There is a gigantic beanstalk stretching all the way\nup to the hole.\n/You've over-watered the plant!  It's shriveling up!\nIt's, It's...\n/\n";
 
 static char * loadObject(StringRepository * stringRepo, FlashHelper * helper, uint8_t objectNumber) {

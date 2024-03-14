@@ -103,7 +103,6 @@ const __attribute__((__progmem__)) ACTION_3 actions_3[AMOUNT_OF_ACTION_DESCRIPTI
         {{94,},  "I believe what you want is right here with you.\n"},
         {{95,},  "You don't fit through a two-inch slit!\n"},
         {{97,},  "There is no way across the fissure.\n"},
-        {{99,},  "You are currently holding the following:\n"},
         {{101,}, "The snake has now devoured your bird.\n"},
         {{102,}, "There's nothing here it wants to eat (Except perhaps you).\n"},
         {{104,}, "You have nothing in which to carry it.\n"},
@@ -192,7 +191,6 @@ typedef struct {
 const __attribute__((__progmem__)) ACTION_5 actions_5[AMOUNT_OF_ACTION_DESCRIPTIONS_5] = {
         {{3,},   "A little dwarf just walked around a corner, saw you,\nthrew a little axe at you which missed, cursed, and ran away.\n"},
         {{11,},  "I don't know in from out here.  Use compass points or name\nsomething in the general direction you want to go.\n"},
-        {{15,},  "Sorry, but I am not allowed to give more detail.  I will\nrepeat the long description of your location.\n"},
         {{19,},  "The bird is frightened right now and you cannot catch\nit no matter what you try.  Perhaps you might try later.\n"},
         {{26,},  "The bird was unafraid when you entered, but as you approach\nit becomes disturbed and you cannot catch it.\n"},
         {{57,},  "I don't know where the cave is, but hereabouts no stream\ncan run on the surface for very long.  I would try the stream.\n"},
@@ -207,14 +205,12 @@ const __attribute__((__progmem__)) ACTION_5 actions_5[AMOUNT_OF_ACTION_DESCRIPTI
         {{130,}, "A mysterious recorded voice groans into life and announces:\n\"This exit is closed.  Please leave via main office.\"\n"},
         {{131,}, "It looks as though you're dead.  Well, seeing as how it's so\nclose to closing time anyway, I think we'll just call it a day.\n"},
         {{154,}, "The little bird attacks the green dragon, and in an\nastounding flurry gets burnt to a cinder.  The ashes blow away.\n"},
-        {{156,}, "Okay, from now on I'll only describe a place in full the\nfirst time you come to it.  To get the full description\nsay \"look\".\n"},
         {{157,}, "Trolls are close relatives with the rocks and have skin as\ntough as that of a rhinoceros.  The troll fends off your\nblows effortlessly.\n"},
         {{158,}, "The troll deftly catches the axe, examines it carefully,\nand tosses it back, declaring, \"Good workmanship,\nbut it's not valuable enough.\".\n"},
         {{163,}, "The bear lumbers toward the troll, who lets out a\nstartled shriek and scurries away.  The bear soon gives\nup pursuit and wanders back.\n"},
         {{168,}, "The bear eagerly wolfs down your food, after which he seems\nto calm down considerably, and even becomes rather friendly.\n"},
         {{185,}, "There's not much point in wandering around out here, and you\ncan't explore the cave without a lamp.  So let's just call\nit a day.\n"},
         {{192,}, "Hmm, this looks like a clue, which means it'll cost you 10\npoints to read it.  Should I go ahead and read it anyway?\n"},
-        {{193,}, "It says, \"There is something strange about this place,\nsuch that one of the words I've always known now has\na new effect.\"\n"},
         {{199,}, "You prod the nearest Dwarf, who wakes up grumpily, takes\none look at you, curses, and grabs for his axe.\n"},
 };
 
@@ -250,11 +246,11 @@ const __attribute__((__progmem__)) ACTION_7 actions_7[AMOUNT_OF_ACTION_DESCRIPTI
         {{186,}, "There are faint rustling noises from the darkness behind you.\nAs you turn toward them, the beam of your lamp falls across a\nbearded pirate.  He is carrying a large chest.  \"Shiver me\ntimbers!\"  he cries, \"I've been spotted!  I'd best hide\nmeself off to the maze and hide me chest!\".  With that,\nhe vanished into the gloom.\n"},
 };
 
-#define ACTION_DESCRIPTION_51_LENGTH 1336
+#define ACTION_DESCRIPTION_51_LENGTH 1310
 const __attribute__((__progmem__)) char action_51[ACTION_DESCRIPTION_51_LENGTH] = "I know of places, actions, and things.  Most of my vocabulary \ndescribes places and is used to move you there.  To move, try words \nlike forest, building, downstream, enter, east, west, north, south, up \nor down.  \nI know about a few special objects, like a black rod hidden in the \ncave.  These objects can be manipulated using some of the action words \nI know. Usually you will need to give both the object and action words \n(In either order), but sometimes I can infer the object from the verb \nalone.  Some objects also imply verbs; in particular, \"inventory\" \nimplies \"take inventory\", which causes me to give you a list of what \nyou're carrying.\nThe objects have side effects; for instance, the rod scares the bird. \nUsually people having trouble moving just need to try a few more \nwords.  Usually people trying unsuccessfully to manipulate an object \nare attempting something beyond their (or my!) capabilities and should \ntry a completely different tack.\nTo speed the game up, you can sometimes move long distances with a \nsingle word.  For example, \"building\" usually gets you to the building \nfrom anywhere above ground except when lost in the forest.  Also, note \nthat cave passages turn a lot, and that leaving a room to the north \ndoes not guarantee entering the next from the south. Good luck!\n";
 
-#define ACTION_DESCRIPTION_142_LENGTH 1429
-const __attribute__((__progmem__)) char action_142[ACTION_DESCRIPTION_142_LENGTH] = "If you want to end your adventure early, say \"quit\".  To suspend your \nadventure such that you can continue later say \"suspend\" (or \"pause\" \nor \"save\").  To load a previously saved game, say 'load' or 'restore'.  \nTo see how well you're doing, say \"score\".  To get full credit for a \ntreasure, you must have left it safely in the building, though you get \npartial credit just for locating it. You lose points for getting \nkilled, or for quitting, though the former costs you more. \nThere are also points based on how much (If any) of the cave you've \nmanaged to explore;  in particular, there is a large bonus just for \ngetting in (to distinguish the beginners from the rest of the pack), \nand there are other ways to determine whether you've been through some \nof the more harrowing sections. \nIf you think you've found all the treasures, just keep exploring for a \nwhile.  If nothing interesting happens, you haven't found them all \nyet.  If something interesting DOES happen, it means you're getting a \nbonus and have an opportunity to garner many more points in the \nmaster's section.\nI may occasionally offer hints in you seem to be having trouble.  If I \ndo, I'll warn you in advance how much it will affect your score to \naccept the hints.  Finally, to save paper, you may specify \"brief\", \nwhich tells me never to repeat the full description of a place unless \nyou explicitly ask me to.\n";
+#define ACTION_DESCRIPTION_142_LENGTH 1405
+const __attribute__((__progmem__)) char action_142[ACTION_DESCRIPTION_142_LENGTH] = "If you want to end your adventure early, say \"quit\".  To suspend your \nadventure such that you can continue later say \"suspend\" (or \"pause\" \nor \"save\").  To load a previously saved game, say 'load' or 'restore'.  \nTo see how well you're doing, say \"score\".  To get full credit for a \ntreasure, you must have left it safely in the building, though you get \npartial credit just for locating it. You lose points for getting \nkilled, or for quitting, though the former costs you more. \nThere are also points based on how much (If any) of the cave you've \nmanaged to explore;  in particular, there is a large bonus just for \ngetting in (to distinguish the beginners from the rest of the pack), \nand there are other ways to determine whether you've been through some \nof the more harrowing sections. \nIf you think you've found all the treasures, just keep exploring for a \nwhile.  If nothing interesting happens, you haven't found them all \nyet.  If something interesting DOES happen, it means you're getting a \nbonus and have an opportunity to garner many more points in the \nmaster's section.\nI may occasionally offer hints in you seem to be having trouble.  If I \ndo, I'll warn you in advance how much it will affect your score to \naccept the hints.  Finally, to save paper, you may specify \"brief\", \nwhich tells me never to repeat the full description of a objectLocation unless \nyou explicitly ask me to.\n";
 
 
 static char * loadAction(StringRepository * stringRepo, FlashHelper * helper, uint8_t actionNumber) {

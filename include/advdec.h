@@ -14,17 +14,13 @@ UartHelper * uartHelper;
 McuClock * mcuClock;
 
 volatile uint8_t cca_adjustCounter;
+
 /*
 	Database variables
 */
-//extern struct wac wc[]; /* see ADVWORD.H		*/
-//extern char *cave[];    /* see ADVCAVE.H		*/
-extern size_t cavesz;
-
-
 
 extern struct trav travel[];
-extern int actmsg[]; /* action messages	*/
+extern uint8_t actmsg[]; /* action messages	*/
 
 /*
 	English variables
@@ -36,30 +32,30 @@ extern char word1[], word2[];
 	Play variables
 */
 extern int turns;
-extern int loc, oldloc, oldloc2, newloc; /* location variables  */
-extern int cond[];			 /* location status	*/
-extern int place[];			 /* object location	*/
-extern int fixed[];			 /* second object loc	*/
-extern int visited[];			 /* >0 if has been here	*/
-extern int prop[];			 /* status of object	*/
+extern int location, oldLocation, oldLocation2, newLocation; /* location variables  */
+extern uint8_t locationStatus[];			 /* location status	*/
+extern uint8_t objectLocation[];			 /* object location	*/
+extern uint8_t secondObjectLocation[];			 /* second object location	*/
+extern uint8_t visited[];			 /* >0 if has been here	*/
+extern int objectStatus[];			 /* status of object	*/
 extern int tally, tally2;		 /* item counts		*/
-extern int limit;			 /* time limit		*/
-extern int lmwarn;			 /* lamp warning flag	*/
+extern int timeLimit;			 /* time timeLimit		*/
+extern int lampWarningFlag;			 /* lamp warning flag	*/
 extern int wzdark, closing, closed;      /* game state flags	*/
-extern int holding;			 /* count of held items	*/
-extern int detail;			 /* LOOK count		*/
-extern int knfloc;			 /* knife location	*/
-extern int clock1, clock2, panic;	 /* timing variables	*/
-extern int dloc[];			 /* dwarf locations	*/
-extern int dflag;			 /* dwarf flag		*/
-extern int dseen[];			 /* dwarf seen flag	*/
-extern int odloc[];			 /* dwarf old locations	*/
-extern int daltloc;			 /* alternate appearance*/
+extern uint8_t countItemsHeld;			 /* count of held items	*/
+extern uint8_t lookCount;			 /* LOOK count		*/
+extern uint8_t knifeLocation;			 /* knife location	*/
+extern int8_t clock1, clock2, panic;	 /* timing variables	*/
+extern uint8_t dwarfLocations[];			 /* dwarf locations	*/
+extern uint8_t dwarfFlag;			 /* dwarf flag		*/
+extern uint8_t dwarfSeenFlag[];			 /* dwarf seen flag	*/
+extern uint8_t oldLocationOfDwarf[];			 /* dwarf old locations	*/
+extern const uint8_t dwarfAltLocation;			 /* alternate appearance*/
 extern int dkill;			 /* dwarves killed	*/
-extern int chloc, chloc2;		 /* chest locations	*/
+extern const uint8_t chestLocation, chestLocation2;		 /* chest locations	*/
 extern int bonus;			 /* to pass to end	*/
-extern int numdie;			 /* number of deaths	*/
+extern int numberOfDeaths;			 /* number of deaths	*/
 extern int object1;			 /* to help intrans.	*/
-extern int gaveup;			 /* 1 if he quit early	*/
+extern int playerWantToQuitFlag;			 /* 1 if he quit early	*/
 extern int foobar;			 /* fie fie foe foo...	*/
-extern int dbugflg;			 /* if game is in debug	*/
+extern int debugFlag;			 /* if game is in debug	*/

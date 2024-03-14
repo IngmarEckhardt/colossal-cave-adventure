@@ -6,9 +6,7 @@
 */
 struct trav travel[MAXTRAV];
 
-int actmsg[32]; /* action messages	*/
-
-size_t cavesz = MAXLOC;
+uint8_t actmsg[32]; /* action messages	*/
 
 /*
 	English variables
@@ -20,30 +18,32 @@ char word1[WORDSIZE], word2[WORDSIZE];
 	Play variables
 */
 int turns;
-int loc, oldloc, oldloc2, newloc; /* location variables */
-int cond[MAXLOC];		  /* location status	*/
-int place[MAXOBJ];		  /* object location	*/
-int fixed[MAXOBJ];		  /* second object loc	*/
-int visited[MAXLOC];		  /* >0 if has been here	*/
-int prop[MAXOBJ];		  /* status of object	*/
+int location, oldLocation, oldLocation2, newLocation; /* location variables */
+uint8_t locationStatus[MAXLOC];		  /* location status	*/
+uint8_t objectLocation[MAXOBJ];		  /* object location	*/
+uint8_t secondObjectLocation[MAXOBJ];		  /* second object location	*/
+uint8_t visited[MAXLOC];		  /* >0 if has been here	*/
+int objectStatus[MAXOBJ];		  /* status of object	*/
 int tally, tally2;		  /* item counts		*/
-int limit;			  /* time limit		*/
-int lmwarn;			  /* lamp warning flag	*/
+int timeLimit;			  /* time timeLimit		*/
+int lampWarningFlag;			  /* lamp warning flag	*/
 int wzdark, closing, closed;      /* game state flags	*/
-int holding;			  /* count of held items	*/
-int detail;			  /* LOOK count		*/
-int knfloc;			  /* knife location	*/
-int clock1, clock2, panic;	  /* timing variables	*/
-int dloc[DWARFMAX];		  /* dwarf locations	*/
-int dflag;			  /* dwarf flag		*/
-int dseen[DWARFMAX];		  /* dwarf seen flag	*/
-int odloc[DWARFMAX];		  /* dwarf old locations	*/
-int daltloc;			  /* alternate appearance	*/
+uint8_t countItemsHeld;			  /* count of held items	*/
+uint8_t lookCount;			  /* LOOK count		*/
+uint8_t knifeLocation;			  /* knife location	*/
+int8_t clock1, clock2, panic;	  /* timing variables	*/
+uint8_t dwarfLocations[DWARFMAX];		  /* dwarf locations	*/
+uint8_t dwarfFlag;			  /* dwarf flag		*/
+uint8_t dwarfSeenFlag[DWARFMAX];		  /* dwarf seen flag	*/
+uint8_t oldLocationOfDwarf[DWARFMAX];		  /* dwarf old locations	*/
+const uint8_t dwarfAltLocation = 18;;			  /* alternate appearance	*/
 int dkill;			  /* dwarves killed	*/
-int chloc, chloc2;		  /* chest locations	*/
+const uint8_t chestLocation = 114; ;/* chest locations	*/
+const uint8_t chestLocation2 = 140;
+
 int bonus;			  /* to pass to end	*/
-int numdie;			  /* number of deaths	*/
+int numberOfDeaths;			  /* number of deaths	*/
 int object1;			  /* to help intrans.	*/
-int gaveup;			  /* 1 if he quit early	*/
+int playerWantToQuitFlag;			  /* 1 if he quit early	*/
 int foobar;			  /* fie fie foe foo...	*/
-int dbugflg;			  /* if game is in debug	*/
+int debugFlag;			  /* if game is in debug	*/

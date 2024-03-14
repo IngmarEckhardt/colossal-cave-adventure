@@ -7,7 +7,7 @@
 #define WORDSIZE    20		/* max # of chars in commands	*/
 #define MAXMSG      201		/* max # of long location descr	*/
 
-#define MAXTRAV     (16 + 1)  /* max # of travel directions from loc  */
+#define MAXTRAV     (16 + 1)  /* max # of travel directions from location  */
 			      /* +1 for terminator travel[x].tdest=-1 */
 #define DWARFMAX    7	      /* max # of nasty dwarves	*/
 #define MAXDIE      3	      /* max # of deaths before close	*/
@@ -111,7 +111,7 @@
 #define LOAD        33
 
 /*
-	BIT mapping of "cond" array which indicates location status
+	BIT mapping of "locationStatus" array which indicates location status
 */
 #define LIGHT       1
 #define WATOIL      2

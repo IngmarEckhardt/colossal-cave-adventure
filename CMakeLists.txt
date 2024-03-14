@@ -41,6 +41,7 @@ set(SRC_FILES
         "${SRC_PATH}/caves.c"
         "${SRC_PATH}/database.c"
         "${SRC_PATH}/english.c"
+        "${SRC_PATH}/init_adventure.c"
         "${SRC_PATH}/itverb.c"
         "${SRC_PATH}/long_locations.c"
         "${SRC_PATH}/objects.c"

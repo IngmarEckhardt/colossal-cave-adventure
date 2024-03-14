@@ -129,7 +129,7 @@ void getwords(void)
 	while ((*wptr = tolower(*wptr)))
 		++wptr;
 	sscanf(words, "%19s %19s", word1, word2);
-	if (dbugflg)
+	if (debugFlag)
 		printf("WORD1 = %s, WORD2 = %s\n", word1, word2);
 }
 
