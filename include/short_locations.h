@@ -17,25 +17,13 @@
 #define MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH 14
 #define MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH 1
 
-#ifndef CCA_TEST
+
 #define LOAD_FROM(NUM) \
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
+    stringToReturn = stringRepo->loadStringFromFile(&(TextFile) { \
         .farPointer = pgm_get_far_address(shortLocations_##NUM), \
         .maxLengthOfStrings = SHORT_LOCATION_DESCRIPTION_##NUM##_LENGTH, \
         .sizeOfIndexArray = MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
         .amountOfEntries = AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_##NUM, \
-    }, flashHelper, shortLocationNumber); \
+    }, helper, shortLocationNumber); \
     if (stringToReturn != NULL) { return stringToReturn; }
-
-#else
-#define LOAD_FROM(NUM) \
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
-        .farPointer = (uint32_t) (shortLocations_##NUM), \
-        .maxLengthOfStrings = SHORT_LOCATION_DESCRIPTION_##NUM##_LENGTH, \
-        .sizeOfIndexArray = MAX_AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
-        .amountOfEntries = AMOUNT_OF_SHORT_LOCATION_DESCRIPTIONS_##NUM, \
-    }, flashHelper, shortLocationNumber); \
-    if (stringToReturn != NULL) { return stringToReturn; }
-#endif
-
 #endif //COLOSSAL_CAVE_ADVENTURE_SHORT_LOCATIONS_H

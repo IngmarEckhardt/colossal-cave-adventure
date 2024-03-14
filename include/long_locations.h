@@ -18,25 +18,12 @@
 #define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH 1
 #define MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH 1
 
-#ifndef CCA_TEST
 #define LOAD_FROM(NUM) \
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
+    stringToReturn = stringRepo->loadStringFromFile(&(TextFile) { \
         .farPointer = pgm_get_far_address(longLocations_##NUM), \
         .maxLengthOfStrings = LONG_LOCATION_DESCRIPTION_##NUM##_LENGTH, \
         .sizeOfIndexArray = MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
         .amountOfEntries = AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_##NUM, \
-    }, flashHelper, longLocationNumber); \
+    }, helper, longLocationNumber); \
     if (stringToReturn != NULL) { return stringToReturn; }
-
-#else
-#define LOAD_FROM(NUM) \
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
-        .farPointer = (uint32_t) (longLocations_##NUM), \
-        .maxLengthOfStrings = LONG_LOCATION_DESCRIPTION_##NUM##_LENGTH, \
-        .sizeOfIndexArray = MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
-        .amountOfEntries = AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_##NUM, \
-    }, flashHelper, longLocationNumber); \
-    if (stringToReturn != NULL) { return stringToReturn; }
-#endif
-
 #endif //COLOSSAL_CAVE_ADVENTURE_LONG_LOCATIONS_H

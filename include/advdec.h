@@ -1,15 +1,17 @@
+#include <stddef.h>
+// Setup DwarfOS
+#include <setup.h>
 #include <input_queue.h>
 #include <uart_helper.h>
 #include <string_repository.h>
 
 /*	header ADVDEC.H						*\
 \*	WARNING: GLOBAL EXTERNAL declarations for adventure	*/
-
-
 StringRepository * stringRepository;
 FlashHelper * flashHelper;
 InputQueue * inputQueue;
 UartHelper * uartHelper;
+McuClock * mcuClock;
 
 volatile uint8_t cca_adjustCounter;
 /*

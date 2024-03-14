@@ -123,13 +123,7 @@
 #define HINTM       128
 #define HINT        240
 
-/*
-	Structure definitions
-*/
-struct wac {
-	char *aword;
-	int   acode;
-};
+#define setmem(l, s, c) memset(l, c, s)
 
 struct trav {
 	int   tdest;

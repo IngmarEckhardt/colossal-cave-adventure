@@ -1,40 +1,30 @@
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
-#include <time.h>
-
-#include <stdio.h> /* drv = 1.1st file 2.def 3.A	*/
-#include <ctype.h>
-#include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
-
-#include "advent.h"  /* #define preprocessor equates	*/
-#include "advdef.h"
-
-#include "heap_management_helper.h"
-#include "advdec.h"
-#include "setup.h"
-McuClock * mcuClock;
+#include <string.h>
+// DwarfOS
+#include <time.h>
+#include <heap_management_helper.h>
+// Adventure
+#include <advent.h>  /* #define preprocessor equates	*/
+#include <advdec.h>
+#include <advdef.h>
 
 const uint8_t adjustToSecondValue = ADJUST_TO_SECOND_VALUE;
-#define setmem(l, s, c) memset(l, c, s)
-
-
 
 int main(void) {
-    stringRepository = dOS_initStringRepository(0);
-    uartHelper = dOS_initUartHelper();
-    inputQueue = cca_initInputQueue();
-    flashHelper = dOS_initFlashHelper();
+
     setupAdvent();
     initplay();
-    dbugflg =1;
-
+    dbugflg = 1;
     sei();
 
-    if (yes(65, 1, 0))
+    if (yes(65, 1, 0)) {
         limit = 1000;
-    else
+    } else {
         limit = 330;
+    }
     srand(511); /* seed random	*/
 
     while (1) {
@@ -45,40 +35,23 @@ int main(void) {
     }
 }
 
-ISR(TIMER2_OVF_vect) { cca_adjustCounter++; }
+ISR(TIMER2_OVF_vect) { cca_adjustCounter++; } // getting a clock and waking up from sleep mode
 
+void putIntoQueue(int item) { inputQueue->enqueue(item, inputQueue); }
+ISR(USART0_RX_vect) { putIntoQueue(UDR0); } // put into stdin buffer if a sign is available/interrupt is triggered
 
-ISR(USART0_RX_vect) { putIntoQueue(UDR0); }
-
-void printToSerialOutput(void) {
-    HeapManagementHelper * heapHelper = dOS_initHeapManagementHelper();
-    char * timestamp = ctime(NULL);
-    printf("%s: free Memory is: %d byte\n", timestamp, heapHelper->getFreeMemory());
-    free(timestamp);
-    free(heapHelper);
-}
-
-
-/* ************************************************************	*/
-
-/*
-	Initialize integer arrays with sscanf
-*/
-void scanint(int *pi, char *str)
-{
+// adventure initialization
+void scanint(int * pi, char * str) {
     while (*str) {
-        if ((sscanf(str, "%d,", pi++)) < 1)
-            bug(41);      /* failed before EOS	*/
+        if ((sscanf(str, "%d,", pi++)) < 1) {
+            bug(41);
+        }      /* failed before EOS	*/
         while (*str++ != ',') /* advance str pointer	*/
             ;
     }
 }
 
-/*
-	Initialization of adventure play variables
-*/
-void initplay(void)
-{
+void initplay(void) {
     turns = 0;
 
     /* initialize location status array */
@@ -145,36 +118,40 @@ void initplay(void)
     dflag = 0;
     gaveup = 0;
 }
+
+// general inits
 void adjustTo1Sec(void) {
     if (cca_adjustCounter == adjustToSecondValue) {
         mcuClock->incrementClockOneSec();
         cca_adjustCounter = 0;
     }
 }
-void putIntoQueue(int item) {
-    inputQueue->enqueue(item, inputQueue);
-}
-
 
 int put_char(char c, FILE * stream) {
     uartHelper->usartTransmitChar(c);
     return 0;
 }
-
-int get_char(FILE * stream) {
-    int16_t c = inputQueue->get_char(inputQueue);
-    return c;
-}
-
-static FILE myStdOut = FDEV_SETUP_STREAM(put_char, NULL, _FDEV_SETUP_WRITE);
-static FILE myStdIn = FDEV_SETUP_STREAM(NULL, get_char, _FDEV_SETUP_READ);
-
+int get_char(FILE * stream) { return inputQueue->get_char(inputQueue); }
+static FILE ccaStdOut = FDEV_SETUP_STREAM(put_char, NULL, _FDEV_SETUP_WRITE);
+static FILE ccaStdIn = FDEV_SETUP_STREAM(NULL, get_char, _FDEV_SETUP_READ);
 
 void setupAdvent(void) {
+    stringRepository = dOS_initStringRepository(0);
+    uartHelper = dOS_initUartHelper();
+    inputQueue = cca_initInputQueue();
+    flashHelper = dOS_initFlashHelper();
     setupMcu(&mcuClock);
-
-    stdin = &myStdIn;
-    stdout = &myStdOut;
-    // Enable receiver and transmitter and Interrupt additionally
-    UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0);
+    stdin = &ccaStdIn;
+    stdout = &ccaStdOut;
+    UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0); // Enable receiver and transmitter and Interrupt additionally
 }
+
+void printToSerialOutput(void) {
+    HeapManagementHelper * heapHelper = dOS_initHeapManagementHelper();
+    char * timestamp = ctime(NULL);
+    printf("%s: free Memory is: %d byte\n", timestamp, heapHelper->getFreeMemory());
+    free(timestamp);
+    free(heapHelper);
+}
+
+// ToDo: add function to save game into eeprom

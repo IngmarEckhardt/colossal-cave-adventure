@@ -1,8 +1,6 @@
 #ifndef COLOSSAL_CAVE_ADVENTURE_CAVES_H
 #define COLOSSAL_CAVE_ADVENTURE_CAVES_H
 
-
-
 #define CAVE_DESCRIPTION_1_LENGTH 16
 #define CAVE_DESCRIPTION_2_LENGTH 31
 #define CAVE_DESCRIPTION_3_LENGTH 56
@@ -19,25 +17,13 @@
 #define MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_4_WITH_SAME_LENGTH 1
 #define MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_5_WITH_SAME_LENGTH 1
 
-#ifndef CCA_TEST
 #define LOAD_FROM(NUM) \
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
+    stringToReturn = stringRepo->loadStringFromFile(&(TextFile) { \
         .farPointer = pgm_get_far_address(caves_##NUM), \
         .maxLengthOfStrings = CAVE_DESCRIPTION_##NUM##_LENGTH, \
         .sizeOfIndexArray = MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
         .amountOfEntries = AMOUNT_OF_CAVE_DESCRIPTIONS_##NUM, \
-    }, flashHelper, caveNumber); \
+    }, helper, caveNumber); \
     if (stringToReturn != NULL) { return stringToReturn; }
-
-#else
-#define LOAD_FROM(NUM) \
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
-        .farPointer = (uint32_t) (caves_##NUM), \
-        .maxLengthOfStrings = CAVE_DESCRIPTION_##NUM##_LENGTH, \
-        .sizeOfIndexArray = MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
-        .amountOfEntries = AMOUNT_OF_CAVE_DESCRIPTIONS_##NUM, \
-    }, flashHelper, caveNumber); \
-    if (stringToReturn != NULL) { return stringToReturn; }
-#endif
 
 #endif //COLOSSAL_CAVE_ADVENTURE_CAVES_H

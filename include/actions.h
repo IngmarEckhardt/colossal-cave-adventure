@@ -23,24 +23,13 @@
 #define MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_6_WITH_SAME_LENGTH 1
 #define MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_7_WITH_SAME_LENGTH 1
 
-#ifndef CCA_TEST
 #define LOAD_FROM(NUM) \
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
+    stringToReturn = stringRepo->loadStringFromFile(&(TextFile) { \
         .farPointer = pgm_get_far_address(actions_##NUM), \
         .maxLengthOfStrings = ACTION_DESCRIPTION_##NUM##_LENGTH, \
         .sizeOfIndexArray = MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
         .amountOfEntries = AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM, \
-    }, flashHelper, actionNumber); \
+    }, helper, actionNumber); \
     if (stringToReturn != NULL) { return stringToReturn; }
 
-#else
-#define LOAD_FROM(NUM) \
-    stringToReturn = stringRepository->loadStringFromFile(&(TextFile) { \
-        .farPointer = (uint32_t) (actions_##NUM), \
-        .maxLengthOfStrings = ACTION_DESCRIPTION_##NUM##_LENGTH, \
-        .sizeOfIndexArray = MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
-        .amountOfEntries = AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM, \
-    }, flashHelper, actionNumber); \
-    if (stringToReturn != NULL) { return stringToReturn; }
-#endif
 #endif //COLOSSAL_CAVE_ADVENTURE_ACTIONS_H

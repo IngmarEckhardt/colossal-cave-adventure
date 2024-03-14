@@ -6,7 +6,9 @@
 void printToSerialOutput(void);
 void scanint    (int *pi, char *str);
 void initplay   (void);
-
+/* setup_adventure.c */
+void adjustTo1Sec(void);
+void setupAdvent(void);
 
 /* database.c */
 void gettrav (int loc);
@@ -99,10 +101,7 @@ void vwake  (void);
 void actspk (int verb);
 void needobj(void);
 
-/* setup_adventure.c */
-void adjustTo1Sec(void);
-void putIntoQueue(int item);
-void setupAdvent(void);
+
 
 /* program memory getters */
 char * getCave(int caveNumber);
