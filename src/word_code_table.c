@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include <stdlib.h>
 #include <advent.h>
 
 #ifdef CCA_TEST
 
-#include <stdlib.h>
+
 #include <flash_helper.h>
 #include <stdio.h>
 #include <string.h>
@@ -20,7 +21,7 @@ typedef struct {
 #ifdef CCA_TEST
 WordCodeCombination wordCodeTable[MAXWC] = {
 #else
-        struct wac wc[] PROGMEM = {
+        const __attribute__((__progmem__)) WordCodeCombination wordCodeTable[MAXWC] = {
 #endif
         {"spelunker today", 1016},
         {"?", 3051},
@@ -334,7 +335,7 @@ char * loadWord(uint16_t index) {
 #ifdef CCA_TEST
     FlashHelper * flashHelper = dOS_initFlashHelper();
 #endif
-    if (flashHelper == NULL || index > MAXWC) { return NULL; }
+    if (flashHelper == NULL || index >= MAXWC) { return NULL; }
     char * stringToReturn = malloc(WC_TABLE_MAX_WORD_LENGTH);
     if (stringToReturn == NULL) { return NULL; }
     flashHelper->loadStringFromFlash(stringToReturn, (char *) (&wordCodeTable[index]));
@@ -348,7 +349,7 @@ uint16_t loadCode(uint16_t index) {
 #ifdef CCA_TEST
     FlashHelper * flashHelper = dOS_initFlashHelper();
 #endif
-    if (flashHelper == NULL || index > MAXWC) { return 0; }
+    if (flashHelper == NULL || index >= MAXWC) { return 0; }
     uint16_t code = flashHelper->readNearWord((uint16_t *) (&wordCodeTable[index].code));
 #ifdef CCA_TEST
     free(flashHelper);
@@ -356,11 +357,11 @@ uint16_t loadCode(uint16_t index) {
     return code;
 }
 
-int32_t compareWord(const char * string, uint16_t index) {
+int16_t compareWord(const char * string, uint16_t index) {
 #ifdef CCA_TEST
     FlashHelper * flashHelper = dOS_initFlashHelper();
 #endif
-    if (flashHelper == NULL || index > MAXWC) { return -1; }
+    if (flashHelper == NULL || index >= MAXWC) { return -1; }
     int32_t result = flashHelper->compareWithFlashString(string, (char *) (&wordCodeTable[index]));
 #ifdef CCA_TEST
     free(flashHelper);

@@ -15,7 +15,7 @@ volatile uint8_t cca_adjustCounter;
 /*
 	Database variables
 */
-extern struct wac wc[]; /* see ADVWORD.H		*/
+//extern struct wac wc[]; /* see ADVWORD.H		*/
 //extern char *cave[];    /* see ADVCAVE.H		*/
 extern size_t cavesz;
 

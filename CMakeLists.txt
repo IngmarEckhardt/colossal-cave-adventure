@@ -6,13 +6,14 @@ set(MCU atmega2560)
 set(NAME "Colossal-Cave-Adventure")
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
-set(VERSION_PATCH 1)
+set(VERSION_PATCH 3)
 project(${NAME} LANGUAGES C)
 
 option(TESTS "Build ${PROJECT_NAME} Tests with standard gcc" OFF)
 
 set(TOOLCHAIN_PATH "C:/Program Files/JetBrains/CLion 2023.3.4/bin/avr8-gnu-toolchain-win32_x86_64/bin/")
 set(AVR_OBJCOPY "${TOOLCHAIN_PATH}avr-objcopy.exe")
+set(AVR_OBJDUMP "${TOOLCHAIN_PATH}avr-objdump.exe")
 set(AVR_SIZE "${TOOLCHAIN_PATH}avr-size.exe")
 
 
@@ -23,8 +24,8 @@ if (TESTS)
 else ()
     set(CDEBUG "-g -ggdb")
     set(CMCU "-mmcu=${MCU}  -B \"C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega2560\"")
-    set(CTUNING "-funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -ffunction-sections -fdata-sections")
-    set(COPT "-Os -lm")
+    set(CTUNING "-funsigned-char -funsigned-bitfields -fshort-enums -ffunction-sections -fdata-sections")
+    set(COPT "-O2 -lm")
     set(CWARN "-Wall -Wextra -Wstrict-prototypes -Wl,--gc-sections -Wl,--relax")
 endif ()
 set(CFLAGS "${CMCU} ${COPT} ${CWARN} ${CSTANDARD} ${CTUNING} ${CDEBUG}")
@@ -35,6 +36,7 @@ set(SRC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(EXTERN_PATH "${CMAKE_CURRENT_SOURCE_DIR}/extern")
 
 set(SRC_FILES
+        "${SRC_PATH}/word_code_table.c"
         "${SRC_PATH}/actions.c"
         "${SRC_PATH}/caves.c"
         "${SRC_PATH}/database.c"
@@ -45,6 +47,7 @@ set(SRC_FILES
         "${SRC_PATH}/short_locations.c"
         "${SRC_PATH}/turn.c"
         "${SRC_PATH}/verb.c"
+
 )
 
 set(HEADER_FILES
@@ -71,6 +74,7 @@ else ()
             "${PROJECT_NAME}.elf" "${PROJECT_NAME}.hex")
 
     add_custom_target(size "${AVR_SIZE}" "${PROJECT_NAME}.elf")
+    add_custom_target(objdump "${AVR_OBJDUMP}" -h -s "${PROJECT_NAME}.elf")
 endif ()
 
 if (TESTS)

@@ -20,9 +20,9 @@ char * getAction(int actionNumber);
 char * getLongLocation(int longLocationNumber);
 char * getObject(int objectNumber);
 char * getShortLocation(int shortLocationNumber);
+
 char * loadWord(unsigned int index);
 unsigned int loadCode(unsigned int index);
-
 int compareWord(const char * string, unsigned int index);
 
 #endif /* ADVENT_PROTO_H_ */

@@ -14,7 +14,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1_WITH_SAME_LENGTH];
     const char stringInProgramMem[LONG_LOCATION_DESCRIPTION_1_LENGTH];
 } LONG_LOCATION_1;
-const __attribute__((section(".progmemx.data"))) LONG_LOCATION_1  longLocations_1[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1]  = {
+const __attribute__((__progmem__)) LONG_LOCATION_1  longLocations_1[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1]  = {
 		{{3,},"You are inside a building, a well house for a large spring.\n"},
 		{{5,},"You are in open forest, with a deep valley to one side.\n"},
 		{{6,},"You are in open forest near both a valley and a road.\n"},
@@ -56,7 +56,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2_WITH_SAME_LENGTH];
     char stringInProgramMem[LONG_LOCATION_DESCRIPTION_2_LENGTH];
 } LONG_LOCATION_2;
-const __attribute__((section(".progmemx.data"))) LONG_LOCATION_2 longLocations_2[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2] = {
+const __attribute__((__progmem__)) LONG_LOCATION_2 longLocations_2[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2] = {
 		{{4,},"You are in a valley in the forest beside a stream tumbling\nalong a rocky bed.\n"},
 		{{7,},"At your feet all the water of the stream splashes into a\n2-inch slit in the rock.  Downstream the streambed is bare rock.\n"},
 		{{9,},"You are in a small chamber beneath a 3x3 steel grate to the\nsurface.  A low crawl over cobbles leads inward to the West.\n"},
@@ -93,7 +93,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3_WITH_SAME_LENGTH];
     char stringInProgramMem[LONG_LOCATION_DESCRIPTION_3_LENGTH];
 } LONG_LOCATION_3;
-const __attribute__((section(".progmemx.data"))) LONG_LOCATION_3 longLocations_3[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3] = {
+const __attribute__((__progmem__)) LONG_LOCATION_3 longLocations_3[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3] = {
 		{{1,},"You are standing at the end of a road before a small brick\nbuilding.  Around you is a forest.  A small stream flows out\nof the building and down a gully.\n"},
 		{{2,},"You have walked up a hill, still in the forest.  The road\nslopes back down the other side of the hill.  There is a\nbuilding in the distance.\n"},
 		{{8,},"You are in a 20-foot depression floored with bare dirt.  Set\ninto the dirt is a strong steel grate mounted in concrete.\nA dry streambed leads into the depression.\n"},
@@ -118,7 +118,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH];
     char stringInProgramMem[LONG_LOCATION_DESCRIPTION_4_LENGTH];
 } LONG_LOCATION_4;
-const __attribute__((section(".progmemx.data"))) LONG_LOCATION_4 longLocations_4[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4]  = {
+const __attribute__((__progmem__)) LONG_LOCATION_4 longLocations_4[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4]  = {
 		{{11,},"You are in a debris room filled with stuff washed in from the\nsurface.  A low wide passage with cobbles becomes plugged\nwith mud and debris here, but an awkward canyon leads\nupward and west.  A note on the wall says:\n       Magic Word \"XYZZY\"\n"},
 		{{64,},"You are at a complex junction.  A low hands and knees passage\nfrom the north joins a higher crawl from the east to make\na walking passage going west.  There is also a large room\nabove.  The air is damp here.\n"},
 		{{68,},"You are in a large low circular chamber whose floor is\nan immense slab fallen from the ceiling (slab room).\nEast and west there once were large passages, but they\nare now filled with boulders.  Low small passages go\nnorth and south, and the south one quickly bends west\naround the boulders.\n"},
@@ -137,7 +137,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH];
     char stringInProgramMem[LONG_LOCATION_DESCRIPTION_5_LENGTH];
 } LONG_LOCATION_5;
-const __attribute__((section(".progmemx.data"))) LONG_LOCATION_5 longLocations_5[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5] = {
+const __attribute__((__progmem__)) LONG_LOCATION_5 longLocations_5[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5] = {
 		{{15,},"You are at one end of a vast hall stretching forward out of\nsight to the west.  There are openings to either side.\nNearby, a wide stone staircase leads downward.  The hall\nis filled with wisps of white mist swaying to and fro\nalmost as if alive.  A cold wind blows up the staircase.\nThere is a passage at the top of a dome behind you.\n"},
 		{{35,},"You're at a low window overlooking a huge pit, which\nextends up out of sight.  A floor is indistinctly visible\nover 50 feet below.  Traces of white mist cover the floor\nof the pit, becoming thicker to the right.  Marks in the\ndust around the window would seem to indicate that\nsomeone has been here recently.  Directly across the pit\nfrom you and 25 feet away there is a similar window\nlooking into a lighted room.  A shadowy figure can\nbe seen there peering back at you.\n"},
 		{{67,},"You are at the east end of the twopit room.  The floor\nhere is littered with thin rock slabs, which make it easy\nto descend the pits.  There is a path here bypassing\nthe pits to connect passages from east and west.\nThere are holes all over, but the only bit one is on\nthe wall directly over the west pit where you can't\nget at it.\n"},

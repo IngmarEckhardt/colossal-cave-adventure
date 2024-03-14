@@ -181,23 +181,30 @@ int vocab(char *word, int val)
 {
 	int v1, v2;
 
-	if ((v1 = binary(word, wc, MAXWC)) >= 0) {
-		v2 = binary(word, wc, MAXWC - 1);
+	if ((v1 = binary(word, MAXWC)) >= 0) {
+		v2 = binary(word, MAXWC - 1);
 		if (v2 < 0)
 			v2 = v1;
+        int16_t codeV1 = (int16_t) loadCode(v1);
+        int16_t codeV2 = (int16_t) loadCode(v2);
 		if (!val)
-			return wc[v1].acode < wc[v2].acode ? wc[v1].acode : wc[v2].acode;
-		if (val <= wc[v1].acode)
-			return wc[v1].acode % 1000;
-		else if (val <= wc[v2].acode)
-			return wc[v2].acode % 1000;
+//			return wc[v1].acode < wc[v2].acode ? wc[v1].acode : wc[v2].acode;
+			return codeV1 < codeV2 ? codeV1 : codeV2;
+//		if (val <= wc[v1].acode)
+		if (val <= codeV1)
+//			return wc[v1].acode % 1000;
+			return codeV1 % 1000;
+//		else if (val <= wc[v2].acode)
+		else if (val <= codeV2)
+//			return wc[v2].acode % 1000;
+			return codeV2 % 1000;
 		else
 			return -1;
 	} else
 		return -1;
 }
 
-int binary(char *w, struct wac wctable[], int maxwc)
+int binary(char *w, int maxwc)
 {
 	int lo, mid, hi, check;
 
@@ -205,7 +212,9 @@ int binary(char *w, struct wac wctable[], int maxwc)
 	hi = maxwc - 1;
 	while (lo <= hi) {
 		mid = (lo + hi) / 2;
-		if ((check = strcmp(w, wctable[mid].aword)) < 0)
+
+//		if ((check = strcmp(w, wctable[mid].aword)) < 0)
+		if ((check = compareWord(w,mid)) < 0)
 			hi = mid - 1;
 		else if (check > 0)
 			lo = mid + 1;

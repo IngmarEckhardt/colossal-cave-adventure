@@ -144,9 +144,16 @@ void outwords(void)
 
 	j = line = 0;
 	for (i = 0; i < MAXWC; ++i) {
-		if ((wc[i].acode < 1000) || ((wc[i].acode < 3000) &&
-					     (wc[i].acode > 1999))) {
-			printf("%-12s", wc[i].aword);
+//		if ((wc[i].acode < 1000) || ((wc[i].acode < 3000) && (wc[i].acode > 1999))) {
+        uint16_t code = loadCode(i);
+		if ((code < 1000) || ((code < 3000) && (code > 1999))) {
+
+            char * word = loadWord(i);
+
+//			printf("%-12s", wc[i].aword);
+			printf("%-12s", word);
+            free(word);
+
 			if ((++j == 6) || (i == MAXWC - 1)) {
 				j = 0;
 				fputc('\n', stdout);

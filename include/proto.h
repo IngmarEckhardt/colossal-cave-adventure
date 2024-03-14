@@ -16,7 +16,7 @@ void pspeak  (int item, int state);
 void desclg  (int loc);
 void descsh  (int loc);
 int  vocab   (char *word, int val);
-int  binary  (char *w, struct wac wctable[], int maxwc);
+int  binary  (char *w, int maxwc);
 int  dark    (void);
 int  here    (int item);
 int  toting  (int item);
@@ -111,4 +111,8 @@ char * getLongLocation(int longLocationNumber);
 char * getObject(int objectNumber);
 char * getShortLocation(int shortLocationNumber);
 
+/* wordtable make sure it is placed at the beginning of the progmem data section, because it uses the 16bit address room*/
+char * loadWord(unsigned int index);
+unsigned int loadCode(unsigned int index);
+int compareWord(const char * string, unsigned int index);
 #endif /* ADVENT_PROTO_H_ */

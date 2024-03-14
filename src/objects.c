@@ -14,7 +14,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_1_WITH_SAME_LENGTH];
     char stringInProgramMem[OBJECT_DESCRIPTION_1_LENGTH];
 } OBJECT_1;
-const __attribute__((section(".progmemx.data"))) OBJECT_1 objects_1[AMOUNT_OF_OBJECT_DESCRIPTIONS_1] = {
+const __attribute__((__progmem__)) OBJECT_1 objects_1[AMOUNT_OF_OBJECT_DESCRIPTIONS_1] = {
 		{{1,},"/Set of keys.\n/There are some keys on the ground here.\n/\n"},
 		{{3,},"/*Grate\n/The grate is locked.\n/The grate is open.\n/\n"},
 		{{4,},"/Wicker cage\n/There is a small wicker cage discarded nearby.\n/\n"},
@@ -46,7 +46,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_2_WITH_SAME_LENGTH];
     char stringInProgramMem[OBJECT_DESCRIPTION_2_LENGTH];
 } OBJECT_2;
-const __attribute__((section(".progmemx.data"))) OBJECT_2 objects_2[AMOUNT_OF_OBJECT_DESCRIPTIONS_2]= {
+const __attribute__((__progmem__)) OBJECT_2 objects_2[AMOUNT_OF_OBJECT_DESCRIPTIONS_2]= {
 		{{2,},"/Brass lantern\n/There is a shiny brass lamp nearby.\n/There is a lamp shining nearby.\n/\n"},
 		{{5,},"/Black rod\n/A three foot black rod with a rusty star on an end lies nearby.\n/\n"},
 		{{6,},"/Black rod\n/A three foot black rod with a rusty mark on an end lies nearby.\n/\n"},
@@ -68,7 +68,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_3_WITH_SAME_LENGTH];
     char stringInProgramMem[OBJECT_DESCRIPTION_3_LENGTH];
 } OBJECT_3;
-const __attribute__((section(".progmemx.data"))) OBJECT_3 objects_3[AMOUNT_OF_OBJECT_DESCRIPTIONS_3] = {
+const __attribute__((__progmem__)) OBJECT_3 objects_3[AMOUNT_OF_OBJECT_DESCRIPTIONS_3] = {
 		{{9,},"/*Rusty door\n/The way north is barred by a massive, rusty, iron door.\n/The way north leads through a massive, rusty, iron door.\n/\n"},
 		{{13,},"/*Stone tablet\n/A massive stone tablet imbedded in the wall reads:\n\"Congratulations on bringing light into the dark-room!\"\n/\n"},
 		{{15,},"/Giant oyster >Groan!<\n/There is an enormous oyster here with its shell tightly closed.\n/Interesting.  There seems to be something written on the\nunderside of the oyster.\n/\n"},
@@ -84,7 +84,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_4_WITH_SAME_LENGTH];
     char stringInProgramMem[OBJECT_DESCRIPTION_4_LENGTH];
 } OBJECT_4;
-const __attribute__((section(".progmemx.data"))) OBJECT_4 objects_4[AMOUNT_OF_OBJECT_DESCRIPTIONS_4] = {
+const __attribute__((__progmem__)) OBJECT_4 objects_4[AMOUNT_OF_OBJECT_DESCRIPTIONS_4] = {
 		{{31,},"/*Dragon\n/A huge green fierce dragon bars the way!\n/Congratulations!  You have just vanquished a dragon with\nyour bare hands!  (Unbelievable, Isn't it?)\n/The body of a huge green dead dragon is lying off to one\nside.\n/\n"},
 		{{32,},"/*Chasm\n/A rickety wooden bridge extends across the chasm, vanishing\ninto the mist.  A sign posted on the bridge reads:\n          \"Stop!  Pay Troll!\"\n/The wreckage of a bridge (and a dead bear) can be seen\nat the bottom of the chasm.\n/\n"},
 		{{35,},"//There is a ferocious cave bear eyeing you from the far\nend of the room!\n/There is a gentle cave bear sitting placidly in one corner.\n/There is a contented-looking bear wandering about nearby.\n//\n"},

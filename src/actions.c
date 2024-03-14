@@ -14,7 +14,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_1_WITH_SAME_LENGTH];
     char stringInProgramMem[ACTION_DESCRIPTION_1_LENGTH];
 } ACTION_1;
-const __attribute__((section(".progmemx.data"))) ACTION_1 actions_1[AMOUNT_OF_ACTION_DESCRIPTIONS_1] = {
+const __attribute__((__progmem__)) ACTION_1 actions_1[AMOUNT_OF_ACTION_DESCRIPTIONS_1] = {
 		{{43,},"Where?\n"},
 		{{52,},"It misses!\n"},
 		{{53,},"It gets you!\n"},
@@ -30,7 +30,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_2_WITH_SAME_LENGTH];
     char stringInProgramMem[ACTION_DESCRIPTION_2_LENGTH];
 } ACTION_2;
-const __attribute__((section(".progmemx.data"))) ACTION_2 actions_2[AMOUNT_OF_ACTION_DESCRIPTIONS_2] = {
+const __attribute__((__progmem__)) ACTION_2 actions_2[AMOUNT_OF_ACTION_DESCRIPTIONS_2] = {
 		{{6,},"None of them hit you!\n"},
 		{{7,},"One of them gets you!\n"},
 		{{8,},"A hollow voice says \"Plugh\".\n"},
@@ -77,7 +77,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_3_WITH_SAME_LENGTH];
     char stringInProgramMem[ACTION_DESCRIPTION_3_LENGTH];
 } ACTION_3;
-const __attribute__((section(".progmemx.data"))) ACTION_3 actions_3[AMOUNT_OF_ACTION_DESCRIPTIONS_3]= {
+const __attribute__((__progmem__)) ACTION_3 actions_3[AMOUNT_OF_ACTION_DESCRIPTIONS_3]= {
 		{{2,},"A little dwarf with a big knife blocks your way.\n"},
 		{{4,},"There is a threatening little dwarf in the room with you!\n"},
 		{{5,},"One sharp, nasty knife is thrown at you!\n"},
@@ -152,7 +152,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_4_WITH_SAME_LENGTH];
     char stringInProgramMem[ACTION_DESCRIPTION_4_LENGTH];
 } ACTION_4;
-const __attribute__((section(".progmemx.data"))) ACTION_4 actions_4[AMOUNT_OF_ACTION_DESCRIPTIONS_4] = {
+const __attribute__((__progmem__)) ACTION_4 actions_4[AMOUNT_OF_ACTION_DESCRIPTIONS_4] = {
 		{{10,},"I am unsure how you are facing.  Use compass points or\nnearby objects.\n"},
 		{{16,},"It is now pitch dark.  If you proceed you will likely fall\ninto a pit.\n"},
 		{{30,},"The little bird attacks the green snake, and in an\nastounding flurry drives the snake away.\n"},
@@ -194,7 +194,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_5_WITH_SAME_LENGTH];
     char stringInProgramMem[ACTION_DESCRIPTION_5_LENGTH];
 } ACTION_5;
-const __attribute__((section(".progmemx.data"))) ACTION_5 actions_5[AMOUNT_OF_ACTION_DESCRIPTIONS_5]= {
+const __attribute__((__progmem__)) ACTION_5 actions_5[AMOUNT_OF_ACTION_DESCRIPTIONS_5]= {
         {{3,},"A little dwarf just walked around a corner, saw you,\nthrew a little axe at you which missed, cursed, and ran away.\n"},
 		{{11,},"I don't know in from out here.  Use compass points or name\nsomething in the general direction you want to go.\n"},
 		{{15,},"Sorry, but I am not allowed to give more detail.  I will\nrepeat the long description of your location.\n"},
@@ -227,7 +227,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_6_WITH_SAME_LENGTH];
     char stringInProgramMem[ACTION_DESCRIPTION_6_LENGTH];
 } ACTION_6;
-const __attribute__((section(".progmemx.data"))) ACTION_6 actions_6[AMOUNT_OF_ACTION_DESCRIPTIONS_6] = {
+const __attribute__((__progmem__)) ACTION_6 actions_6[AMOUNT_OF_ACTION_DESCRIPTIONS_6] = {
 		{{21,},"You can't kill the snake, or drive it away, or avoid it,\nor anything like that.  There is a way to get by, but you\ndon't have the necessary resources right now.\n"},
 		{{63,},"The grate is very solid and has a hardened steel lock.  You\ncannot enter without a key, and there are no keys nearby.\nI would recommend looking elsewhere for the keys.\n"},
 		{{69,},"Mist is a white vapor, usually water.  Seen from time to time\nin caverns.  It can be found anywhere but is frequently a\nsign of a deep pit leading down to water.\n"},
@@ -248,7 +248,7 @@ typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_7_WITH_SAME_LENGTH];
     char stringInProgramMem[ACTION_DESCRIPTION_7_LENGTH];
 } ACTION_7;
-const __attribute__((section(".progmemx.data"))) ACTION_7 actions_7[AMOUNT_OF_ACTION_DESCRIPTIONS_7] = {
+const __attribute__((__progmem__)) ACTION_7 actions_7[AMOUNT_OF_ACTION_DESCRIPTIONS_7] = {
 		{{1,},"Somewhere nearby is Colossal Cave, where others have found fortunes in \ntreasure and gold, though it is rumored that some who enter are never \nseen again.  Magic is said to work in the cave.  I will be your eyes \nand hands.  Direct me with commands of 1 or 2 words.  I should warn \nyou that I look at only the first five letters of each word, so you'll \nhave to enter \"Northeast\" as \"ne\" to distinguish it from \"North\".  \n(Should you get stuck, type \"help\" for some general hints).\n\n"},
 		{{64,},"The trees of the forest are large hardwood oak and maple,\nwith an occasional grove of pine or spruce.  There is quite\na bit of undergrowth, largely birch and ash saplings plus\nnondescript bushes of various sorts.  This time of year \nvisibility is quite restricted by all the leaves, but travel\nis quite easy if you detour around the spruce and berry\nbushes.\n"},
 		{{65,},"\n                              Welcome to \n\n                       Colossal Cave Adventure!\n\n\n               Original development by Willie Crowther.\n                  Major features added by Don Woods.\n                 Conversion to BDS C by J. R. Jaeger.\n                Unix standardization by Jerry D. Pohl.\n            Port to QNX 4 and bug fixes by James Lummel.\n\nWould you like instructions?\n\n"},

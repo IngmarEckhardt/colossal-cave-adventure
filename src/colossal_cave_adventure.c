@@ -8,7 +8,6 @@
 #include <stdlib.h>
 
 #include "advent.h"  /* #define preprocessor equates	*/
-#include "advword.h" /* definition of "word" array	*/
 #include "advdef.h"
 
 #include "heap_management_helper.h"
@@ -26,7 +25,6 @@ int main(void) {
     uartHelper = dOS_initUartHelper();
     inputQueue = cca_initInputQueue();
     flashHelper = dOS_initFlashHelper();
-
     setupAdvent();
     initplay();
     dbugflg =1;
