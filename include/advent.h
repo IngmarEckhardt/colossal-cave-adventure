@@ -5,10 +5,10 @@
 #define MAXWC       306		/* max # of adventure words	*/
 #define MAXLOC      140		/* max # of cave locations	*/
 #define WORDSIZE    20		/* max # of chars in commands	*/
-#define MAXMSG      201		/* max # of long location descr	*/
+#define MAXMSG      201		/* max # of long actualLocation descr	*/
 
-#define MAXTRAV     (16 + 1)  /* max # of travel directions from location  */
-			      /* +1 for terminator travel[x].tdest=-1 */
+#define MAXTRAV     (16 + 1)  /* max # of locationRoutingInfos directions from actualLocation  */
+			      /* +1 for terminator locationRoutingInfos[x].destination=-1 */
 #define DWARFMAX    7	      /* max # of nasty dwarves	*/
 #define MAXDIE      3	      /* max # of deaths before close	*/
 #define MAXTRS      79	      /* max # of			*/
@@ -111,7 +111,7 @@
 #define LOAD        33
 
 /*
-	BIT mapping of "locationStatus" array which indicates location status
+	BIT mapping of "locationStatus" array which indicates actualLocation status
 */
 #define LIGHT       1
 #define WATOIL      2
@@ -125,10 +125,10 @@
 
 #define setmem(l, s, c) memset(l, c, s)
 
-struct trav {
-	int   tdest;
-	int   tverb;
-	int   tcond;
-};
+typedef struct  {
+	int   destination;
+	int   verbForDest;
+	int   condition;
+} TravelInfo;
 
 #include "proto.h"

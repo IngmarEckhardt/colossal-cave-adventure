@@ -5,10 +5,12 @@
 // DwarfOS
 #include <time.h>
 #include <heap_management_helper.h>
+#include <avr/pgmspace.h>
 // Adventure
-#include <advent.h>  /* #define preprocessor equates	*/
-#include <advdec.h>
-#include <advdef.h>
+#include "advent.h"  /* #define preprocessor equates	*/
+#include "advdec.h"
+#include "advdef.h"
+
 
 const uint8_t adjustToSecondValue = ADJUST_TO_SECOND_VALUE;
 
@@ -19,7 +21,7 @@ int main(void) {
 //    debugFlag = 1;
     sei();
 
-    if (yes(65, 1, 0)) {
+    if (yesOrNoQuestion(65, 1, 0)) {
         timeLimit = 1000;
     } else {
         timeLimit = 330;
@@ -36,10 +38,8 @@ int main(void) {
 
 ISR(TIMER2_OVF_vect) { cca_adjustCounter++; } // getting a clock and waking up from sleep mode
 
-void putIntoQueue(int item) { inputQueue->enqueue(item, inputQueue); }
 
-ISR(USART0_RX_vect) { putIntoQueue(UDR0); } // put into stdin buffer if a sign is available/interrupt is triggered
-
+ISR(USART0_RX_vect) { inputQueue->enqueue(UDR0, inputQueue); } // put into stdin buffer if a sign is available/interrupt is triggered
 
 
 // general inits
@@ -71,12 +71,19 @@ void setupAdvent(void) {
     UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0); // Enable receiver and transmitter and Interrupt additionally
 }
 
+#define MEMORY_STRING_LENGTH 19
+const __attribute__((__progmem__)) char memoryStringOnFlash[MEMORY_STRING_LENGTH] = ": free Memory is: ";
 void printToSerialOutput(void) {
     HeapManagementHelper * heapHelper = dOS_initHeapManagementHelper();
-    char * timestamp = ctime(NULL);
-    printf("%s: free Memory is: %d byte\n", timestamp, heapHelper->getFreeMemory());
-    free(timestamp);
+    int16_t freeMem =  heapHelper->getFreeMemory();
     free(heapHelper);
+
+    char * timestamp = ctime(NULL);
+    char * memoryString = malloc(MEMORY_STRING_LENGTH);
+    flashHelper->loadFarStringFromFlash(memoryString, pgm_get_far_address(memoryStringOnFlash));
+    printf("%s%s%d\n", timestamp, memoryString, freeMem);
+    free(timestamp);
+    free(memoryString);
 }
 
 // ToDo: add function to save game into eeprom

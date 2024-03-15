@@ -55,7 +55,7 @@ void test_convertAdvent(void) {
     }
     for (int i = 0; i < 306; i++) {
         //test if getWord is the same as wc[].aword
-        result = loadWord(i);
+        result = getWord(i);
         TEST_ASSERT_EQUAL_STRING(wc[i].aword, result);
         free(result);
     }
@@ -66,7 +66,7 @@ void test_convertAdvent(void) {
     }
     for (int i = 0; i < 306; i++) {
         //test loadCode
-        uint16_t resultInt = loadCode(i);
+        uint16_t resultInt = getCode(i);
         TEST_ASSERT_EQUAL(wc[i].acode, resultInt);
     }
 }

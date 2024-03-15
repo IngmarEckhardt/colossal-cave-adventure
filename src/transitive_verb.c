@@ -18,8 +18,8 @@
 #define VERB_NOT_IMPLEMENTED_STRING_LENGTH 35
 const __attribute__((__progmem__)) char verbNotImplementedString[VERB_NOT_IMPLEMENTED_STRING_LENGTH] = "This verb is not implemented yet.\n";
 
-void trverb(void) {
-    switch (verb) {
+void transitiveVerb(void) {
+    switch (actualVerb) {
         case CALM:
         case WALK:
         case QUIT:
@@ -29,98 +29,98 @@ void trverb(void) {
         case SUSPEND:
         case HOURS:
         case LOG: {
-            actspk(verb);
+            speakDefaultAnswerTo(actualVerb);
             break;
         }
         case TAKE: {
-            vtake();
+            tvTake();
             break;
         }
         case DROP: {
-            vdrop();
+            tvDrop();
             break;
         }
         case OPEN:
         case LOCK: {
-            vopen();
+            tvOpen();
             break;
         }
         case SAY: {
-            vsay();
+            tvSay();
             break;
         }
         case NOTHING: {
-            rspeak(54);
+            speakReaction(54);
             break;
         }
         case ON: {
-            von();
+            tvOn();
             break;
         }
         case OFF: {
-            voff();
+            tvOff();
             break;
         }
         case WAVE: {
-            vwave();
+            tvWave();
             break;
         }
         case KILL: {
-            vkill();
+            tvKill();
             break;
         }
         case POUR: {
-            vpour();
+            tvPour();
             break;
         }
         case EAT: {
-            veat();
+            tvEat();
             break;
         }
         case DRINK: {
-            vdrink();
+            tvDrink();
             break;
         }
         case RUB: {
-            if (object != LAMP) {
-                rspeak(76);
+            if (actualObject != LAMP) {
+                speakReaction(76);
             } else {
-                actspk(RUB);
+                speakDefaultAnswerTo(RUB);
             }
             break;
         }
         case THROW: {
-            vthrow();
+            tvThrow();
             break;
         }
         case FEED: {
-            vfeed();
+            tvFeed();
             break;
         }
         case FIND: {
         }
         case INVENTORY: {
-            vfind();
+            tvFind();
             break;
         }
         case FILL: {
-            vfill();
+            tvFill();
             break;
         }
         case READ: {
-            vread();
+            tvRead();
             break;
         }
         case BLAST: {
-            vblast();
+            tvBlast();
             break;
         }
         case BREAK: {
-            vbreak();
+            tvBreak();
             break;
         }
         case WAKE: {
-            vwake();
+            tvWake();
             break;
         }
         default: {
@@ -135,127 +135,127 @@ void trverb(void) {
 /*
 	CARRY TAKE etc.
 */
-void vtake(void) {
+void tvTake(void) {
     int msg;
     int i;
 
-    if (toting(object)) {
-        actspk(verb);
+    if (isInInventory(actualObject)) {
+        speakDefaultAnswerTo(actualVerb);
         return;
     }
     /*
        special case objects and secondObjectLocation objects
     */
     msg = 25;
-    if (object == PLANT && objectStatus[PLANT] <= 0) {
+    if (actualObject == PLANT && stateOfObject[PLANT] <= 0) {
         msg = 115;
     }
-    if (object == BEAR && objectStatus[BEAR] == 1) {
+    if (actualObject == BEAR && stateOfObject[BEAR] == 1) {
         msg = 169;
     }
-    if (object == CHAIN && objectStatus[BEAR] != 0) {
+    if (actualObject == CHAIN && stateOfObject[BEAR] != 0) {
         msg = 170;
     }
-    if (secondObjectLocation[object]) {
-        rspeak(msg);
+    if (secondObjectLocation[actualObject]) {
+        speakReaction(msg);
         return;
     }
     /*
        special case for liquids
     */
-    if (object == WATER || object == OIL) {
-        if (!here(BOTTLE) || liq() != object) {
-            object = BOTTLE;
-            if (toting(BOTTLE) && objectStatus[BOTTLE] == 1) {
-                vfill();
+    if (actualObject == WATER || actualObject == OIL) {
+        if (!here(BOTTLE) || liq() != actualObject) {
+            actualObject = BOTTLE;
+            if (isInInventory(BOTTLE) && stateOfObject[BOTTLE] == 1) {
+                tvFill();
                 return;
             }
-            if (objectStatus[BOTTLE] != 1) {
+            if (stateOfObject[BOTTLE] != 1) {
                 msg = 105;
             }
-            if (!toting(BOTTLE)) {
+            if (!isInInventory(BOTTLE)) {
                 msg = 104;
             }
-            rspeak(msg);
+            speakReaction(msg);
             return;
         }
-        object = BOTTLE;
+        actualObject = BOTTLE;
     }
     if (countItemsHeld >= 7) {
-        rspeak(92);
+        speakReaction(92);
         return;
     }
     /*
        special case for bird.
     */
-    if (object == BIRD && objectStatus[BIRD] == 0) {
-        if (toting(ROD)) {
-            rspeak(26);
+    if (actualObject == BIRD && stateOfObject[BIRD] == 0) {
+        if (isInInventory(ROD)) {
+            speakReaction(26);
             return;
         }
-        if (!toting(CAGE)) {
-            rspeak(27);
+        if (!isInInventory(CAGE)) {
+            speakReaction(27);
             return;
         }
-        objectStatus[BIRD] = 1;
+        stateOfObject[BIRD] = 1;
     }
-    if ((object == BIRD || object == CAGE) && objectStatus[BIRD] != 0) {
-        carry((BIRD + CAGE) - object, location);
+    if ((actualObject == BIRD || actualObject == CAGE) && stateOfObject[BIRD] != 0) {
+        carry((BIRD + CAGE) - actualObject, actualLocation);
     }
-    carry(object, location);
+    carry(actualObject, actualLocation);
     /*
        handle liquid in bottle
     */
     i = liq();
-    if (object == BOTTLE && i != 0) {
+    if (actualObject == BOTTLE && i != 0) {
         objectLocation[i] = UINT8_MAX;
     }
-    rspeak(54);
+    speakReaction(54);
 }
 
 /*
 	DROP etc.
 */
-void vdrop(void) {
+void tvDrop(void) {
     int i;
 
     /*
        check for dynamite
     */
-    if (toting(ROD2) && object == ROD && !toting(ROD)) {
-        object = ROD2;
+    if (isInInventory(ROD2) && actualObject == ROD && !isInInventory(ROD)) {
+        actualObject = ROD2;
     }
-    if (!toting(object)) {
-        actspk(verb);
+    if (!isInInventory(actualObject)) {
+        speakDefaultAnswerTo(actualVerb);
         return;
     }
     /*
        snake and bird
     */
-    if (object == BIRD && here(SNAKE)) {
-        rspeak(30);
-        if (closed) {
-            dwarfend();
+    if (actualObject == BIRD && here(SNAKE)) {
+        speakReaction(30);
+        if (caveIsClosed) {
+            dwarfEnd();
         }
-        dstroy(SNAKE);
-        objectStatus[SNAKE] = -1;
+        destroy(SNAKE);
+        stateOfObject[SNAKE] = -1;
     }
         /*
            coins and vending machine
         */
-    else if (object == COINS && here(VEND)) {
-        dstroy(COINS);
-        drop(BATTERIES, location);
-        pspeak(BATTERIES, 0);
+    else if (actualObject == COINS && here(VEND)) {
+        destroy(COINS);
+        drop(BATTERIES, actualLocation);
+        printItemMessage(BATTERIES, 0);
         return;
     }
         /*
            bird and dragon (ouch!!)
         */
-    else if (object == BIRD && at(DRAGON) && objectStatus[DRAGON] == 0) {
-        rspeak(154);
-        dstroy(BIRD);
-        objectStatus[BIRD] = 0;
+    else if (actualObject == BIRD && isOnEitherSideOfTwoSidedObject(DRAGON) && stateOfObject[DRAGON] == 0) {
+        speakReaction(154);
+        destroy(BIRD);
+        stateOfObject[BIRD] = 0;
         if (objectLocation[SNAKE] != 0) {
             ++tally2;
         }
@@ -264,25 +264,25 @@ void vdrop(void) {
     /*
        Bear and troll
     */
-    if (object == BEAR && at(TROLL)) {
-        rspeak(163);
+    if (actualObject == BEAR && isOnEitherSideOfTwoSidedObject(TROLL)) {
+        speakReaction(163);
         move(TROLL, 0);
         move((TROLL + MAXOBJ), 0);
         move(TROLL2, 117);
         move((TROLL2 + MAXOBJ), 122);
         juggle(CHASM);
-        objectStatus[TROLL] = 2;
+        stateOfObject[TROLL] = 2;
     }
         /*
            vase
         */
-    else if (object == VASE) {
-        if (location == 96) {
-            rspeak(54);
+    else if (actualObject == VASE) {
+        if (actualLocation == 96) {
+            speakReaction(54);
         } else {
-            objectStatus[VASE] = at(PILLOW) ? 0 : 2;
-            pspeak(VASE, objectStatus[VASE] + 1);
-            if (objectStatus[VASE] != 0) {
+            stateOfObject[VASE] = isOnEitherSideOfTwoSidedObject(PILLOW) ? 0 : 2;
+            printItemMessage(VASE, stateOfObject[VASE] + 1);
+            if (stateOfObject[VASE] != 0) {
                 secondObjectLocation[VASE] = UINT8_MAX;
             }
         }
@@ -291,51 +291,50 @@ void vdrop(void) {
        handle liquid and bottle
     */
     i = liq();
-    if (i == object) {
-        object = BOTTLE;
+    if (i == actualObject) {
+        actualObject = BOTTLE;
     }
-    if (object == BOTTLE && i != 0) {
+    if (actualObject == BOTTLE && i != 0) {
         objectLocation[i] = 0;
     }
     /*
        handle bird and cage
     */
-    if (object == CAGE && objectStatus[BIRD] != 0) {
-        drop(BIRD, location);
+    if (actualObject == CAGE && stateOfObject[BIRD] != 0) {
+        drop(BIRD, actualLocation);
     }
-    if (object == BIRD) {
-        objectStatus[BIRD] = 0;
+    if (actualObject == BIRD) {
+        stateOfObject[BIRD] = 0;
     }
-    drop(object, location);
+    drop(actualObject, actualLocation);
 }
 
 /*
 	LOCK, UNLOCK, OPEN, CLOSE etc.
 */
-void vopen(void) {
+void tvOpen(void) {
     int msg, oyclam;
 
-    switch (object) {
-        case CLAM: {
-        }
+    switch (actualObject) {
+        case CLAM: { }
         case OYSTER: {
-            oyclam = (object == OYSTER ? 1 : 0);
-            if (verb == LOCK) {
+            oyclam = (actualObject == OYSTER ? 1 : 0);
+            if (actualVerb == LOCK) {
                 msg = 61;
-            } else if (!toting(TRIDENT)) {
+            } else if (!isInInventory(TRIDENT)) {
                 msg = 122 + oyclam;
-            } else if (toting(object)) {
+            } else if (isInInventory(actualObject)) {
                 msg = 120 + oyclam;
             } else {
                 msg = 124 + oyclam;
-                dstroy(CLAM);
-                drop(OYSTER, location);
+                destroy(CLAM);
+                drop(OYSTER, actualLocation);
                 drop(PEARL, 105);
             }
             break;
         }
         case DOOR: {
-            msg = (objectStatus[DOOR] == 1 ? 54 : 111);
+            msg = (stateOfObject[DOOR] == 1 ? 54 : 111);
             break;
         }
         case CAGE: {
@@ -349,28 +348,28 @@ void vopen(void) {
         case CHAIN: {
             if (!here(KEYS)) {
                 msg = 31;
-            } else if (verb == LOCK) {
-                if (objectStatus[CHAIN] != 0) {
+            } else if (actualVerb == LOCK) {
+                if (stateOfObject[CHAIN] != 0) {
                     msg = 34;
-                } else if (location != 130) {
+                } else if (actualLocation != 130) {
                     msg = 173;
                 } else {
-                    objectStatus[CHAIN] = 2;
-                    if (toting(CHAIN)) {
-                        drop(CHAIN, location);
+                    stateOfObject[CHAIN] = 2;
+                    if (isInInventory(CHAIN)) {
+                        drop(CHAIN, actualLocation);
                     }
                     secondObjectLocation[CHAIN] = UINT8_MAX;
                     msg = 172;
                 }
             } else {
-                if (objectStatus[BEAR] == 0) { msg = 41; }
-                else if (objectStatus[CHAIN] == 0) { msg = 37; }
+                if (stateOfObject[BEAR] == 0) { msg = 41; }
+                else if (stateOfObject[CHAIN] == 0) { msg = 37; }
                 else {
-                    objectStatus[CHAIN] = 0;
+                    stateOfObject[CHAIN] = 0;
                     secondObjectLocation[CHAIN] = 0;
-                    if (objectStatus[BEAR] != 3) { objectStatus[BEAR] = 2; }
+                    if (stateOfObject[BEAR] != 3) { stateOfObject[BEAR] = 2; }
                     //the original calculation works also with UINT8_MAX instead of -1
-                    secondObjectLocation[BEAR] = 2 - objectStatus[BEAR];
+                    secondObjectLocation[BEAR] = 2 -stateOfObject[BEAR];
                     msg = 171;
                 }
             }
@@ -379,16 +378,16 @@ void vopen(void) {
         case GRATE: {
             if (!here(KEYS)) {
                 msg = 31;
-            } else if (closing) {
+            } else if (caveIsClosing) {
                 if (!panic) {
                     clock2 = 15;
                     ++panic;
                 }
                 msg = 130;
             } else {
-                msg = 34 + objectStatus[GRATE];
-                objectStatus[GRATE] = (verb == LOCK ? 0 : 1);
-                msg += 2 * objectStatus[GRATE];
+                msg = 34 + stateOfObject[GRATE];
+                stateOfObject[GRATE] = (actualVerb == LOCK ? 0 : 1);
+                msg += 2 * stateOfObject[GRATE];
             }
             break;
         }
@@ -396,33 +395,33 @@ void vopen(void) {
             msg = 33;
         }
     }
-    rspeak(msg);
+    speakReaction(msg);
 }
 
 /*
 	SAY etc.
 */
-void vsay(void) {
+void tvSay(void) {
     int wtype, wval;
 
-    analyze(word1, &wtype, &wval);
+    computeTypeAndValue(word1, &wtype, &wval);
     printf("Okay.\n%s\n", wval == SAY ? word2 : word1);
 }
 
 /*
 	ON etc.
 */
-void von(void) {
+void tvOn(void) {
     if (!here(LAMP)) {
-        actspk(verb);
+        speakDefaultAnswerTo(actualVerb);
     } else if (timeLimit < 0) {
-        rspeak(184);
+        speakReaction(184);
     } else {
-        objectStatus[LAMP] = 1;
-        rspeak(39);
-        if (wzdark) {
-            wzdark = 0;
-            describe();
+        stateOfObject[LAMP] = 1;
+        speakReaction(39);
+        if (locationIsDark) {
+            locationIsDark = 0;
+            describeLocation();
         }
     }
 }
@@ -430,43 +429,43 @@ void von(void) {
 /*
 	OFF etc.
 */
-void voff(void) {
+void tvOff(void) {
     if (!here(LAMP)) {
-        actspk(verb);
+        speakDefaultAnswerTo(actualVerb);
     } else {
-        objectStatus[LAMP] = 0;
-        rspeak(40);
+        stateOfObject[LAMP] = 0;
+        speakReaction(40);
     }
 }
 
 /*
 	WAVE etc.
 */
-void vwave(void) {
-    if (!toting(object) && (object != ROD || !toting(ROD2))) {
-        rspeak(29);
-    } else if (object != ROD || !at(FISSURE) || !toting(object) || closing) {
-        actspk(verb);
+void tvWave(void) {
+    if (!isInInventory(actualObject) && (actualObject != ROD || !isInInventory(ROD2))) {
+        speakReaction(29);
+    } else if (actualObject != ROD || !isOnEitherSideOfTwoSidedObject(FISSURE) || !isInInventory(actualObject) || caveIsClosing) {
+        speakDefaultAnswerTo(actualVerb);
     } else {
-        objectStatus[FISSURE] = 1 - objectStatus[FISSURE];
-        pspeak(FISSURE, 2 - objectStatus[FISSURE]);
+        stateOfObject[FISSURE] = 1 - stateOfObject[FISSURE];
+        printItemMessage(FISSURE, 2 - stateOfObject[FISSURE]);
     }
 }
 
 /*
 	ATTACK, KILL etc.
 */
-void vkill(void) {
+void tvKill(void) {
     int msg;
     int i;
 
-    switch (object) {
+    switch (actualObject) {
         case BIRD: {
-            if (closed) {
+            if (caveIsClosed) {
                 msg = 137;
             } else {
-                dstroy(BIRD);
-                objectStatus[BIRD] = 0;
+                destroy(BIRD);
+                stateOfObject[BIRD] = 0;
                 if (objectLocation[SNAKE] == 19) {
                     ++tally2;
                 }
@@ -489,8 +488,8 @@ void vkill(void) {
             break;
         }
         case DWARF: {
-            if (closed) {
-                dwarfend();
+            if (caveIsClosed) {
+                dwarfEnd();
             }
             msg = 49;
             break;
@@ -500,21 +499,21 @@ void vkill(void) {
             break;
         }
         case BEAR: {
-            msg = 165 + (objectStatus[BEAR] + 1) / 2;
+            msg = 165 + (stateOfObject[BEAR] + 1) / 2;
             break;
         }
         case DRAGON: {
-            if (objectStatus[DRAGON] != 0) {
+            if (stateOfObject[DRAGON] != 0) {
                 msg = 167;
                 break;
             }
-            if (!yes(49, 0, 0)) {
+            if (!yesOrNoQuestion(49, 0, 0)) {
                 return;
             }
-            pspeak(DRAGON, 1);
-            objectStatus[DRAGON] = 2;
-            objectStatus[RUG] = 0;
-            move((DRAGON + MAXOBJ), -1);
+            printItemMessage(DRAGON, 1);
+            stateOfObject[DRAGON] = 2;
+            stateOfObject[RUG] = 0;
+            move((DRAGON + MAXOBJ), 0);
             move((RUG + MAXOBJ), 0);
             move(DRAGON, 120);
             move(RUG, 120);
@@ -526,60 +525,60 @@ void vkill(void) {
             return;
         }
         default: {
-            actspk(verb);
+            speakDefaultAnswerTo(actualVerb);
             return;
         }
     }
-    rspeak(msg);
+    speakReaction(msg);
 }
 
 /*
 	POUR
 */
-void vpour(void) {
-    if (object == BOTTLE || object == 0) {
-        object = liq();
+void tvPour(void) {
+    if (actualObject == BOTTLE || actualObject == 0) {
+        actualObject = liq();
     }
-    if (object == 0) {
-        needobj();
+    if (actualObject == 0) {
+        needObject();
         return;
     }
-    if (!toting(object)) {
-        actspk(verb);
+    if (!isInInventory(actualObject)) {
+        speakDefaultAnswerTo(actualVerb);
         return;
     }
-    if (object != OIL && object != WATER) {
-        rspeak(78);
+    if (actualObject != OIL && actualObject != WATER) {
+        speakReaction(78);
         return;
     }
-    objectStatus[BOTTLE] = 1;
-    objectLocation[object] = 0;
-    if (at(PLANT)) {
-        if (object != WATER) {
-            rspeak(112);
+    stateOfObject[BOTTLE] = 1;
+    objectLocation[actualObject] = 0;
+    if (isOnEitherSideOfTwoSidedObject(PLANT)) {
+        if (actualObject != WATER) {
+            speakReaction(112);
         } else {
-            pspeak(PLANT, objectStatus[PLANT] + 1);
-            objectStatus[PLANT] = (objectStatus[PLANT] + 2) % 6;
-            objectStatus[PLANT2] = objectStatus[PLANT] / 2;
-            describe();
+            printItemMessage(PLANT, stateOfObject[PLANT] + 1);
+            stateOfObject[PLANT] = (stateOfObject[PLANT] + 2) % 6;
+            stateOfObject[PLANT2] = stateOfObject[PLANT] / 2;
+            describeLocation();
         }
-    } else if (at(DOOR)) {
-        objectStatus[DOOR] = (object == OIL ? 1 : 0);
-        rspeak(113 + objectStatus[DOOR]);
+    } else if (isOnEitherSideOfTwoSidedObject(DOOR)) {
+        stateOfObject[DOOR] = (actualObject == OIL ? 1 : 0);
+        speakReaction(113 + stateOfObject[DOOR]);
     } else {
-        rspeak(77);
+        speakReaction(77);
     }
 }
 
 /*
 	EAT
 */
-void veat(void) {
+void tvEat(void) {
     int msg;
 
-    switch (object) {
+    switch (actualObject) {
         case FOOD: {
-            dstroy(FOOD);
+            destroy(FOOD);
             msg = 72;
             break;
         }
@@ -595,48 +594,48 @@ void veat(void) {
             break;
         }
         default: {
-            actspk(verb);
+            speakDefaultAnswerTo(actualVerb);
             return;
         }
     }
-    rspeak(msg);
+    speakReaction(msg);
 }
 
 /*
 	DRINK
 */
-void vdrink(void) {
-    if (object != WATER) {
-        rspeak(110);
+void tvDrink(void) {
+    if (actualObject != WATER) {
+        speakReaction(110);
     } else if (liq() != WATER || !here(BOTTLE)) {
-        actspk(verb);
+        speakDefaultAnswerTo(actualVerb);
     } else {
-        objectStatus[BOTTLE] = 1;
+        stateOfObject[BOTTLE] = 1;
         objectLocation[WATER] = 0;
-        rspeak(74);
+        speakReaction(74);
     }
 }
 
 /*
 	THROW etc.
 */
-void vthrow(void) {
+void tvThrow(void) {
     int msg;
     int i;
 
-    if (toting(ROD2) && object == ROD && !toting(ROD)) {
-        object = ROD2;
+    if (isInInventory(ROD2) && actualObject == ROD && !isInInventory(ROD)) {
+        actualObject = ROD2;
     }
-    if (!toting(object)) {
-        actspk(verb);
+    if (!isInInventory(actualObject)) {
+        speakDefaultAnswerTo(actualVerb);
         return;
     }
     /*
        treasure to troll
     */
-    if (at(TROLL) && object >= 50 && object < MAXOBJ) {
-        rspeak(159);
-        drop(object, 0);
+    if (isOnEitherSideOfTwoSidedObject(TROLL) && actualObject >= 50 && actualObject < MAXOBJ) {
+        speakReaction(159);
+        drop(actualObject, 0);
         move(TROLL, 0);
         move((TROLL + MAXOBJ), 0);
         drop(TROLL2, 117);
@@ -647,16 +646,16 @@ void vthrow(void) {
     /*
        feed the bears...
     */
-    if (object == FOOD && here(BEAR)) {
-        object = BEAR;
-        vfeed();
+    if (actualObject == FOOD && here(BEAR)) {
+        actualObject = BEAR;
+        tvFeed();
         return;
     }
     /*
        if not axe, same as drop...
     */
-    if (object != AXE) {
-        vdrop();
+    if (actualObject != AXE) {
+        tvDrop();
         return;
     }
     /*
@@ -667,11 +666,11 @@ void vthrow(void) {
     */
     if ((i = dcheck())) {
         msg = 48;
-        if (pct(33)) {
-            dwarfSeenFlag[i] = dwarfLocations[i] = 0;
+        if (isRandomlyTrue(33)) {
+            dwarfSawThePlayer[i] = dwarfLocations[i] = 0;
             msg = 47;
-            ++dkill;
-            if (dkill == 1) {
+            ++amountDwarfKills;
+            if (amountDwarfKills == 1) {
                 msg = 149;
             }
         }
@@ -679,21 +678,21 @@ void vthrow(void) {
         /*
            at a dragon...
         */
-    else if (at(DRAGON) && objectStatus[DRAGON] == 0) {
+    else if (isOnEitherSideOfTwoSidedObject(DRAGON) && stateOfObject[DRAGON] == 0) {
         msg = 152;
         /*
            at the troll...
         */
-    } else if (at(TROLL)) {
+    } else if (isOnEitherSideOfTwoSidedObject(TROLL)) {
         msg = 158;
         /*
            at the bear...
         */
-    } else if (here(BEAR) && objectStatus[BEAR] == 0) {
-        rspeak(164);
-        drop(AXE, location);
+    } else if (here(BEAR) && stateOfObject[BEAR] == 0) {
+        speakReaction(164);
+        drop(AXE, actualLocation);
         secondObjectLocation[AXE] = UINT8_MAX;
-        objectStatus[AXE] = 1;
+        stateOfObject[AXE] = 1;
         juggle(BEAR);
         return;
     }
@@ -701,57 +700,57 @@ void vthrow(void) {
            otherwise it is an attack
         */
     else {
-        verb = KILL;
-        object = 0;
-        itverb();
+        actualVerb = KILL;
+        actualObject = 0;
+        intransitiveVerb();
         return;
     }
     /*
        handle the left over axe...
     */
-    rspeak(msg);
-    drop(AXE, location);
-    describe();
+    speakReaction(msg);
+    drop(AXE, actualLocation);
+    describeLocation();
 }
 
 /*
 	INVENTORY, FIND etc.
 */
-void vfind(void) {
+void tvFind(void) {
     int msg;
 
-    if (toting(object)) {
+    if (isInInventory(actualObject)) {
         msg = 24;
-    } else if (closed) {
+    } else if (caveIsClosed) {
         msg = 138;
-    } else if (dcheck() && dwarfFlag >= 2 && object == DWARF) {
+    } else if (dcheck() && dwarfFlag >= 2 && actualObject == DWARF) {
         msg = 94;
-    } else if (at(object) || (liq() == object && here(BOTTLE)) || object == liqloc(location)) {
+    } else if (isOnEitherSideOfTwoSidedObject(actualObject) || (liq() == actualObject && here(BOTTLE)) || actualObject == liqloc(actualLocation)) {
         msg = 94;
     } else {
-        actspk(verb);
+        speakDefaultAnswerTo(actualVerb);
         return;
     }
-    rspeak(msg);
+    speakReaction(msg);
 }
 
 /*
 	FILL
 */
-void vfill(void) {
+void tvFill(void) {
     int msg;
     int i;
 
-    switch (object) {
+    switch (actualObject) {
         case BOTTLE: {
             if (liq() != 0) {
                 msg = 105;
-            } else if (liqloc(location) == 0) {
+            } else if (liqloc(actualLocation) == 0) {
                 msg = 106;
             } else {
-                objectStatus[BOTTLE] = locationStatus[location] & WATOIL;
+                stateOfObject[BOTTLE] = locationStatus[actualLocation] & WATOIL;
                 i = liq();
-                if (toting(BOTTLE)) {
+                if (isInInventory(BOTTLE)) {
                     objectLocation[i] = UINT8_MAX;
                 }
                 msg = (i == OIL ? 108 : 107);
@@ -759,39 +758,39 @@ void vfill(void) {
             break;
         }
         case VASE: {
-            if (liqloc(location) == 0) {
+            if (liqloc(actualLocation) == 0) {
                 msg = 144;
                 break;
             }
-            if (!toting(VASE)) {
+            if (!isInInventory(VASE)) {
                 msg = 29;
                 break;
             }
-            rspeak(145);
-            vdrop();
+            speakReaction(145);
+            tvDrop();
             return;
         }
         default: {
             msg = 29;
         }
     }
-    rspeak(msg);
+    speakReaction(msg);
 }
 
 /*
 	FEED
 */
-void vfeed(void) {
+void tvFeed(void) {
     int msg;
 
-    switch (object) {
+    switch (actualObject) {
         case BIRD: {
             msg = 100;
             break;
         }
         case DWARF: {
             if (!here(FOOD)) {
-                actspk(verb);
+                speakDefaultAnswerTo(actualVerb);
                 return;
             }
             ++dwarfFlag;
@@ -800,25 +799,25 @@ void vfeed(void) {
         }
         case BEAR: {
             if (!here(FOOD)) {
-                if (objectStatus[BEAR] == 0) {
+                if (stateOfObject[BEAR] == 0) {
                     msg = 102;
-                } else if (objectStatus[BEAR] == 3) {
+                } else if (stateOfObject[BEAR] == 3) {
                     msg = 110;
                 } else {
-                    actspk(verb);
+                    speakDefaultAnswerTo(actualVerb);
                     return;
                 }
                 break;
             }
-            dstroy(FOOD);
-            objectStatus[BEAR] = 1;
+            destroy(FOOD);
+            stateOfObject[BEAR] = 1;
             secondObjectLocation[AXE] = 0;
-            objectStatus[AXE] = 0;
+            stateOfObject[AXE] = 0;
             msg = 168;
             break;
         }
         case DRAGON: {
-            msg = (objectStatus[DRAGON] != 0 ? 110 : 102);
+            msg = (stateOfObject[DRAGON] != 0 ? 110 : 102);
             break;
         }
         case TROLL: {
@@ -826,13 +825,13 @@ void vfeed(void) {
             break;
         }
         case SNAKE: {
-            if (closed || !here(BIRD)) {
+            if (caveIsClosed || !here(BIRD)) {
                 msg = 102;
                 break;
             }
             msg = 101;
-            dstroy(BIRD);
-            objectStatus[BIRD] = 0;
+            destroy(BIRD);
+            stateOfObject[BIRD] = 0;
             ++tally2;
             break;
         }
@@ -840,21 +839,21 @@ void vfeed(void) {
             msg = 14;
         }
     }
-    rspeak(msg);
+    speakReaction(msg);
 }
 
 /*
 	READ etc.
 */
-void vread(void) {
+void tvRead(void) {
     int msg;
 
     msg = 0;
     if (dark()) {
-        printf("I see no %s here.\n", probj(object));
+        printf("I see no %s here.\n", searchObjStringInBothWords(actualObject));
         return;
     }
-    switch (object) {
+    switch (actualObject) {
         case MAGAZINE: {
             msg = 190;
             break;
@@ -868,81 +867,81 @@ void vread(void) {
             break;
         }
         case OYSTER: {
-            if (!toting(OYSTER) || !closed) {break;}
+            if (!isInInventory(OYSTER) || !caveIsClosed) {break;}
 
-            yes(192, 193, 54);
+            yesOrNoQuestion(192, 193, 54);
             return;
         }
         default: {
         }
     }
     if (msg) {
-        rspeak(msg);
+        speakReaction(msg);
     } else {
-        actspk(verb);
+        speakDefaultAnswerTo(actualVerb);
     }
 }
 
 /*
 	BLAST etc.
 */
-void vblast(void) {
-    if (objectStatus[ROD2] < 0 || !closed) {
-        actspk(verb);
+void tvBlast(void) {
+    if (stateOfObject[ROD2] < 0 || !caveIsClosed) {
+        speakDefaultAnswerTo(actualVerb);
     } else {
         bonus = 133;
-        if (location == 115) { bonus = 134; }
+        if (actualLocation == 115) { bonus = 134; }
         if (here(ROD2)) { bonus = 135; }
-        rspeak(bonus);
-        normend();
+        speakReaction(bonus);
+        normalEnd();
     }
 }
 
 /*
 	BREAK etc.
 */
-void vbreak(void) {
+void tvBreak(void) {
     int msg;
 
-    if (object == MIRROR) {
+    if (actualObject == MIRROR) {
         msg = 148;
-        if (closed) {
-            rspeak(197);
-            dwarfend();
+        if (caveIsClosed) {
+            speakReaction(197);
+            dwarfEnd();
         }
-    } else if (object == VASE && objectStatus[VASE] == 0) {
+    } else if (actualObject == VASE && stateOfObject[VASE] == 0) {
         msg = 198;
-        if (toting(VASE)) { drop(VASE, location); }
-        objectStatus[VASE] = 2;
+        if (isInInventory(VASE)) { drop(VASE, actualLocation); }
+        stateOfObject[VASE] = 2;
         secondObjectLocation[VASE] = UINT8_MAX;
     } else {
-        actspk(verb);
+        speakDefaultAnswerTo(actualVerb);
         return;
     }
-    rspeak(msg);
+    speakReaction(msg);
 }
 
 /*
 	WAKE etc.
 */
-void vwake(void) {
-    if (object != DWARF || !closed) {
-        actspk(verb);
+void tvWake(void) {
+    if (actualObject != DWARF || !caveIsClosed) {
+        speakDefaultAnswerTo(actualVerb);
     } else {
-        rspeak(199);
-        dwarfend();
+        speakReaction(199);
+        dwarfEnd();
     }
 }
 
 /*
 	Routine to speak default verb message
 */
-void actspk(int verb) {
+void speakDefaultAnswerTo(int verb) {
     char i;
     if (verb < 1 || verb > 31) { bug(39); }
 
     i = actmsg[verb];
-    if (i) { rspeak(i); }
+    if (i) { speakReaction(i); }
 }
 
 /*
@@ -950,9 +949,9 @@ void actspk(int verb) {
 	object for verb found.  Used mostly by
 	intransitive verbs.
 */
-void needobj(void) {
+void needObject(void) {
     int wtype, wval;
 
-    analyze(word1, &wtype, &wval);
+    computeTypeAndValue(word1, &wtype, &wval);
     printf("%s what?\n", wtype == 2 ? word1 : word2);
 }

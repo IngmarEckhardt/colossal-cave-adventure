@@ -1,8 +1,8 @@
-#include <caves.h>
-#include <advent.h>
-#include <advdec.h>
+#include "caves.h"
 #include <stdlib.h>
 #include <avr/pgmspace.h>
+#include "advent.h"
+#include "advdec.h"
 
 
 typedef struct {

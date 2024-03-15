@@ -12,66 +12,48 @@
 
 #include "advent.h"
 #include "advdec.h"
-//#include "advent1.h"
-//#include "advent2.h"
-//#include "advent3.h"
-//#include "advent4.h"
-
 
 
 /*
-	Routine to fill travel array for a given location
+	Routine to fill locationRoutingInfos array for a given location
 */
-void gettrav(int loc) {
-    char atrav[145] = {0}; /* max length of any cave pos = 144 bytes */
-    char * aptr;
-    long t;
-    int i;
+void getRoutingInfos(int location) {
+    char travelString[145] = {0}; /* max length of any cave pos = 144 bytes */
+    char * charPointer;
+    long interimResult;
 
-    if (loc <= 0 || loc >= MAXLOC) {
-        bug(42);
-    }
+    if (location <= 0 || location >= MAXLOC) { bug(42); }
 
 
-    char * cave = getCave(loc);
-    if (cave == NULL) {
-        bug(1);
-    }
-
-//	if (strlen(cave[location - 1]) > sizeof(atrav))
-//	if (strlen(cave) > sizeof(atrav)) {
-//        bug(43);
-//    }
-
-
-//	strcpy(atrav, cave[location - 1]);
-    strcpy(atrav, cave);
+    char * cave = getCave(location);
+    if (cave == NULL) { bug(1); }
+    if (strlen(cave) > sizeof(travelString)) { bug(43); }
+    strcpy(travelString, cave);
     free(cave);
 
-    while ((aptr = strrchr(atrav, ','))) {
-        *aptr = '\0'; /* terminate substring	*/
-    }
+    while ((charPointer = strrchr(travelString, ','))) { *charPointer = '\0'; } /* terminate substring	*/
 
-    aptr = &atrav[0];
-    for (i = 0; i < MAXTRAV - 1; ++i) {
+    charPointer = &travelString[0];
+    uint8_t limit = MAXTRAV - 1;
+    for (uint8_t i = 0; i < limit; i++) {
 
-        t = atol(aptr); /* convert to long int	*/
+        interimResult = atol(charPointer); /* convert to long int	*/
 
-        travel[i].tcond = (int) (t % 1000L);
-        t /= 1000L;
-        travel[i].tverb = (int) (t % 1000L);
-        t /= 1000L;
-        travel[i].tdest = (int) (t % 1000L);
+        locationRoutingInfos[i].condition = (int) (interimResult % 1000L);
+        interimResult /= 1000L;
+        locationRoutingInfos[i].verbForDest = (int) (interimResult % 1000L);
+        interimResult /= 1000L;
+        locationRoutingInfos[i].destination = (int) (interimResult % 1000L);
 
-        while (*(aptr++)) {} /* to next substring	*/
+        while (*(charPointer++)) {} /* to next substring	*/
 
-        if (!(*aptr)) {
-            travel[++i].tdest = -1; /* end of array	*/
+        if (!(*charPointer)) {
+            locationRoutingInfos[++i].destination = -1; /* end of array	*/
 
             if (debugFlag) {
-                for (i = 0; i < MAXTRAV; ++i) {
-                    printf("cave[%d] = %d %d %d\n", loc,
-                           travel[i].tdest, travel[i].tverb, travel[i].tcond);
+                for (uint8_t j = 0; j < MAXTRAV; j++) {
+                    printf("cave[%d] = %d %d %d\n", location, locationRoutingInfos[j].destination,
+                           locationRoutingInfos[j].verbForDest, locationRoutingInfos[j].condition);
                 }
             }
             return; /* terminate for loop	*/
@@ -81,98 +63,78 @@ void gettrav(int loc) {
 }
 
 /*
-	Routine to request a yes or no answer to a question.
+	Routine to request a yesOrNoQuestion or no answer to a question.
 */
-int yes(int msg1, int msg2, int msg3) {
+int yesOrNoQuestion(int question, int yesReactionMsg, int noReactionMsg) {
     char answer[80];
 
-    if (msg1) {
-        rspeak(msg1);
-    }
+    if (question) { speakReaction(question); }
+
     fputs("> ", stdout);
     fflush(stdout);
-    if (NULL == fgets(answer, 80, stdin)) {
-        exit(0);
-    }
+
+    if (NULL == fgets(answer, 80, stdin)) { bug(3); }
+
     if (tolower(answer[0]) == 'n') {
-        if (msg3) {
-            rspeak(msg3);
-        }
+        if (noReactionMsg) { speakReaction(noReactionMsg); }
         return 0;
     }
-    if (msg2) {
-        rspeak(msg2);
-    }
+
+    if (yesReactionMsg) { speakReaction(yesReactionMsg); }
     return 1;
 }
 
 /*
 	Print a location description from "advent4.txt"
 */
-void rspeak(int msg) {
+void speakReaction(int actionMsgNumber) {
 
-    //	fputs(adventtxt4[msg - 1], stdout);
-
-    char * message = getAction(msg);
+    char * message = getAction(actionMsgNumber);
     fputs(message, stdout);
     free(message);
-//	return;
 }
 
 /*
 	Print an item message for a given state from "advent3.txt"
 */
-void pspeak(int item, int state) {
+void printItemMessage(int item, int state) {
 
-//	const char *p;
-    char * p;
+    if (item > 64) { bug(40);}
 
-    if (item > 64) {
-        bug(40);
-        return;
-    }
+    char * itemString = getObject(item);
 
-//	p = adventtxt3[item - 1];
-    p = getObject(item);
+    if (itemString == NULL) { bug(31); }
+    else {
+        char character;
+        uint8_t n = state + 2;
 
-    if (p == NULL) {
-        bug(31);
-    } else {
-        int c;
-        int n = state + 2;
-
+        //move the string pointer to the sign after the (second + state) '/' or report a bug if null terminated before
         while (n--) {
-            while ((c = *p++) != '/') {
-                if (c == '\0') {
-                    bug(32);
-                }
-            }
+            while ((character = *itemString++) != '/') { if (character == '\0') { bug(32); }}
         }
-        for (n = 0; p[n] != '\0' && p[n] != '/'; n++)
-            putchar(p[n]);
+
+        //print the string until the next '/'
+        for (uint8_t i = 0; itemString[i] != '\0' && itemString[i] != '/'; i++) { putchar(itemString[i]); }
     }
-    free(p);
+    free(itemString);
 }
 
 /*
 	Print a long location description from "advent1.txt"
 */
-void desclg(int loc) {
+void describeLongLocation(int location) {
 
-//	fputs(adventtxt1[location - 1], stdout);
-    char * message = getLongLocation(loc);
+    char * message = getLongLocation(location);
     fputs(message, stdout);
     free(message);
-
 }
 
 /*
 	Print a short location description from "advent2.txt"
 */
-void descsh(int loc) {
+void describeShortLocation(int location) {
 
-//	fputs(adventtxt2[location - 1], stdout);
-    char * message = getShortLocation(loc);
+    char * message = getShortLocation(location);
     fputs(message, stdout);
     free(message);
 }
@@ -183,49 +145,45 @@ void descsh(int loc) {
 	= 0, then return minimum of different codes.  last word CANNOT
 	have two entries(due to binary sort).
 	word is the word to look up.
-	val  is the minimum acceptable value,
+	minValue  is the minimum acceptable value,
 		if != 0 return %1000
 */
-int vocab(char * word, int val) {
-    int v1, v2;
+int lookUpVocabulary(char * word, int minValue) {
+    int firstWordIndex, secondWordIndex;
+    int16_t firstWordCode;
+    int16_t secondWordCode;
 
-    if ((v1 = binary(word, MAXWC)) >= 0) {
-        v2 = binary(word, MAXWC - 1);
-        if (v2 < 0) {
-            v2 = v1;
-        }
-        int16_t codeV1 = (int16_t) loadCode(v1);
-        int16_t codeV2 = (int16_t) loadCode(v2);
-        if (!val) {
-//			return wc[v1].acode < wc[v2].acode ? wc[v1].acode : wc[v2].acode;
-            return codeV1 < codeV2 ? codeV1 : codeV2;
-        }
-//		if (val <= wc[v1].acode)
-        if (val <= codeV1) {
-//			return wc[v1].acode % 1000;
-            return codeV1 % 1000;
-//		else if (val <= wc[v2].acode)
-        } else if (val <= codeV2) {
-//			return wc[v2].acode % 1000;
-            return codeV2 % 1000;
+    if ((firstWordIndex = searchWordIndex(word, MAXWC)) >= 0) {
+
+        secondWordIndex = searchWordIndex(word, MAXWC - 1);
+
+        if (secondWordIndex < 0) {
+            secondWordCode = firstWordCode = (int16_t) getCode(firstWordIndex);
         } else {
-            return -1;
+            firstWordCode = (int16_t) getCode(firstWordIndex);
+            secondWordCode = (int16_t) getCode(secondWordIndex);
         }
+
+        if (!minValue) { return firstWordCode < secondWordCode ? firstWordCode : secondWordCode; }
+
+        if (minValue <= firstWordCode) { return firstWordCode % 1000; }
+        else if (minValue <= secondWordCode) { return secondWordCode % 1000; }
+        else { return -1; }
     } else {
         return -1;
     }
 }
 
-int binary(char * w, int maxwc) {
+//performs the binary search
+int searchWordIndex(char * word, int amountToSearchThrough) {
     int lo, mid, hi, check;
 
     lo = 0;
-    hi = maxwc - 1;
+    hi = amountToSearchThrough - 1;
     while (lo <= hi) {
         mid = (lo + hi) / 2;
 
-//		if ((check = strcmp(w, wctable[mid].aword)) < 0)
-        if ((check = compareWord(w, mid)) < 0) {
+        if ((check = compareWord(word, mid)) < 0) {
             hi = mid - 1;
         } else if (check > 0) {
             lo = mid + 1;
@@ -243,39 +201,39 @@ int binary(char * w, int maxwc) {
 /*
 	Routine to test for darkness
 */
-int dark(void) { return !(locationStatus[location] & LIGHT) && (!objectStatus[LAMP] || !here(LAMP)); }
+int dark(void) { return !(locationStatus[actualLocation] & LIGHT) && (!stateOfObject[LAMP] || !here(LAMP)); }
 
 /*
 	Routine to tell if an item is present.
 */
-int here(int item) { return objectLocation[item] == location || toting(item); }
+int here(int item) { return objectLocation[item] == actualLocation || isInInventory(item); }
 
 /*
 	Routine to tell if an item is being carried.
 */
-int toting(int item) { return objectLocation[item] == UINT8_MAX; }
+int isInInventory(int item) { return objectLocation[item] == UINT8_MAX; }
 
 /*
 	Routine to tell if a location causes
-	a forced move.
+	a isForcingAMove move.
 */
-int forced(int atloc) { return locationStatus[atloc] == 2; }
+int isForcingAMove(int location) { return locationStatus[location] == 2; }
 
 /*
 	Routine true x% of the time.
 */
-int pct(int x) { return rand() % 100 < x; }
+int isRandomlyTrue(int percentageOfTrueAnswers) { return rand() % 100 < percentageOfTrueAnswers; }
 
 /*
 	Routine to tell if player is on
-	either side of a two sided object.
+	either side of a two-sided object.
 */
-int at(int item) { return objectLocation[item] == location || secondObjectLocation[item] == location; }
+int isOnEitherSideOfTwoSidedObject(int objectToInvestigate) { return objectLocation[objectToInvestigate] == actualLocation || secondObjectLocation[objectToInvestigate] == actualLocation; }
 
 /*
 	Routine to destroy an object
 */
-void dstroy(int obj) { move(obj, 0); }
+void destroy(int object) { move(object, 0); }
 
 /*
 	Routine to move an object
@@ -284,7 +242,7 @@ void move(int obj, int where) {
     int from;
 
     from = (obj < MAXOBJ) ? objectLocation[obj] : secondObjectLocation[obj - MAXOBJ];
-    if (from > 0 && from <= 300) {
+    if (from > 0 && from <= MAXLOC) {
         carry(obj, from);
     }
     drop(obj, where);
@@ -323,7 +281,7 @@ void drop(int obj, int where) {
 
 /*
 	routine to move an object and return a
-	value used to set the negated objectStatus values
+	value used to set the negated statusOfObject values
 	for the repository.
 */
 int put(int obj, int where, int pval) {
@@ -339,7 +297,7 @@ int dcheck(void) {
     int i;
 
     for (i = 1; i < (DWARFMAX - 1); ++i) {
-        if (dwarfLocations[i] == location) {
+        if (dwarfLocations[i] == actualLocation) {
             return i;
         }
     }
@@ -351,7 +309,7 @@ int dcheck(void) {
 */
 int liq(void) {
     int i, j;
-    i = objectStatus[BOTTLE];
+    i = stateOfObject[BOTTLE];
     j = -1 - i;
     return liq2(i > j ? i : j);
 }

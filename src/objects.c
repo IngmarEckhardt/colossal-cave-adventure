@@ -1,8 +1,8 @@
-#include <objects.h>
-#include <advent.h>
-#include <advdec.h>
+#include "objects.h"
 #include <stdlib.h>
 #include <avr/pgmspace.h>
+#include "advent.h"
+#include "advdec.h"
 
 
 typedef struct {

@@ -40,15 +40,14 @@ set(SRC_FILES
         "${SRC_PATH}/actions.c"
         "${SRC_PATH}/caves.c"
         "${SRC_PATH}/database.c"
-        "${SRC_PATH}/english.c"
         "${SRC_PATH}/init_adventure.c"
-        "${SRC_PATH}/itverb.c"
+        "${SRC_PATH}/intransitive_verb.c"
         "${SRC_PATH}/long_locations.c"
         "${SRC_PATH}/objects.c"
         "${SRC_PATH}/short_locations.c"
+        "${SRC_PATH}/simple_english_helper.c"
+        "${SRC_PATH}/transitive_verb.c"
         "${SRC_PATH}/turn.c"
-        "${SRC_PATH}/verb.c"
-
 )
 
 set(HEADER_FILES
@@ -75,7 +74,7 @@ else ()
             "${PROJECT_NAME}.elf" "${PROJECT_NAME}.hex")
 
     add_custom_target(size "${AVR_SIZE}" "${PROJECT_NAME}.elf")
-    add_custom_target(objdump "${AVR_OBJDUMP}" -h -s "${PROJECT_NAME}.elf")
+    add_custom_target(objdump "${AVR_OBJDUMP}" -h -s "${PROJECT_NAME}.elf" > objdump_output.txt)
 endif ()
 
 if (TESTS)

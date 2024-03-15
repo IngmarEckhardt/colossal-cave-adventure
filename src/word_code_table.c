@@ -1,9 +1,9 @@
-#include <advent.h>
-#include <advdec.h>
 #include <stdlib.h>
 
-#define WC_TABLE_MAX_WORD_LENGTH 16
+#include "advent.h"
+#include "advdec.h"
 
+#define WC_TABLE_MAX_WORD_LENGTH 16
 typedef struct {
     char word[WC_TABLE_MAX_WORD_LENGTH];
     uint16_t code;
@@ -317,22 +317,22 @@ const __attribute__((__progmem__)) WordCodeCombination wordCodeTable[MAXWC] = {
         {"y2",              55}
 };
 
-char * loadWord(uint16_t index) {
-    if (flashHelper == NULL || index >= MAXWC) { return NULL; }
+char * getWord(uint16_t indexInWordCodeTable) {
+    if (flashHelper == NULL || indexInWordCodeTable >= MAXWC) { return NULL; }
 
     char * stringToReturn = malloc(WC_TABLE_MAX_WORD_LENGTH);
     if (stringToReturn == NULL) { return NULL; }
 
-    flashHelper->loadStringFromFlash(stringToReturn, (char *) (&wordCodeTable[index]));
+    flashHelper->loadStringFromFlash(stringToReturn, (char *) (&wordCodeTable[indexInWordCodeTable]));
     return stringToReturn;
 }
 
-uint16_t loadCode(uint16_t index) {
-    if (flashHelper == NULL || index >= MAXWC) { return 0; }
-    return flashHelper->readNearWord((uint16_t *) (&wordCodeTable[index].code));
+uint16_t getCode(uint16_t indexInWordCodeTable) {
+    if (flashHelper == NULL || indexInWordCodeTable >= MAXWC) { return 0; }
+    return flashHelper->readNearWord((uint16_t *) (&wordCodeTable[indexInWordCodeTable].code));
 }
 
-int16_t compareWord(const char * string, uint16_t index) {
-    if (flashHelper == NULL || index >= MAXWC) { return -1; }
-    return flashHelper->compareWithFlashString(string, (char *) (&wordCodeTable[index]));
+int16_t compareWord(const char * word, uint16_t indexInWordCodeTable) {
+    if (flashHelper == NULL || indexInWordCodeTable >= MAXWC) { return -1; }
+    return flashHelper->compareWithFlashString(word, (char *) (&wordCodeTable[indexInWordCodeTable]));
 }
