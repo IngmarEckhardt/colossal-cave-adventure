@@ -8,7 +8,7 @@ English.
 
 ## Port to MCU
 
-The game has been successfully ported to run on an AtMega2560 (as used in some Arduino clones).
+The game shall be ported to run on an AtMega2560 (as used in some Arduino clones).
 
 The original code can be found at 'https://github.com/troglobit/adventure' and is licensed under the Unlicense.
 
