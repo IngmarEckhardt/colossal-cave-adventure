@@ -8,14 +8,10 @@ English.
 
 ## Port to MCU
 
-The game is ported to run on a AtMega2560 (such as used in some arduino clones).
+The game has been successfully ported to run on an AtMega2560 (as used in some Arduino clones).
 
-The original code is from 'https://github.com/troglobit/adventure' and under unlicense.
+The original code can be found at 'https://github.com/troglobit/adventure' and is licensed under the Unlicense.
 
-The most of the work is done and the game uses stdin/out Interface and can be played over 
-a serial connection. Most of the work until now was placing the strings into Program Memory, 
-to deal with 8kB Ram. The game uses now less then 1.5kB Ram and has space for small improvement
-with better seperation of debug and release code. The 6kB free Ram should be used in the next
-steps to cache some strings, and also should allow to run unity directly and test the components
-in a simavr session. There is a early coming bug, described in issues. Feel free to investigate
-and open a pull request if you found the solution.
+Most of the groundwork has been completed, and the game now utilizes a stdin/out interface, allowing it to be played over a serial connection. Much effort has been dedicated to storing strings in Program Memory to accommodate the limited 8kB RAM. Currently, the game utilizes less than 1.5kB RAM, leaving room for minor improvements such as better separation of debug and release code. With approximately 6kB of free RAM available, the next steps involve caching certain strings to optimize performance. Additionally, this should allow for the direct execution of Unity and testing of components within a simavr session.
+
+An early bug has been identified and documented in the issues section. You are encouraged to investigate and submit a pull request if you discover a solution. Feel free to contribute to this exciting project!
