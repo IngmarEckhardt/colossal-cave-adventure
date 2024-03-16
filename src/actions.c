@@ -5,7 +5,6 @@
 #include "advdec.h"
 
 
-
 typedef struct {
     uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_1_WITH_SAME_LENGTH];
     char stringInProgramMem[ACTION_DESCRIPTION_1_LENGTH];
@@ -104,6 +103,7 @@ const __attribute__((__progmem__)) ACTION_3 actions_3[AMOUNT_OF_ACTION_DESCRIPTI
         {{94,},  "I believe what you want is right here with you.\n"},
         {{95,},  "You don't fit through a two-inch slit!\n"},
         {{97,},  "There is no way across the fissure.\n"},
+        {{99,},  "You are currently holding the following:\n"},
         {{101,}, "The snake has now devoured your bird.\n"},
         {{102,}, "There's nothing here it wants to eat (Except perhaps you).\n"},
         {{104,}, "You have nothing in which to carry it.\n"},
@@ -192,6 +192,7 @@ typedef struct {
 const __attribute__((__progmem__)) ACTION_5 actions_5[AMOUNT_OF_ACTION_DESCRIPTIONS_5] = {
         {{3,},   "A little dwarf just walked around a corner, saw you,\nthrew a little axe at you which missed, cursed, and ran away.\n"},
         {{11,},  "I don't know in from out here.  Use compass points or name\nsomething in the general direction you want to go.\n"},
+        {{15,},  "Sorry, but I am not allowed to give more detail.  I will\nrepeat the long description of your location.\n"},
         {{19,},  "The bird is frightened right now and you cannot catch\nit no matter what you try.  Perhaps you might try later.\n"},
         {{26,},  "The bird was unafraid when you entered, but as you approach\nit becomes disturbed and you cannot catch it.\n"},
         {{57,},  "I don't know where the cave is, but hereabouts no stream\ncan run on the surface for very long.  I would try the stream.\n"},
@@ -206,12 +207,14 @@ const __attribute__((__progmem__)) ACTION_5 actions_5[AMOUNT_OF_ACTION_DESCRIPTI
         {{130,}, "A mysterious recorded voice groans into life and announces:\n\"This exit is closed.  Please leave via main office.\"\n"},
         {{131,}, "It looks as though you're dead.  Well, seeing as how it's so\nclose to closing time anyway, I think we'll just call it a day.\n"},
         {{154,}, "The little bird attacks the green dragon, and in an\nastounding flurry gets burnt to a cinder.  The ashes blow away.\n"},
+        {{156,}, "Okay, from now on I'll only describe a place in full the\nfirst time you come to it.  To get the full description\nsay \"look\".\n"},
         {{157,}, "Trolls are close relatives with the rocks and have skin as\ntough as that of a rhinoceros.  The troll fends off your\nblows effortlessly.\n"},
         {{158,}, "The troll deftly catches the axe, examines it carefully,\nand tosses it back, declaring, \"Good workmanship,\nbut it's not valuable enough.\".\n"},
         {{163,}, "The bear lumbers toward the troll, who lets out a\nstartled shriek and scurries away.  The bear soon gives\nup pursuit and wanders back.\n"},
         {{168,}, "The bear eagerly wolfs down your food, after which he seems\nto calm down considerably, and even becomes rather friendly.\n"},
         {{185,}, "There's not much point in wandering around out here, and you\ncan't explore the cave without a lamp.  So let's just call\nit a day.\n"},
         {{192,}, "Hmm, this looks like a clue, which means it'll cost you 10\npoints to read it.  Should I go ahead and read it anyway?\n"},
+        {{193,}, "It says, \"There is something strange about this place,\nsuch that one of the words I've always known now has\na new effect.\"\n"},
         {{199,}, "You prod the nearest Dwarf, who wakes up grumpily, takes\none look at you, curses, and grabs for his axe.\n"},
 };
 
