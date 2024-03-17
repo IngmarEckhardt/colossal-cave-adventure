@@ -323,7 +323,7 @@ char * getWord(uint16_t indexInWordCodeTable) {
     char * stringToReturn = malloc(WC_TABLE_MAX_WORD_LENGTH);
     if (stringToReturn == NULL) { return NULL; }
 
-    flashHelper->loadStringFromFlash(stringToReturn, (char *) (&wordCodeTable[indexInWordCodeTable]));
+    flashHelper->loadNearStringFromFlash(stringToReturn, (char *) (&wordCodeTable[indexInWordCodeTable]));
     return stringToReturn;
 }
 

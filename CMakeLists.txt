@@ -10,6 +10,7 @@ set(VERSION_PATCH 3)
 project(${NAME} LANGUAGES C)
 
 option(TESTS "Build ${PROJECT_NAME} Tests with standard gcc" OFF)
+option(MOCK_USER "Build ${PROJECT_NAME} with mocked user input" OFF)
 
 set(TOOLCHAIN_PATH "C:/Program Files/JetBrains/CLion 2023.3.4/bin/avr8-gnu-toolchain-win32_x86_64/bin/")
 set(AVR_OBJCOPY "${TOOLCHAIN_PATH}avr-objcopy.exe")
@@ -55,8 +56,12 @@ set(HEADER_FILES
 )
 
 if (TESTS)
+    add_definitions(-D__AVR_HAVE_ELPM__)
 
 else ()
+    if (MOCK_USER)
+        add_definitions(-DMOCK_USER)
+    endif ()
     include_directories(${INCL_PATH})
     set(BUILD_DWARFOS_AS_LIBRARY ON CACHE BOOL "Build DwarfOS as a library")
     add_definitions(-D_TIME_T_DEFINED)
@@ -92,16 +97,16 @@ if (TESTS)
     # string_repository.c
     add_executable(${PROJECT_NAME}_string_db_conversion
             "${TEST_PATH}/string_db_conversion.c"
-            "${SRC_PATH}/long_locations.c"
-            "${SRC_PATH}/short_locations.c"
-            "${SRC_PATH}/actions.c"
-            "${SRC_PATH}/objects.c"
-            "${SRC_PATH}/caves.c"
-            "${SRC_PATH}/word_code_table.c"
+#            "${SRC_PATH}/long_locations.c"
+#            "${SRC_PATH}/short_locations.c"
+#            "${SRC_PATH}/actions.c"
+#            "${SRC_PATH}/objects.c"
+#            "${SRC_PATH}/caves.c"
+#            "${SRC_PATH}/word_code_table.c"
 
             "extern/dwarfOS/src/string_repository.c"
             "extern/dwarfOS/src/pgm_textfile_generator.c"
-            "tests/_src/_flash_helper.c")
+    )
     target_link_libraries(${PROJECT_NAME}_string_db_conversion unity)
 
     include(CTest)

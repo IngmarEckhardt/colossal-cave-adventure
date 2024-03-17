@@ -146,11 +146,11 @@ const char *adventtxt1[140] = {
 // 45
 	"You are in a maze of twisty little passages, all alike.\n",
 // 46
-	"Dead end.\n",
+	"Dead end\n",
 // 47
-	"Dead end.\n",
+	"Dead end\n",
 // 48
-	"Dead end.\n",
+	"Dead end\n",
 // 49
 	"You are in a maze of twisty little passages, all alike.\n",
 // 50
@@ -162,17 +162,17 @@ const char *adventtxt1[140] = {
 // 53
 	"You are in a maze of twisty little passages, all alike.\n",
 // 54
-	"Dead end.\n",
+	"Dead end\n",
 // 55
 	"You are in a maze of twisty little passages, all alike.\n",
 // 56
-	"Dead end.\n",
+	"Dead end\n",
 // 57
 	"You are on the brink of a thirty foot pit with a massive\n"
 	"orange column down one wall.  You could climb down here but\n"
 	"you could not get back up.  The maze continues at this level.\n",
 // 58
-	"Dead end.\n",
+	"Dead end\n",
 // 59
 	"You have crawled through a very low wide passage paralled\n"
 	"to and north of the hall of mists.\n",
@@ -188,7 +188,7 @@ const char *adventtxt1[140] = {
 	"You are at a crossover of a high N/S passage and a low\n"
 	"E/W one.\n",
 // 63
-	"Dead end.\n",
+	"Dead end\n",
 // 64
 	"You are at a complex junction.  A low hands and knees passage\n"
 	"from the north joins a higher crawl from the east to make\n"
@@ -338,7 +338,7 @@ const char *adventtxt1[140] = {
 	"              \"Proceed at your own risk.\"\n"
 	"             \"Witt construction company\"\n",
 // 107
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a maze of twisty little passages, all different.\n",
 // 108
 	"You are at Witt's end.  Passages lead off in ALL directions.\n",
 // 109
@@ -474,21 +474,21 @@ const char *adventtxt1[140] = {
 	"the dust lead away toward the far end of the room.\n"
 	"The only exit is the way you came in.\n",
 // 131
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a maze of twisting little passages, all different.\n",
 // 132
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a little maze of twisty passages, all different.\n",
 // 133
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a twisting maze of little passages, all different.\n",
 // 134
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a twisting little maze of passages, all different.\n",
 // 135
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a twisty little maze of passages, all different.\n",
 // 136
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a twisty maze of little passages, all different.\n",
 // 137
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a little twisty maze of passages, all different.\n",
 // 138
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a maze of little twisting passages, all different.\n",
 // 139
 	"You are in a maze of little twisty passages, all different.\n",
 // 140

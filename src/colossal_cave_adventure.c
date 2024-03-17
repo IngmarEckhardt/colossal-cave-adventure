@@ -11,23 +11,19 @@
 #include "advdec.h"
 #include "advdef.h"
 
-
 const uint8_t adjustToSecondValue = ADJUST_TO_SECOND_VALUE;
 
 int main(void) {
-
     setupAdvent();
     initplay();
 //    debugFlag = 1;
     sei();
-
     if (yesOrNoQuestion(65, 1, 0)) {
         timeLimit = 1000;
     } else {
         timeLimit = 330;
     }
     srand(511); /* seed random	*/
-
     while (1) {
         turn();
         printToSerialOutput();
@@ -35,12 +31,8 @@ int main(void) {
         adjustTo1Sec();
     }
 }
-
 ISR(TIMER2_OVF_vect) { cca_adjustCounter++; } // getting a clock and waking up from sleep mode
-
-
-ISR(USART0_RX_vect) { inputQueue->enqueue(UDR0, inputQueue); } // put into stdin buffer if a sign is available/interrupt is triggered
-
+ISR(USART0_RX_vect){ inputQueue->enqueue(UDR0, inputQueue); } // put into stdin buffer if a sign is available/interrupt is triggered
 
 // general inits
 void adjustTo1Sec(void) {
@@ -49,13 +41,30 @@ void adjustTo1Sec(void) {
         cca_adjustCounter = 0;
     }
 }
-
 int put_char(char c, FILE * stream) {
     uartHelper->usartTransmitChar(c);
     return 0;
 }
-
-int get_char(FILE * stream) { return inputQueue->get_char(inputQueue); }
+int getMockUserInput(void);
+int get_char(FILE * stream) {
+#ifdef MOCK_USER
+    return getMockUserInput();
+#else
+    return inputQueue->get_char(inputQueue);
+#endif
+}
+#ifdef MOCK_USER
+uint8_t interaction = 0;
+char userinput1[2] = {'y','\n'};
+char userinput2[2] = {'s','\n'};
+int getMockUserInput(void) {
+    if (interaction < 2) {
+        return userinput1[interaction++];
+    } else {
+        return userinput2[interaction++ % 2];
+    }
+}
+#endif
 
 static FILE ccaStdOut = FDEV_SETUP_STREAM(put_char, NULL, _FDEV_SETUP_WRITE);
 static FILE ccaStdIn = FDEV_SETUP_STREAM(NULL, get_char, _FDEV_SETUP_READ);
@@ -64,7 +73,6 @@ void setupAdvent(void) {
     stringRepository = dOS_initStringRepository(0);
     uartHelper = dOS_initUartHelper();
     inputQueue = cca_initInputQueue();
-    flashHelper = dOS_initFlashHelper();
     setupMcu(&mcuClock);
     stdin = &ccaStdIn;
     stdout = &ccaStdOut;
@@ -87,3 +95,4 @@ void printToSerialOutput(void) {
 }
 
 // ToDo: add function to save game into eeprom
+

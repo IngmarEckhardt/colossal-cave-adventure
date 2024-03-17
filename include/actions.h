@@ -1,13 +1,13 @@
 #ifndef COLOSSAL_CAVE_ADVENTURE_ACTIONS_H
 #define COLOSSAL_CAVE_ADVENTURE_ACTIONS_H
 
-#define ACTION_DESCRIPTION_1_LENGTH 14
-#define ACTION_DESCRIPTION_2_LENGTH 32
-#define ACTION_DESCRIPTION_3_LENGTH 63
-#define ACTION_DESCRIPTION_4_LENGTH 99
-#define ACTION_DESCRIPTION_5_LENGTH 140
-#define ACTION_DESCRIPTION_6_LENGTH 270
-#define ACTION_DESCRIPTION_7_LENGTH 484
+#define ACTION_DESCRIPTION_1_LENGTH 15
+#define ACTION_DESCRIPTION_2_LENGTH 33
+#define ACTION_DESCRIPTION_3_LENGTH 65
+#define ACTION_DESCRIPTION_4_LENGTH 101
+#define ACTION_DESCRIPTION_5_LENGTH 145
+#define ACTION_DESCRIPTION_6_LENGTH 275
+#define ACTION_DESCRIPTION_7_LENGTH 500
 #define AMOUNT_OF_ACTION_DESCRIPTIONS_1 9
 #define AMOUNT_OF_ACTION_DESCRIPTIONS_2 40
 #define AMOUNT_OF_ACTION_DESCRIPTIONS_3 68
@@ -24,12 +24,13 @@
 #define MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_7_WITH_SAME_LENGTH 1
 
 #define LOAD_FROM(NUM) \
-    stringToReturn = stringRepo->loadStringFromFile(&(TextFile) { \
-        .farPointer = pgm_get_far_address(actions_##NUM), \
-        .maxLengthOfStrings = ACTION_DESCRIPTION_##NUM##_LENGTH, \
-        .sizeOfIndexArray = MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
-        .amountOfEntries = AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM, \
-    }, helper, actionNumber); \
-    if (stringToReturn != NULL) { return stringToReturn; }
+	stringToReturn = helper->loadFarStringFromFile(&(FarTextFile) { \
+		.farPointer = pgm_get_far_address(actions_##NUM), \
+		.maxLengthOfStrings = ACTION_DESCRIPTION_##NUM##_LENGTH, \
+		.sizeOfIndexArray = MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
+		.amountOfEntries = AMOUNT_OF_ACTION_DESCRIPTIONS_##NUM, \
+	}, actionNumber); \
+	if (stringToReturn != NULL) { return stringToReturn; }
+
 
 #endif //COLOSSAL_CAVE_ADVENTURE_ACTIONS_H

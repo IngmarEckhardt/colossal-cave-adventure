@@ -96,11 +96,11 @@ const char *adventtxt2[140] = {
 // 45
 	"You are in a maze of twisty little passages, all alike.\n",
 // 46
-    "Dead end.\n",
+	"Dead end.\n",
 // 47
-    "Dead end.\n",
+	"Dead end.\n",
 // 48
-    "Dead end.\n",
+	"Dead end.\n",
 // 49
 	"You are in a maze of twisty little passages, all alike.\n",
 // 50
@@ -112,15 +112,15 @@ const char *adventtxt2[140] = {
 // 53
 	"You are in a maze of twisty little passages, all alike.\n",
 // 54
-    "Dead end.\n",
+	"Dead end.\n",
 // 55
 	"You are in a maze of twisty little passages, all alike.\n",
 // 56
-    "Dead end.\n",
+	"Dead end.\n",
 // 57
 	"You're at brink of pit.\n",
 // 58
-    "Dead end.\n",
+	"Dead end.\n",
 // 59
 	"You have crawled through a very low wide passage paralled\n"
 	"to and north of the hall of mists.\n",
@@ -132,7 +132,7 @@ const char *adventtxt2[140] = {
 	"You are at a crossover of a high N/S passage and a low\n"
 	"E/W one.\n",
 // 63
-    "Dead end.\n",
+	"Dead end.\n",
 // 64
 	"You're at complex junction.\n",
 // 65
@@ -172,17 +172,17 @@ const char *adventtxt2[140] = {
 // 80
 	"You are in a maze of twisty little passages, all alike.\n",
 // 81
-    "Dead end.\n",
+	"Dead end.\n",
 // 82
-    "Dead end.\n",
+	"Dead end.\n",
 // 83
 	"You are in a maze of twisty little passages, all alike.\n",
 // 84
 	"You are in a maze of twisty little passages, all alike.\n",
 // 85
-    "Dead end.\n",
+	"Dead end.\n",
 // 86
-    "Dead end.\n",
+	"Dead end.\n",
 // 87
 	"You are in a maze of twisty little passages, all alike.\n",
 // 88
@@ -225,7 +225,7 @@ const char *adventtxt2[140] = {
 // 106
 	"You're in anteroom.\n",
 // 107
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a maze of twisty little passages, all different.\n",
 // 108
 	"You're at Witt's end.\n",
 // 109
@@ -235,11 +235,11 @@ const char *adventtxt2[140] = {
 // 111
 	"You're at top of stalactite.\n",
 // 112
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a little maze of twisting passages, all different.\n",
 // 113
 	"You're at reservoir.\n",
 // 114
-    "Dead end.\n",
+	"Dead end.\n",
 // 115
 	"You're at ne end of repository.\n",
 // 116
@@ -273,21 +273,21 @@ const char *adventtxt2[140] = {
 // 130
 	"You're in barren room.\n",
 // 131
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a maze of twisting little passages, all different.\n",
 // 132
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a little maze of twisty passages, all different.\n",
 // 133
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a twisting maze of little passages, all different.\n",
 // 134
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a twisting little maze of passages, all different.\n",
 // 135
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a twisty little maze of passages, all different.\n",
 // 136
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a twisty maze of little passages, all different.\n",
 // 137
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a little twisty maze of passages, all different.\n",
 // 138
-	"You are in a maze of little twisty passages, all different.\n",
+	"You are in a maze of little twisting passages, all different.\n",
 // 139
 	"You are in a maze of little twisty passages, all different.\n",
 // 140

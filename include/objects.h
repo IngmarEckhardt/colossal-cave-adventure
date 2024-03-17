@@ -1,10 +1,10 @@
 #ifndef COLOSSAL_CAVE_ADVENTURE_OBJECTS_H
 #define COLOSSAL_CAVE_ADVENTURE_OBJECTS_H
 
-#define OBJECT_DESCRIPTION_1_LENGTH 71
-#define OBJECT_DESCRIPTION_2_LENGTH 112
-#define OBJECT_DESCRIPTION_3_LENGTH 189
-#define OBJECT_DESCRIPTION_4_LENGTH 237
+#define OBJECT_DESCRIPTION_1_LENGTH 74
+#define OBJECT_DESCRIPTION_2_LENGTH 117
+#define OBJECT_DESCRIPTION_3_LENGTH 199
+#define OBJECT_DESCRIPTION_4_LENGTH 246
 #define AMOUNT_OF_OBJECT_DESCRIPTIONS_1 25
 #define AMOUNT_OF_OBJECT_DESCRIPTIONS_2 15
 #define AMOUNT_OF_OBJECT_DESCRIPTIONS_3 9
@@ -14,13 +14,14 @@
 #define MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_3_WITH_SAME_LENGTH 1
 #define MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_4_WITH_SAME_LENGTH 1
 
+
 #define LOAD_FROM(NUM) \
-    stringToReturn = stringRepo->loadStringFromFile(&(TextFile) { \
-        .farPointer = pgm_get_far_address(objects_##NUM), \
-        .maxLengthOfStrings = OBJECT_DESCRIPTION_##NUM##_LENGTH, \
-        .sizeOfIndexArray = MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
-        .amountOfEntries = AMOUNT_OF_OBJECT_DESCRIPTIONS_##NUM, \
-    }, helper, objectNumber); \
-    if (stringToReturn != NULL) { return stringToReturn; }
+	stringToReturn = helper->loadFarStringFromFile(&(FarTextFile) { \
+		.farPointer = pgm_get_far_address(objects_##NUM), \
+		.maxLengthOfStrings = OBJECT_DESCRIPTION_##NUM##_LENGTH, \
+		.sizeOfIndexArray = MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_##NUM##_WITH_SAME_LENGTH, \
+		.amountOfEntries = AMOUNT_OF_OBJECT_DESCRIPTIONS_##NUM, \
+	}, objectNumber); \
+	if (stringToReturn != NULL) { return stringToReturn; }
 
 #endif //COLOSSAL_CAVE_ADVENTURE_OBJECTS_H

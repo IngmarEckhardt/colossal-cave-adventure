@@ -2,6 +2,8 @@
 #ifndef ADVENT_PROTO_H_
 #define ADVENT_PROTO_H_
 
+#include <stdint.h>
+
 /* init_adventure.c */
 void initplay(void);
 
@@ -109,8 +111,8 @@ char * getObject(int objectNumber);
 char * getShortLocation(int shortLocationNumber);
 
 /* wordtable make sure it is placed isOnEitherSideOfTwoSidedObject the beginning of the progmem data section, because it uses the 16bit address room*/
-char * getWord(unsigned int indexInWordCodeTable);
-unsigned int getCode(unsigned int indexInWordCodeTable);
-int compareWord(const char * string, unsigned int index);
+char * getWord(uint16_t indexInWordCodeTable);
+uint16_t  getCode(uint16_t indexInWordCodeTable);
+int16_t compareWord(const char * string, uint16_t  index);
 
 #endif /* ADVENT_PROTO_H_ */
