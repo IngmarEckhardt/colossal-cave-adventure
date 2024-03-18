@@ -5,13 +5,12 @@
 #include "advdec.h"
 
 
-
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1_WITH_SAME_LENGTH];
-    char stringInProgramMem[LONG_LOCATION_DESCRIPTION_1_LENGTH];
+    uint8_t numbers[LONG_LOCATION_1_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[LONG_LOCATION_1_STRING_LENGTH];
 } LONG_LOCATION_1;
 
-const __attribute__((__progmem__)) LONG_LOCATION_1 longLocations_1[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_1] = {
+const __attribute__((__progmem__)) LONG_LOCATION_1 longLocations_1[AMOUNT_LONG_LOCATION_1_STRINGS] = {
         {{3,},"You are inside a building, a well house for a large spring.\n"},
         {{5,},"You are in open forest, with a deep valley to one side.\n"},
         {{6,},"You are in open forest near both a valley and a road.\n"},
@@ -60,11 +59,11 @@ const __attribute__((__progmem__)) LONG_LOCATION_1 longLocations_1[AMOUNT_OF_LON
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2_WITH_SAME_LENGTH];
-    char stringInProgramMem[LONG_LOCATION_DESCRIPTION_2_LENGTH];
+    uint8_t numbers[LONG_LOCATION_2_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[LONG_LOCATION_2_STRING_LENGTH];
 } LONG_LOCATION_2;
 
-const __attribute__((__progmem__)) LONG_LOCATION_2 longLocations_2[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_2] = {
+const __attribute__((__progmem__)) LONG_LOCATION_2 longLocations_2[AMOUNT_LONG_LOCATION_2_STRINGS] = {
         {{4,},"You are in a valley in the forest beside a stream tumbling\nalong a rocky bed.\n"},
         {{7,},"At your feet all the water of the stream splashes into a\n2-inch slit in the rock.  Downstream the streambed is bare rock.\n"},
         {{9,},"You are in a small chamber beneath a 3x3 steel grate to the\nsurface.  A low crawl over cobbles leads inward to the West.\n"},
@@ -98,11 +97,11 @@ const __attribute__((__progmem__)) LONG_LOCATION_2 longLocations_2[AMOUNT_OF_LON
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3_WITH_SAME_LENGTH];
-    char stringInProgramMem[LONG_LOCATION_DESCRIPTION_3_LENGTH];
+    uint8_t numbers[LONG_LOCATION_3_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[LONG_LOCATION_3_STRING_LENGTH];
 } LONG_LOCATION_3;
 
-const __attribute__((__progmem__)) LONG_LOCATION_3 longLocations_3[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_3] = {
+const __attribute__((__progmem__)) LONG_LOCATION_3 longLocations_3[AMOUNT_LONG_LOCATION_3_STRINGS] = {
         {{1,},"You are standing at the end of a road before a small brick\nbuilding.  Around you is a forest.  A small stream flows out\nof the building and down a gully.\n"},
         {{2,},"You have walked up a hill, still in the forest.  The road\nslopes back down the other side of the hill.  There is a\nbuilding in the distance.\n"},
         {{8,},"You are in a 20-foot depression floored with bare dirt.  Set\ninto the dirt is a strong steel grate mounted in concrete.\nA dry streambed leads into the depression.\n"},
@@ -124,11 +123,11 @@ const __attribute__((__progmem__)) LONG_LOCATION_3 longLocations_3[AMOUNT_OF_LON
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4_WITH_SAME_LENGTH];
-    char stringInProgramMem[LONG_LOCATION_DESCRIPTION_4_LENGTH];
+    uint8_t numbers[LONG_LOCATION_4_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[LONG_LOCATION_4_STRING_LENGTH];
 } LONG_LOCATION_4;
 
-const __attribute__((__progmem__)) LONG_LOCATION_4 longLocations_4[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_4] = {
+const __attribute__((__progmem__)) LONG_LOCATION_4 longLocations_4[AMOUNT_LONG_LOCATION_4_STRINGS] = {
         {{11,},"You are in a debris room filled with stuff washed in from the\nsurface.  A low wide passage with cobbles becomes plugged\nwith mud and debris here, but an awkward canyon leads\nupward and west.  A note on the wall says:\n       Magic Word \"XYZZY\"\n"},
         {{64,},"You are at a complex junction.  A low hands and knees passage\nfrom the north joins a higher crawl from the east to make\na walking passage going west.  There is also a large room\nabove.  The air is damp here.\n"},
         {{68,},"You are in a large low circular chamber whose floor is\nan immense slab fallen from the ceiling (slab room).\nEast and west there once were large passages, but they\nare now filled with boulders.  Low small passages go\nnorth and south, and the south one quickly bends west\naround the boulders.\n"},
@@ -144,11 +143,11 @@ const __attribute__((__progmem__)) LONG_LOCATION_4 longLocations_4[AMOUNT_OF_LON
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5_WITH_SAME_LENGTH];
-    char stringInProgramMem[LONG_LOCATION_DESCRIPTION_5_LENGTH];
+    uint8_t numbers[LONG_LOCATION_5_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[LONG_LOCATION_5_STRING_LENGTH];
 } LONG_LOCATION_5;
 
-const __attribute__((__progmem__)) LONG_LOCATION_5 longLocations_5[AMOUNT_OF_LONG_LOCATION_DESCRIPTIONS_5] = {
+const __attribute__((__progmem__)) LONG_LOCATION_5 longLocations_5[AMOUNT_LONG_LOCATION_5_STRINGS] = {
         {{15,},"You are at one end of a vast hall stretching forward out of\nsight to the west.  There are openings to either side.\nNearby, a wide stone staircase leads downward.  The hall\nis filled with wisps of white mist swaying to and fro\nalmost as if alive.  A cold wind blows up the staircase.\nThere is a passage at the top of a dome behind you.\n"},
         {{35,},"You're at a low window overlooking a huge pit, which\nextends up out of sight.  A floor is indistinctly visible\nover 50 feet below.  Traces of white mist cover the floor\nof the pit, becoming thicker to the right.  Marks in the\ndust around the window would seem to indicate that\nsomeone has been here recently.  Directly across the pit\nfrom you and 25 feet away there is a similar window\nlooking into a lighted room.  A shadowy figure can\nbe seen there peering back at you.\n"},
         {{67,},"You are at the east end of the twopit room.  The floor\nhere is littered with thin rock slabs, which make it easy\nto descend the pits.  There is a path here bypassing\nthe pits to connect passages from east and west.\nThere are holes all over, but the only bit one is on\nthe wall directly over the west pit where you can't\nget at it.\n"},
@@ -158,23 +157,21 @@ const __attribute__((__progmem__)) LONG_LOCATION_5 longLocations_5[AMOUNT_OF_LON
         {{116,},"You are at the southwest end of the repository.  To one\nside is a pit full of fierce green snakes.  On the other\nside is a row of small wicker cages, each of which contains\na little sulking bird.  In one corner is a bundle of\nblack rods with rusty marks on their ends.  A large\nnumber of velvet pillows are scattered about on the floor.\nA vast mirror stretches off to the northeast.  At your\nfeet is a large steel grate, next to which is a sign\nwhich reads:\n     \"Treasure vault.  Keys in main office.\"\n"},
 };
 
-#define LONG_LOCATION_DESCRIPTION_115_LENGTH 766
-const __attribute__((__progmem__)) char longLocation_115[LONG_LOCATION_DESCRIPTION_115_LENGTH] = "You are at the northeast end of an immense room, even\nlarger than the giant room.  It appears to be a repository\nfor the \"adventure\" program.  Massive torches far overhead\nbathe the room with smoky yellow light.  Scattered about\nyou can be seen a pile of bottles (all of them empty), a\nnursery of young beanstalks murmuring quietly, a bed of\noysters, a bundle of black rods with rusty stars on their\nends, and a collection of brass lanterns.  Off to one side\na great many Dwarves are sleeping on the floor, snoring\nloudly.  A sign nearby reads:\n        \"Do NOT disturb the Dwarves!\"\nAn immense mirror is hanging against one wall, and\nstretches to the other end of the room, where various\nother sundry objects can be glimpsed dimly in the distance.\n";
+#define LONG_LOCATION_115_STRING_LENGTH 767
+const __attribute__((__progmem__)) char longLocation_115[LONG_LOCATION_115_STRING_LENGTH] = "You are at the northeast end of an immense room, even\nlarger than the giant room.  It appears to be a repository\nfor the \"adventure\" program.  Massive torches far overhead\nbathe the room with smoky yellow light.  Scattered about\nyou can be seen a pile of bottles (all of them empty), a\nnursery of young beanstalks murmuring quietly, a bed of\noysters, a bundle of black rods with rusty stars on their\nends, and a collection of brass lanterns.  Off to one side\na great many Dwarves are sleeping on the floor, snoring\nloudly.  A sign nearby reads:\n        \"Do NOT disturb the Dwarves!\"\nAn immense mirror is hanging against one wall, and\nstretches to the other end of the room, where various\nother sundry objects can be glimpsed dimly in the distance.\n";
 
-#define LONG_LOCATION_DESCRIPTION_126_LENGTH 1320
-const __attribute__((__progmem__)) char longLocation_126[LONG_LOCATION_DESCRIPTION_126_LENGTH] = "You are on the edge of a breath-taking view.  Far below you is an \nactive volcano, from which great gouts of molten lava come surging \nout, cascading back down into the depths. The glowing rock fills the \nfarthest reaches of the cavern with a blood-red glare, giving \neverything an eerie, macabre appearance.\nThe air is filled with flickering sparks of ash and a heavy smell of \nbrimstone.  The walls are hot to the touch, and the thundering of the \nvolcano drowns out all other sounds.  Embedded in the jagged roof far \noverhead are myriad formations composed of pure white alabaster, which \nscatter their murky light into sinister apparitions upon the walls.\nTo one side is a deep gorge, filled with a bizarre chaos of tortured \nrock which seems to have been crafted by the Devil Himself.  An \nimmense river of fire crashes out from the depths of the volcano, \nburns its way through the gorge, and plummets into a bottomless pit \nfar off to your left.  \nTo the right, an immense geyser of blistering steam erupts \ncontinuously from a barren island in the center of a sulfurous lake, \nwhich bubbles ominously. The far right wall is aflame with an \nincandescence of its own, which lends an additional infernal splendor \nto the already hellish scene.  \nA dark, foreboding passage exits to the south.\n";
-
-
+#define LONG_LOCATION_126_STRING_LENGTH 1321
+const __attribute__((__progmem__)) char longLocation_126[LONG_LOCATION_126_STRING_LENGTH] = "You are on the edge of a breath-taking view.  Far below you is an \nactive volcano, from which great gouts of molten lava come surging \nout, cascading back down into the depths. The glowing rock fills the \nfarthest reaches of the cavern with a blood-red glare, giving \neverything an eerie, macabre appearance.\nThe air is filled with flickering sparks of ash and a heavy smell of \nbrimstone.  The walls are hot to the touch, and the thundering of the \nvolcano drowns out all other sounds.  Embedded in the jagged roof far \noverhead are myriad formations composed of pure white alabaster, which \nscatter their murky light into sinister apparitions upon the walls.\nTo one side is a deep gorge, filled with a bizarre chaos of tortured \nrock which seems to have been crafted by the Devil Himself.  An \nimmense river of fire crashes out from the depths of the volcano, \nburns its way through the gorge, and plummets into a bottomless pit \nfar off to your left.  \nTo the right, an immense geyser of blistering steam erupts \ncontinuously from a barren island in the center of a sulfurous lake, \nwhich bubbles ominously. The far right wall is aflame with an \nincandescence of its own, which lends an additional infernal splendor \nto the already hellish scene.  \nA dark, foreboding passage exits to the south.\n";
 
 char * loadLongLocation(FlashHelper * helper, uint8_t longLocationNumber) {
     char * stringToReturn = NULL;
 
     if (longLocationNumber == 115) {
-        stringToReturn = (char *) malloc(LONG_LOCATION_DESCRIPTION_115_LENGTH);
+        stringToReturn = (char *) malloc(LONG_LOCATION_115_STRING_LENGTH);
         helper->loadFarStringFromFlash(stringToReturn, pgm_get_far_address(longLocation_115));
     }
     if (longLocationNumber == 126) {
-        stringToReturn = (char *) malloc(LONG_LOCATION_DESCRIPTION_126_LENGTH);
+        stringToReturn = (char *) malloc(LONG_LOCATION_126_STRING_LENGTH);
         helper->loadFarStringFromFlash(stringToReturn, pgm_get_far_address(longLocation_126));
     }
     LOAD_FROM(1)
@@ -186,6 +183,7 @@ char * loadLongLocation(FlashHelper * helper, uint8_t longLocationNumber) {
     return stringToReturn;
 }
 
+//getter function expects an initialized instance of FlashHelper as reachable global reference
 char * getLongLocation(int longLocationNumber) {
     return loadLongLocation(flashHelper, longLocationNumber);
 }

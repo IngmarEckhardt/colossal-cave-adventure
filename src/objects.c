@@ -4,12 +4,13 @@
 #include "advent.h"
 #include "advdec.h"
 
+
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_1_WITH_SAME_LENGTH];
-    char stringInProgramMem[OBJECT_DESCRIPTION_1_LENGTH];
+    uint8_t numbers[OBJECT_1_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[OBJECT_1_STRING_LENGTH];
 } OBJECT_1;
 
-const __attribute__((__progmem__)) OBJECT_1 objects_1[AMOUNT_OF_OBJECT_DESCRIPTIONS_1] = {
+const __attribute__((__progmem__)) OBJECT_1 objects_1[AMOUNT_OBJECT_1_STRINGS] = {
         {{1,},"/Set of keys.\n/There are some keys on the ground here.\n/\n"},
         {{3,},"/*Grate\n/The grate is locked.\n/The grate is open.\n/\n"},
         {{4,},"/Wicker cage\n/There is a small wicker cage discarded nearby.\n/\n"},
@@ -38,11 +39,11 @@ const __attribute__((__progmem__)) OBJECT_1 objects_1[AMOUNT_OF_OBJECT_DESCRIPTI
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_2_WITH_SAME_LENGTH];
-    char stringInProgramMem[OBJECT_DESCRIPTION_2_LENGTH];
+    uint8_t numbers[OBJECT_2_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[OBJECT_2_STRING_LENGTH];
 } OBJECT_2;
 
-const __attribute__((__progmem__)) OBJECT_2 objects_2[AMOUNT_OF_OBJECT_DESCRIPTIONS_2] = {
+const __attribute__((__progmem__)) OBJECT_2 objects_2[AMOUNT_OBJECT_2_STRINGS] = {
         {{2,},"/Brass lantern\n/There is a shiny brass lamp nearby.\n/There is a lamp shining nearby.\n/\n"},
         {{5,},"/Black rod\n/A three foot black rod with a rusty star on an end lies nearby.\n/\n"},
         {{6,},"/Black rod\n/A three foot black rod with a rusty mark on an end lies nearby.\n/\n"},
@@ -61,11 +62,11 @@ const __attribute__((__progmem__)) OBJECT_2 objects_2[AMOUNT_OF_OBJECT_DESCRIPTI
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_3_WITH_SAME_LENGTH];
-    char stringInProgramMem[OBJECT_DESCRIPTION_3_LENGTH];
+    uint8_t numbers[OBJECT_3_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[OBJECT_3_STRING_LENGTH];
 } OBJECT_3;
 
-const __attribute__((__progmem__)) OBJECT_3 objects_3[AMOUNT_OF_OBJECT_DESCRIPTIONS_3] = {
+const __attribute__((__progmem__)) OBJECT_3 objects_3[AMOUNT_OBJECT_3_STRINGS] = {
         {{9,},"/*Rusty door\n/The way north is barred by a massive, rusty, iron door.\n/The way north leads through a massive, rusty, iron door.\n/\n"},
         {{13,},"/*Stone tablet\n/A massive stone tablet imbedded in the wall reads:\n\"Congratulations on bringing light into the dark-room!\"\n/\n"},
         {{15,},"/Giant oyster >Groan!<\n/There is an enormous oyster here with its shell tightly closed.\n/Interesting.  There seems to be something written on the\nunderside of the oyster.\n/\n"},
@@ -78,26 +79,25 @@ const __attribute__((__progmem__)) OBJECT_3 objects_3[AMOUNT_OF_OBJECT_DESCRIPTI
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_OBJECT_DESCRIPTIONS_4_WITH_SAME_LENGTH];
-    char stringInProgramMem[OBJECT_DESCRIPTION_4_LENGTH];
+    uint8_t numbers[OBJECT_4_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[OBJECT_4_STRING_LENGTH];
 } OBJECT_4;
 
-const __attribute__((__progmem__)) OBJECT_4 objects_4[AMOUNT_OF_OBJECT_DESCRIPTIONS_4] = {
+const __attribute__((__progmem__)) OBJECT_4 objects_4[AMOUNT_OBJECT_4_STRINGS] = {
         {{31,},"/*Dragon\n/A huge green fierce dragon bars the way!\n/Congratulations!  You have just vanquished a dragon with\nyour bare hands!  (Unbelievable, Isn't it?)\n/The body of a huge green dead dragon is lying off to one\nside.\n/\n"},
         {{32,},"/*Chasm\n/A rickety wooden bridge extends across the chasm, vanishing\ninto the mist.  A sign posted on the bridge reads:\n          \"Stop!  Pay Troll!\"\n/The wreckage of a bridge (and a dead bear) can be seen\nat the bottom of the chasm.\n/\n"},
         {{35,},"//There is a ferocious cave bear eyeing you from the far\nend of the room!\n/There is a gentle cave bear sitting placidly in one corner.\n/There is a contented-looking bear wandering about nearby.\n//\n"},
         {{58,},"/Ming vase\n/There is a delicate, precious, ming vase here!\n/The vase is now resting, delicately, on a velvet pillow.\n/The floor is littered with worthless shards of pottery.\n/The ming vase drops with a delicate crash.\n/\n"},
 };
 
-#define OBJECT_DESCRIPTION_24_LENGTH 455
-const __attribute__((__progmem__)) char object_24[OBJECT_DESCRIPTION_24_LENGTH] = "/*Plant\n/There is a tiny little plant in the pit, murmuring\n\"Water, Water, ...\"\n/The plant spurts into furious growth for a few seconds.\n/There is a 12-foot-tall beanstalk stretching up out of\nthe pit, bellowing \"Water!! Water!!\"\n/The plant grows explosively, almost filling the bottom\nof the pit. \n/There is a gigantic beanstalk stretching all the way\nup to the hole.\n/You've over-watered the plant!  It's shriveling up!\nIt's, It's...\n/\n";
-
+#define OBJECT_24_STRING_LENGTH 456
+const __attribute__((__progmem__)) char object_24[OBJECT_24_STRING_LENGTH] = "/*Plant\n/There is a tiny little plant in the pit, murmuring\n\"Water, Water, ...\"\n/The plant spurts into furious growth for a few seconds.\n/There is a 12-foot-tall beanstalk stretching up out of\nthe pit, bellowing \"Water!! Water!!\"\n/The plant grows explosively, almost filling the bottom\nof the pit. \n/There is a gigantic beanstalk stretching all the way\nup to the hole.\n/You've over-watered the plant!  It's shriveling up!\nIt's, It's...\n/\n";
 
 char * loadObject(FlashHelper * helper, uint8_t objectNumber) {
     char * stringToReturn = NULL;
 
     if (objectNumber == 24) {
-        stringToReturn = (char *) malloc(OBJECT_DESCRIPTION_24_LENGTH);
+        stringToReturn = (char *) malloc(OBJECT_24_STRING_LENGTH);
         helper->loadFarStringFromFlash(stringToReturn, pgm_get_far_address(object_24));
     }
     LOAD_FROM(1)
@@ -108,6 +108,7 @@ char * loadObject(FlashHelper * helper, uint8_t objectNumber) {
     return stringToReturn;
 }
 
+//getter function expects an initialized instance of FlashHelper as reachable global reference
 char * getObject(int objectNumber) {
     return loadObject(flashHelper, objectNumber);
 }

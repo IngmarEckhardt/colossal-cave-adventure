@@ -4,12 +4,13 @@
 #include "advent.h"
 #include "advdec.h"
 
+
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_1_WITH_SAME_LENGTH];
-    char stringInProgramMem[CAVE_DESCRIPTION_1_LENGTH];
+    uint8_t numbers[CAVE_1_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[CAVE_1_STRING_LENGTH];
 } CAVE_1;
 
-const __attribute__((__progmem__)) CAVE_1 caves_1[AMOUNT_OF_CAVE_DESCRIPTIONS_1] = {
+const __attribute__((__progmem__)) CAVE_1 caves_1[AMOUNT_CAVE_1_STRINGS] = {
         {{16,},"14001000,"},
         {{20,21,},"001000,"},
         {{22,},"15001000,"},
@@ -27,11 +28,11 @@ const __attribute__((__progmem__)) CAVE_1 caves_1[AMOUNT_OF_CAVE_DESCRIPTIONS_1]
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_2_WITH_SAME_LENGTH];
-    char stringInProgramMem[CAVE_DESCRIPTION_2_LENGTH];
+    uint8_t numbers[CAVE_2_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[CAVE_2_STRING_LENGTH];
 } CAVE_2;
 
-const __attribute__((__progmem__)) CAVE_2 caves_2[AMOUNT_OF_CAVE_DESCRIPTIONS_2] = {
+const __attribute__((__progmem__)) CAVE_2 caves_2[AMOUNT_CAVE_2_STRINGS] = {
         {{18,},"15038000,15011000,15045000,"},
         {{24,},"67029000,67011000,"},
         {{29,},"19038000,19011000,19045000,"},
@@ -79,11 +80,11 @@ const __attribute__((__progmem__)) CAVE_2 caves_2[AMOUNT_OF_CAVE_DESCRIPTIONS_2]
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_3_WITH_SAME_LENGTH];
-    char stringInProgramMem[CAVE_DESCRIPTION_3_LENGTH];
+    uint8_t numbers[CAVE_3_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[CAVE_3_STRING_LENGTH];
 } CAVE_3;
 
-const __attribute__((__progmem__)) CAVE_3 caves_3[AMOUNT_OF_CAVE_DESCRIPTIONS_3] = {
+const __attribute__((__progmem__)) CAVE_3 caves_3[AMOUNT_CAVE_3_STRINGS] = {
         {{25,},"23029000,23011000,31056724,26056000,"},
         {{30,},"19038000,19011000,19043000,62044000,62029000,"},
         {{36,},"37043000,37017000,28029000,28052000,39044000,65070000,"},
@@ -118,11 +119,11 @@ const __attribute__((__progmem__)) CAVE_3 caves_3[AMOUNT_OF_CAVE_DESCRIPTIONS_3]
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_4_WITH_SAME_LENGTH];
-    char stringInProgramMem[CAVE_DESCRIPTION_4_LENGTH];
+    uint8_t numbers[CAVE_4_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[CAVE_4_STRING_LENGTH];
 } CAVE_4;
 
-const __attribute__((__progmem__)) CAVE_4 caves_4[AMOUNT_OF_CAVE_DESCRIPTIONS_4] = {
+const __attribute__((__progmem__)) CAVE_4 caves_4[AMOUNT_CAVE_4_STRINGS] = {
         {{2,},"1002000,1012000,1007000,1043000,1045000,1030000,5006000,5045000,5046000,"},
         {{3,},"1003000,1011000,1032000,1044000,11062000,33065000,79005000,79014000,"},
         {{5,},"4009000,4043000,4030000,5006050,5007050,5045050,6006000,5044000,5046000,"},
@@ -144,11 +145,11 @@ const __attribute__((__progmem__)) CAVE_4 caves_4[AMOUNT_OF_CAVE_DESCRIPTIONS_4]
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_CAVE_DESCRIPTIONS_5_WITH_SAME_LENGTH];
-    char stringInProgramMem[CAVE_DESCRIPTION_5_LENGTH];
+    uint8_t numbers[CAVE_5_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[CAVE_5_STRING_LENGTH];
 } CAVE_5;
 
-const __attribute__((__progmem__)) CAVE_5 caves_5[AMOUNT_OF_CAVE_DESCRIPTIONS_5] = {
+const __attribute__((__progmem__)) CAVE_5 caves_5[AMOUNT_CAVE_5_STRINGS] = {
         {{1,},"2002000,2044000,2029000,3003000,3012000,3019000,3043000,4005000,4013000,4014000,4046000,4030000,5006000,5045000,5043000,8063000,"},
         {{4,},"1004000,1012000,1045000,5006000,5043000,5044000,5029000,7005000,7046000,7030000,8063000,"},
         {{7,},"1012000,4004000,4045000,5006000,5043000,5044000,8005000,8015000,8016000,8046000,595060000,595014000,595030000,"},
@@ -195,6 +196,7 @@ char * loadCave(FlashHelper * helper, uint8_t caveNumber) {
     return stringToReturn;
 }
 
+//getter function expects an initialized instance of FlashHelper as reachable global reference
 char * getCave(int caveNumber) {
     return loadCave(flashHelper, caveNumber);
 }

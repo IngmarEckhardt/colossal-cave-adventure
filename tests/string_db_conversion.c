@@ -16,11 +16,11 @@
 void setUp(void) {}
 void tearDown(void) {}
 void convertAdvent(void) {
-    convertTextArrayToProgMemTextFiles(adventtxt1, 140, (uint16_t[]) {72, 140, 195, 320, 520}, 5, "LONG_LOCATION");
-    convertTextArrayToProgMemTextFiles(adventtxt2, 140, (uint16_t[]) {15, 30, 55, 75, 186}, 5, "SHORT_LOCATION");
-    convertTextArrayToProgMemTextFiles(cave, 140, (uint16_t[]) {15, 30, 55, 75, 186}, 5, "CAVE");
-    convertTextArrayToProgMemTextFiles(adventtxt3, 65, (uint16_t[]) {72, 112,  196, 246}, 4, "OBJECT");
-    convertTextArrayToProgMemTextFiles(adventtxt4, 201, (uint16_t[]) {13,31, 62, 100, 156, 320, 520}, 7, "ACTION");
+    convertStringsToPGMTextFile(adventtxt1, 140, (uint16_t[]) {72, 140, 195, 320, 520}, 5, "LONG_LOCATION");
+    convertStringsToPGMTextFile(adventtxt2, 140, (uint16_t[]) {15, 30, 55, 75, 186}, 5, "SHORT_LOCATION");
+    convertStringsToPGMTextFile((const char **) cave, 140, (uint16_t[]) {15, 30, 55, 75, 186}, 5, "CAVE");
+    convertStringsToPGMTextFile(adventtxt3, 65, (uint16_t[]) {72, 112,  196, 246}, 4, "OBJECT");
+    convertStringsToPGMTextFile(adventtxt4, 201, (uint16_t[]) {13,31, 62, 100, 156, 320, 520}, 7, "ACTION");
 }
 
 //void test_convertAdvent(void) {

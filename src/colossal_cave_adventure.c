@@ -72,7 +72,7 @@ static FILE ccaStdIn = FDEV_SETUP_STREAM(NULL, get_char, _FDEV_SETUP_READ);
 void setupAdvent(void) {
     stringRepository = dOS_initStringRepository(0);
     uartHelper = dOS_initUartHelper();
-    inputQueue = cca_initInputQueue();
+    inputQueue = dOS_initInputQueue();
     setupMcu(&mcuClock);
     stdin = &ccaStdIn;
     stdout = &ccaStdOut;

@@ -5,11 +5,11 @@
 #include "advdec.h"
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_1_WITH_SAME_LENGTH];
-    char stringInProgramMem[ACTION_DESCRIPTION_1_LENGTH];
+    uint8_t numbers[ACTION_1_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[ACTION_1_STRING_LENGTH];
 } ACTION_1;
 
-const __attribute__((__progmem__)) ACTION_1 actions_1[AMOUNT_OF_ACTION_DESCRIPTIONS_1] = {
+const __attribute__((__progmem__)) ACTION_1 actions_1[AMOUNT_ACTION_1_STRINGS] = {
         {{43,},"Where?\n"},
         {{52,},"It misses!\n"},
         {{53,},"It gets you!\n"},
@@ -22,11 +22,11 @@ const __attribute__((__progmem__)) ACTION_1 actions_1[AMOUNT_OF_ACTION_DESCRIPTI
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_2_WITH_SAME_LENGTH];
-    char stringInProgramMem[ACTION_DESCRIPTION_2_LENGTH];
+    uint8_t numbers[ACTION_2_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[ACTION_2_STRING_LENGTH];
 } ACTION_2;
 
-const __attribute__((__progmem__)) ACTION_2 actions_2[AMOUNT_OF_ACTION_DESCRIPTIONS_2] = {
+const __attribute__((__progmem__)) ACTION_2 actions_2[AMOUNT_ACTION_2_STRINGS] = {
         {{6,},"None of them hit you!\n"},
         {{7,},"One of them gets you!\n"},
         {{8,},"A hollow voice says \"Plugh\".\n"},
@@ -70,11 +70,11 @@ const __attribute__((__progmem__)) ACTION_2 actions_2[AMOUNT_OF_ACTION_DESCRIPTI
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_3_WITH_SAME_LENGTH];
-    char stringInProgramMem[ACTION_DESCRIPTION_3_LENGTH];
+    uint8_t numbers[ACTION_3_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[ACTION_3_STRING_LENGTH];
 } ACTION_3;
 
-const __attribute__((__progmem__)) ACTION_3 actions_3[AMOUNT_OF_ACTION_DESCRIPTIONS_3] = {
+const __attribute__((__progmem__)) ACTION_3 actions_3[AMOUNT_ACTION_3_STRINGS] = {
         {{2,},"A little dwarf with a big knife blocks your way.\n"},
         {{4,},"There is a threatening little dwarf in the room with you!\n"},
         {{5,},"One sharp, nasty knife is thrown at you!\n"},
@@ -146,11 +146,11 @@ const __attribute__((__progmem__)) ACTION_3 actions_3[AMOUNT_OF_ACTION_DESCRIPTI
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_4_WITH_SAME_LENGTH];
-    char stringInProgramMem[ACTION_DESCRIPTION_4_LENGTH];
+    uint8_t numbers[ACTION_4_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[ACTION_4_STRING_LENGTH];
 } ACTION_4;
 
-const __attribute__((__progmem__)) ACTION_4 actions_4[AMOUNT_OF_ACTION_DESCRIPTIONS_4] = {
+const __attribute__((__progmem__)) ACTION_4 actions_4[AMOUNT_ACTION_4_STRINGS] = {
         {{10,},"I am unsure how you are facing.  Use compass points or\nnearby objects.\n"},
         {{16,},"It is now pitch dark.  If you proceed you will likely fall\ninto a pit.\n"},
         {{30,},"The little bird attacks the green snake, and in an\nastounding flurry drives the snake away.\n"},
@@ -189,11 +189,11 @@ const __attribute__((__progmem__)) ACTION_4 actions_4[AMOUNT_OF_ACTION_DESCRIPTI
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_5_WITH_SAME_LENGTH];
-    char stringInProgramMem[ACTION_DESCRIPTION_5_LENGTH];
+    uint8_t numbers[ACTION_5_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[ACTION_5_STRING_LENGTH];
 } ACTION_5;
 
-const __attribute__((__progmem__)) ACTION_5 actions_5[AMOUNT_OF_ACTION_DESCRIPTIONS_5] = {
+const __attribute__((__progmem__)) ACTION_5 actions_5[AMOUNT_ACTION_5_STRINGS] = {
         {{3,},"A little dwarf just walked around a corner, saw you,\nthrew a little axe at you which missed, cursed, and ran away.\n"},
         {{11,},"I don't know in from out here.  Use compass points or name\nsomething in the general direction you want to go.\n"},
         {{15,},"Sorry, but I am not allowed to give more detail.  I will\nrepeat the long description of your location.\n"},
@@ -223,11 +223,11 @@ const __attribute__((__progmem__)) ACTION_5 actions_5[AMOUNT_OF_ACTION_DESCRIPTI
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_6_WITH_SAME_LENGTH];
-    char stringInProgramMem[ACTION_DESCRIPTION_6_LENGTH];
+    uint8_t numbers[ACTION_6_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[ACTION_6_STRING_LENGTH];
 } ACTION_6;
 
-const __attribute__((__progmem__)) ACTION_6 actions_6[AMOUNT_OF_ACTION_DESCRIPTIONS_6] = {
+const __attribute__((__progmem__)) ACTION_6 actions_6[AMOUNT_ACTION_6_STRINGS] = {
         {{21,},"You can't kill the snake, or drive it away, or avoid it,\nor anything like that.  There is a way to get by, but you\ndon't have the necessary resources right now.\n"},
         {{63,},"The grate is very solid and has a hardened steel lock.  You\ncannot enter without a key, and there are no keys nearby.\nI would recommend looking elsewhere for the keys.\n"},
         {{69,},"Mist is a white vapor, usually water.  Seen from time to time\nin caverns.  It can be found anywhere but is frequently a\nsign of a deep pit leading down to water.\n"},
@@ -245,33 +245,32 @@ const __attribute__((__progmem__)) ACTION_6 actions_6[AMOUNT_OF_ACTION_DESCRIPTI
 };
 
 typedef struct {
-    uint8_t numbers[MAX_AMOUNT_OF_ACTION_DESCRIPTIONS_7_WITH_SAME_LENGTH];
-    char stringInProgramMem[ACTION_DESCRIPTION_7_LENGTH];
+    uint8_t numbers[ACTION_7_INDEX_ARRAY_SIZE];
+    char stringInProgramMem[ACTION_7_STRING_LENGTH];
 } ACTION_7;
 
-const __attribute__((__progmem__)) ACTION_7 actions_7[AMOUNT_OF_ACTION_DESCRIPTIONS_7] = {
+const __attribute__((__progmem__)) ACTION_7 actions_7[AMOUNT_ACTION_7_STRINGS] = {
         {{1,},"Somewhere nearby is Colossal Cave, where others have found fortunes in \ntreasure and gold, though it is rumored that some who enter are never \nseen again.  Magic is said to work in the cave.  I will be your eyes \nand hands.  Direct me with commands of 1 or 2 words.  I should warn \nyou that I look at only the first five letters of each word, so you'll \nhave to enter \"Northeast\" as \"ne\" to distinguish it from \"North\".  \n(Should you get stuck, type \"help\" for some general hints).\n\n"},
         {{64,},"The trees of the forest are large hardwood oak and maple,\nwith an occasional grove of pine or spruce.  There is quite\na bit of undergrowth, largely birch and ash saplings plus\nnondescript bushes of various sorts.  This time of year \nvisibility is quite restricted by all the leaves, but travel\nis quite easy if you detour around the spruce and berry\nbushes.\n"},
         {{65,},"\n                              Welcome to \n\n                       Colossal Cave Adventure!\n\n\n               Original development by Willie Crowther.\n                  Major features added by Don Woods.\n                 Conversion to BDS C by J. R. Jaeger.\n                Unix standardization by Jerry D. Pohl.\n            Port to QNX 4 and bug fixes by James Lummel.\n\nWould you like instructions?\n\n"},
         {{186,},"There are faint rustling noises from the darkness behind you.\nAs you turn toward them, the beam of your lamp falls across a\nbearded pirate.  He is carrying a large chest.  \"Shiver me\ntimbers!\"  he cries, \"I've been spotted!  I'd best hide\nmeself off to the maze and hide me chest!\".  With that,\nhe vanished into the gloom.\n"},
 };
 
-#define ACTION_DESCRIPTION_51_LENGTH 1336
-const __attribute__((__progmem__)) char action_51[ACTION_DESCRIPTION_51_LENGTH] = "I know of places, actions, and things.  Most of my vocabulary \ndescribes places and is used to move you there.  To move, try words \nlike forest, building, downstream, enter, east, west, north, south, up \nor down.  \nI know about a few special objects, like a black rod hidden in the \ncave.  These objects can be manipulated using some of the action words \nI know. Usually you will need to give both the object and action words \n(In either order), but sometimes I can infer the object from the verb \nalone.  Some objects also imply verbs; in particular, \"inventory\" \nimplies \"take inventory\", which causes me to give you a list of what \nyou're carrying.\nThe objects have side effects; for instance, the rod scares the bird. \nUsually people having trouble moving just need to try a few more \nwords.  Usually people trying unsuccessfully to manipulate an object \nare attempting something beyond their (or my!) capabilities and should \ntry a completely different tack.\nTo speed the game up, you can sometimes move long distances with a \nsingle word.  For example, \"building\" usually gets you to the building \nfrom anywhere above ground except when lost in the forest.  Also, note \nthat cave passages turn a lot, and that leaving a room to the north \ndoes not guarantee entering the next from the south. Good luck!\n";
+#define ACTION_51_STRING_LENGTH 1337
+const __attribute__((__progmem__)) char action_51[ACTION_51_STRING_LENGTH] = "I know of places, actions, and things.  Most of my vocabulary \ndescribes places and is used to move you there.  To move, try words \nlike forest, building, downstream, enter, east, west, north, south, up \nor down.  \nI know about a few special objects, like a black rod hidden in the \ncave.  These objects can be manipulated using some of the action words \nI know. Usually you will need to give both the object and action words \n(In either order), but sometimes I can infer the object from the verb \nalone.  Some objects also imply verbs; in particular, \"inventory\" \nimplies \"take inventory\", which causes me to give you a list of what \nyou're carrying.\nThe objects have side effects; for instance, the rod scares the bird. \nUsually people having trouble moving just need to try a few more \nwords.  Usually people trying unsuccessfully to manipulate an object \nare attempting something beyond their (or my!) capabilities and should \ntry a completely different tack.\nTo speed the game up, you can sometimes move long distances with a \nsingle word.  For example, \"building\" usually gets you to the building \nfrom anywhere above ground except when lost in the forest.  Also, note \nthat cave passages turn a lot, and that leaving a room to the north \ndoes not guarantee entering the next from the south. Good luck!\n";
 
-#define ACTION_DESCRIPTION_142_LENGTH 1429
-const __attribute__((__progmem__)) char action_142[ACTION_DESCRIPTION_142_LENGTH] = "If you want to end your adventure early, say \"quit\".  To suspend your \nadventure such that you can continue later say \"suspend\" (or \"pause\" \nor \"save\").  To load a previously saved game, say 'load' or 'restore'.  \nTo see how well you're doing, say \"score\".  To get full credit for a \ntreasure, you must have left it safely in the building, though you get \npartial credit just for locating it. You lose points for getting \nkilled, or for quitting, though the former costs you more. \nThere are also points based on how much (If any) of the cave you've \nmanaged to explore;  in particular, there is a large bonus just for \ngetting in (to distinguish the beginners from the rest of the pack), \nand there are other ways to determine whether you've been through some \nof the more harrowing sections. \nIf you think you've found all the treasures, just keep exploring for a \nwhile.  If nothing interesting happens, you haven't found them all \nyet.  If something interesting DOES happen, it means you're getting a \nbonus and have an opportunity to garner many more points in the \nmaster's section.\nI may occasionally offer hints in you seem to be having trouble.  If I \ndo, I'll warn you in advance how much it will affect your score to \naccept the hints.  Finally, to save paper, you may specify \"brief\", \nwhich tells me never to repeat the full description of a place unless \nyou explicitly ask me to.\n";
-
+#define ACTION_142_STRING_LENGTH 1430
+const __attribute__((__progmem__)) char action_142[ACTION_142_STRING_LENGTH] = "If you want to end your adventure early, say \"quit\".  To suspend your \nadventure such that you can continue later say \"suspend\" (or \"pause\" \nor \"save\").  To load a previously saved game, say 'load' or 'restore'.  \nTo see how well you're doing, say \"score\".  To get full credit for a \ntreasure, you must have left it safely in the building, though you get \npartial credit just for locating it. You lose points for getting \nkilled, or for quitting, though the former costs you more. \nThere are also points based on how much (If any) of the cave you've \nmanaged to explore;  in particular, there is a large bonus just for \ngetting in (to distinguish the beginners from the rest of the pack), \nand there are other ways to determine whether you've been through some \nof the more harrowing sections. \nIf you think you've found all the treasures, just keep exploring for a \nwhile.  If nothing interesting happens, you haven't found them all \nyet.  If something interesting DOES happen, it means you're getting a \nbonus and have an opportunity to garner many more points in the \nmaster's section.\nI may occasionally offer hints in you seem to be having trouble.  If I \ndo, I'll warn you in advance how much it will affect your score to \naccept the hints.  Finally, to save paper, you may specify \"brief\", \nwhich tells me never to repeat the full description of a place unless \nyou explicitly ask me to.\n";
 
 char * loadAction(FlashHelper * helper, uint8_t actionNumber) {
     char * stringToReturn = NULL;
 
     if (actionNumber == 51) {
-        stringToReturn = (char *) malloc(ACTION_DESCRIPTION_51_LENGTH);
+        stringToReturn = (char *) malloc(ACTION_51_STRING_LENGTH);
         helper->loadFarStringFromFlash(stringToReturn, pgm_get_far_address(action_51));
     }
     if (actionNumber == 142) {
-        stringToReturn = (char *) malloc(ACTION_DESCRIPTION_142_LENGTH);
+        stringToReturn = (char *) malloc(ACTION_142_STRING_LENGTH);
         helper->loadFarStringFromFlash(stringToReturn, pgm_get_far_address(action_142));
     }
     LOAD_FROM(1)
@@ -285,6 +284,7 @@ char * loadAction(FlashHelper * helper, uint8_t actionNumber) {
     return stringToReturn;
 }
 
+//getter function expects an initialized instance of FlashHelper as reachable global reference
 char * getAction(int actionNumber) {
     return loadAction(flashHelper, actionNumber);
 }

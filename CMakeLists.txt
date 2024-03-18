@@ -56,7 +56,6 @@ set(HEADER_FILES
 )
 
 if (TESTS)
-    add_definitions(-D__AVR_HAVE_ELPM__)
 
 else ()
     if (MOCK_USER)
@@ -83,6 +82,7 @@ else ()
 endif ()
 
 if (TESTS)
+    add_definitions(-D__AVR_HAVE_ELPM__)
     set(TEST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tests")
     include_directories("${TEST_PATH}/_include" ${INCL_PATH} "${EXTERN_PATH}/dwarfOS/include")
     add_definitions(-DCCA_TEST)
